@@ -17,17 +17,17 @@ substitute(Element, Substitute, List, a) -> subAll(Element, Substitute, List);
 substitute(Element, Substitute, List, e) -> subFirst(Element, Substitute, List);
 substitute(Element, Substitute, List, l) -> subLast(Element, Substitute, List). 
 
-%% substitute(E, S, L) ersetzt alle Elemente E in Liste E mit dem Substitut S
+%% subAll(E, S, L) ersetzt alle Elemente E in Liste E mit dem Substitut S
 subAll(Element, Substitute, [Element|Tail]) -> [Substitute|subAll(Element, Substitute, Tail)];
 subAll(Element, Substitute, [Head|Tail]) -> [Head|subAll(Element, Substitute, Tail)];
 subAll(_, _, []) -> [].  
 
-%% substitute(E, S, L) ersetzt das erste Element E in Liste E mit dem Substitut S
+%% subFirst(E, S, L) ersetzt das erste Element E in Liste E mit dem Substitut S
 subFirst(Element, Substitute, [Element|Tail]) -> [Substitute|Tail];
 subFirst(Element, Substitute, [_|Tail]) -> subFirst(Element, Substitute, Tail);
 subFirst(_, _, []) -> [].
 
-%% substitute(E, S, L) ersetzt das letzte Element E in Liste E mit dem Substitut S
+%% subsLast(E, S, L) ersetzt das letzte Element E in Liste E mit dem Substitut S
 subLast(Element, Substitute, List) -> invert(subFirst(Element, Substitute, invert(List))).
 
 %% invert(L) invertiert die Liste L
@@ -45,10 +45,19 @@ count(_, []) -> 0;
 count(Element, [Element|Tail]) -> count(Element, Tail) + 1;
 count(Element, [_|Tail]) -> count(Element, Tail).
 
+%% =================================================================
 %% reduce(E, L) entfernt alle Vorkommnisse von E aus der Liste L
-reduce(Element, [Element|Tail]) -> reduce(Element, Tail);
-reduce(Element, [Head|Tail]) -> [Head] ++ reduce(Element, Tail);
-reduce(_, []) -> [].
+%% reduce(Element, [Element|Tail]) -> reduce(Element, Tail);
+%% reduce(Element, [Head|Tail]) -> [Head] ++ reduce(Element, Tail);
+%% reduce(_, []) -> [].
+%% =================================================================
+
+%% reduce(E, L) via List Comprehension
+reduce(Element, List) -> 
+    [ListElement || ListElement <- List, ListElement =/= Element].
+
+
+
 
 
 
