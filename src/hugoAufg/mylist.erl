@@ -29,7 +29,7 @@ member(M, [_H | T]) -> member(M, T).
 %%% relativen Position P und gibt die neue Liste zurück. P bezeichnet die
 %%% Position: e erstes, l letztes, a alle Vorkommen von E.
 % reverse list => substitute first => reverse list
-substitute(E, S, L, P) when P == l ->
+substitute(E, S, L, l) ->
   reverse(substitute(E, S, reverse(L), e, []));
 substitute(E, S, L, P) -> substitute(E, S, L, P, []).
 
@@ -57,21 +57,21 @@ reverse([H | T], Reversed) -> reverse(T, [H | Reversed]).
 
 compress(L) -> compress(L, []).
 
-compress([H | T], M) when T == [] -> multisetAdd(M, H);
+compress([H | []], M) -> multisetAdd(M, H);
 compress([H | T], M) ->
   M2 = multisetAdd(M, H),
   compress(T, M2).
 
 
 %%% Adds the element E to the multiset M
-multisetAdd(M, E) when M == [] -> [{E, 1}];
 multisetAdd(M, E) -> multisetAdd(M, E, []).
 
-% when element exists in multiset, increase the count and return
-multisetAdd([{ME, MC} | T], E, Acc) when ME == E -> Acc ++ [{E, MC + 1}] ++ T;
-% when there is no more elements in multiset add an element with count 1
-multisetAdd([M | T], E, Acc) when T == [] -> Acc ++ [M] ++ [{E, 1}];
-% else, add current item to accumulator
+% when element is currently inspected element in multiset, increase the count
+% of the currently inspected element
+multisetAdd([{E, MC} | T], E, Acc) -> Acc ++ [{E, MC + 1}] ++ T;
+% when there is no elements in multiset, add an element with count 1
+multisetAdd([], E, Acc) -> Acc ++ [{E, 1}];
+% else, look at next element
 multisetAdd([M | T], E, Acc) -> multisetAdd(T, E, Acc ++ [M]).
 
 
