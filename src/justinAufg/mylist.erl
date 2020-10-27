@@ -18,27 +18,30 @@ substitute(Element, Substitute, List, e) -> subFirst(Element, Substitute, List);
 substitute(Element, Substitute, List, l) -> subLast(Element, Substitute, List). 
 
 %% subAll(E, S, L) ersetzt alle Elemente E in Liste E mit dem Substitut S
+subAll(_, _, []) -> [];
 subAll(Element, Substitute, [Element|Tail]) -> [Substitute|subAll(Element, Substitute, Tail)];
-subAll(Element, Substitute, [Head|Tail]) -> [Head|subAll(Element, Substitute, Tail)];
-subAll(_, _, []) -> [].  
+subAll(Element, Substitute, [Head|Tail]) -> [Head|subAll(Element, Substitute, Tail)].
+
 
 %% subFirst(E, S, L) ersetzt das erste Element E in Liste E mit dem Substitut S
+subFirst(_, _, []) -> [];
 subFirst(Element, Substitute, [Element|Tail]) -> [Substitute|Tail];
-subFirst(Element, Substitute, [_|Tail]) -> subFirst(Element, Substitute, Tail);
-subFirst(_, _, []) -> [].
+subFirst(Element, Substitute, [_|Tail]) -> subFirst(Element, Substitute, Tail).
+
 
 %% subsLast(E, S, L) ersetzt das letzte Element E in Liste E mit dem Substitut S
 subLast(Element, Substitute, List) -> invert(subFirst(Element, Substitute, invert(List))).
 
 %% invert(L) invertiert die Liste L
-invert([Head|Tail]) -> invert(Tail) ++ [Head];
-invert([]) -> [].
+invert([]) -> [];
+invert([Head|Tail]) -> invert(Tail) ++ [Head].
+
 
 %% compress(L) gibt eine Liste aller einzigartigen Elemente der Liste L und deren
 %% respektive Vorkommens-Zahl zurück
+compress([]) -> [];
 compress([Head|Tail]) ->
-    [{Head, count(Head, [Head|Tail])}] ++ compress(reduce(Head, Tail));
-compress([]) -> [].
+    [{Head, count(Head, [Head|Tail])}] ++ compress(reduce(Head, Tail)).
 
 %% count(E, L) zählt die Vorkommnisse von Element E in Liste L
 count(_, []) -> 0;
