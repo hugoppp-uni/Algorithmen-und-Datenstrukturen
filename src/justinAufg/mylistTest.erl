@@ -4,13 +4,13 @@
 
 -include_lib("eunit/include/eunit.hrl").
 
-all_test() ->
-member_test() ->
-substitute_test() ->
-subAll_test() ->
-subFirst_test() ->
-subLast_test() ->
-invert_test() ->
-compress_test() ->
-count_test() ->
-reduce_test() ->
+%all_test() ->
+%member_test() ->
+%substitute_test() ->
+%subAll_test() ->
+%subFirst_test() ->
+%subLast_test() ->
+%invert_test() ->
+%compress_test() ->
+%count_test() ->
+%reduce_test() ->
