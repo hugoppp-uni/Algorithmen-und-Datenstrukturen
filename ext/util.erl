@@ -26,8 +26,8 @@ shuffle(List) -> PList = [{rand:uniform(), Elem} || Elem <- List],
 % Beispiel: util:list2string([1,2,3,4,5]). --> "1 2 3 4 5 \n"
 list2string([]) -> "\n";
 list2string([H | T]) -> lists:concat([H, " ", list2string(T)]).
-% transformiert die Liste von Zeichenketten in eine Liste von Integer
-% Beispiel: util:slist_tointlist(["1","2","3","4","5"]). --> [1,2,3,4,5]
+% transformiert die Liste von Zeichenketten in eine Liste von Integer	
+% Beispiel: util:slist_tointlist(["1","2","3","4","5"]). --> [1,2,3,4,5]					
 slist_tointlist([]) -> [];
 slist_tointlist([SInt | STail]) ->
   {IntS, Case} = string:to_integer(SInt),
@@ -60,20 +60,20 @@ readlist(Filename) -> {Sign, ListBinary} = file:read_file(Filename),
 
 %% -------------------------------------------
 % Erzeugt eine sortierte Liste mit Num Zahlen
-% beginnend bei 1 bis einschlieÃŸlich Num
+% beginnend bei 1 bis einschließlich Num
 %
 sortliste(Num) ->
   lists:seq(1, Num).
-% Erzeugt eine umgekehrt sortierte Liste mit Num Zahlen
-% beginnend bei Num bis einschlieÃŸlich 1
+% Erzeugt eine umgekehrt sortierte Liste mit Num Zahlen 
+% beginnend bei Num bis einschließlich 1
 resortliste(Num) ->
   lists:reverse(lists:seq(1, Num)).
 % Erzeugt eine unsortierte Liste mit Num Zufallszahlen im Bereich 1 bis Num
-% ohne Duplikate
+% ohne Duplikate 
 randomliste(Num) ->
   shuffle([X || X <- lists:seq(1, Num)]).
 % Erzeugt eine unsortierte Liste mit Num Zufallszahlen im Bereich Min bis Max
-% Duplikate sind mÃ¶glich
+% Duplikate sind möglich 
 randomliste(Num, Min, Max) ->
   RangeInt = Max - Min,
   lists:flatten([rand:uniform(RangeInt + 1) + Min - 1 || _ <- lists:seq(1, Num)]).
@@ -104,7 +104,7 @@ to_String(Etwas) ->
   lists:flatten(io_lib:format("~p", [Etwas])).
 
 %% Transformiert float nach int
-% gerundet wird kaufmÃ¤nisch: a.44 bzw. a.444 ergibt a, a.45 bzw. a.445 ergibt a+1
+% gerundet wird kaufmänisch: a.44 bzw. a.444 ergibt a, a.45 bzw. a.445 ergibt a+1
 %
 float_to_int(Float) -> list_to_integer(float_to_list(Float, [{decimals, 0}])).
 
@@ -166,12 +166,12 @@ type_is(Something) ->
   end.
 
 %% -------------------------------------------
-% Ein globaler ZÃ¤hler
+% Ein globaler Zähler
 %
 %% Addiert 1
 counting1(Counter) -> counting(Counter, 1).
 
-%% Addiert Step
+%% Addiert Step						 
 counting(Counter, Step) -> %Known = erlang:whereis(Counter),
   % case Known of
   %	undefined -> PIDcountklc = spawn(fun() -> countloop(0) end),
@@ -180,7 +180,7 @@ counting(Counter, Step) -> %Known = erlang:whereis(Counter),
   % end,
   % Counter ! {count,Step},
   % ok.
-  setglobalvar(Counter, min(getglobalvar(Counter), 0) + Step).
+  setglobalvar(Counter, max(getglobalvar(Counter), 0) + Step).
 %% Auslesen des Wertes
 countread(Counter) -> %Known = erlang:whereis(Counter),
   %case Known of
@@ -192,7 +192,7 @@ countread(Counter) -> %Known = erlang:whereis(Counter),
   %			_SomethingElse -> 0
   %		end
   %end.
-  min(getglobalvar(Counter), 0).
+  max(getglobalvar(Counter), 0).
 %% Setzt Wert auf 0
 countreset(Counter) ->  %Known = erlang:whereis(Counter),
   %case Known of
@@ -201,7 +201,7 @@ countreset(Counter) ->  %Known = erlang:whereis(Counter),
   %	_NotUndef -> Counter ! reset, true
   %end.
   setglobalvar(Counter, 0).
-%% Beendet den ZÃ¤hlprozess
+%% Beendet den Zählprozess
 countstop(Counter) ->  %Known = erlang:whereis(Counter),
   %case Known of
   %	undefined -> false;
@@ -210,7 +210,7 @@ countstop(Counter) ->  %Known = erlang:whereis(Counter),
   %				true
   %end.
   globalvarstop(Counter).
-%% Der nebenlÃ¤ufige Prozess
+%% Der nebenläufige Prozess					
 %countloop(Count) -> receive
 %						{count,Num} -> countloop(Count + Num);
 %						{get,PID} -> PID ! {current,Count},
@@ -258,7 +258,7 @@ globalvarreset(VariableName) -> Known = erlang:whereis(VariableName),
     _NotUndef -> VariableName ! reset
   end,
   true.
-% Beendet den nebenlÃ¤ufigen Prozess
+% Beendet den nebenläufigen Prozess 
 globalvarstop(VariableName) -> Known = erlang:whereis(VariableName),
   case Known of
     undefined -> false;
@@ -277,11 +277,11 @@ glvarloop(Value) -> receive
 
 %% -------------------------------------------
 % Schreibt ggf auf den Bildschirm und in eine Datei
-% nebenlÃ¤ufig zur Beschleunigung
+% nebenläufig zur Beschleunigung
 % Beispielaufruf: logging('FileName.log',"Textinhalt"),
 %
 % logging(_Datei,_Inhalt) -> ok;
-% Schreibt Inhal in Datei, nebenlÃ¤ufig!
+% Schreibt Inhal in Datei, nebenläufig!
 logging(Datei, Inhalt) -> Known = erlang:whereis(logklc),
   case Known of
     undefined -> PIDlogklc = spawn(fun() -> logloop(0) end),
@@ -290,7 +290,7 @@ logging(Datei, Inhalt) -> Known = erlang:whereis(logklc),
   end,
   logklc ! {Datei, Inhalt},
   ok.
-% Beendet den nebenlÃ¤ufigen Prozess
+% Beendet den nebenläufigen Prozess
 logstop() -> Known = erlang:whereis(logklc),
   case Known of
     undefined -> false;
@@ -298,7 +298,7 @@ logstop() -> Known = erlang:whereis(logklc),
       erlang:unregister(logklc),
       true
   end.
-% der nebenlÃ¤ufige Prozess
+% der nebenläufige Prozess					
 logloop(Y) -> receive
                 {Datei, Inhalt} -> shell:strings(false),
                   %io:format(Inhalt),
