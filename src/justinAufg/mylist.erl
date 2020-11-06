@@ -3,7 +3,7 @@
 
 %% API Functions
 -export([main/0, member/2, substitute/4, compress/1, diffList/2, del_element/3,
-        eo_count/1, isEven/1,  analyse/1]).
+        eo_count/1]).
 
 %% Internal functions
 
