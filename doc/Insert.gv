@@ -1,0 +1,36 @@
+digraph Q {
+
+node [shape = box];
+compound = true;
+
+//insert
+    a1 [label = "Insert(element)"]
+    a1 -> a2
+    a2 [label = "Existiert BTree.element" shape = diamond]
+    a2-> b2 [label = "NO"]
+    b2 -> "Return true"
+    b2 [label = "BTree.element = element"]
+    a2 -> a3 [label = "YES"]
+    a3 [label = "element < BTree.element" shape = diamond]
+    a3 -> smaller [label = "YES"]
+    a3 -> a4 [label = "NO"]
+    a4 [label = "element > BTree.element" shape = diamond]
+    a4 -> larger [label = "YES"]
+    a4 -> "Return false" [label = "NO (Element == BTree.Element)"]
+    smaller [label = "Insert(BTree.Left)"]
+    //smaller -> a1
+    larger [label = "InsertBTree(right)"]
+    //larger -> a1
+
+    smaller -> checkReturn
+    larger -> checkReturn
+    checkReturn [label = "return true?" shape = diamond]
+    checkReturn -> "BTree.heigth++" [label = YES]
+
+//a4 -> a3
+
+
+
+
+}
+
