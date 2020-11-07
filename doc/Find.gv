@@ -1,0 +1,30 @@
+digraph Q {
+
+node [shape = box];
+compound = true;
+
+//insert
+    a1 [label = "Find(element)"]
+    a1 -> a2
+    a2 [label = "Existiert BTree.element" shape = diamond]
+    a2-> "Return -1" [label = "NO"]
+    a2 -> a3 [label = "YES"]
+    a3 [label = "element < BTree.element" shape = diamond]
+    a3 -> smaller [label = "YES"]
+    a3 -> a4 [label = "NO"]
+    a4 [label = "element > BTree.element" shape = diamond]
+    a4 -> larger [label = "YES"]
+    a4 -> "Return BTree.heigth" [label = "NO (Element == BTree.Element)"]
+    smaller [label = "Find(BTree.Left)"]
+    //smaller -> a1
+    larger [label = "Find(BTree.Right)"]
+    //larger -> a1
+
+
+//a4 -> a3
+
+
+
+
+}
+
