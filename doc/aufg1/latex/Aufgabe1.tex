@@ -40,9 +40,9 @@
     -- Nicht zutreffend --
 
 
-    \section{Entwürfe}\label{sec:entwürfe}
+    \section{Entwürfe}\label{sec:entwuerfe}
 
-    \subsection{InitBT}
+    \subsection{InitBT}\label{subsec:initbt}
     Liefert einen leeren Baum.
     Der Entwurf ist trivial.
 
@@ -50,14 +50,14 @@
                                        \Theta(1)
     \end{math}
 
-    \subsection{IsEmptyBT}
+    \subsection{IsEmptyBT}\label{subsec:isemptybt}
     Prüft einen Baum auf Leerheit.
     Der Entwurf ist trivial.
     Die erwartete Laufzeit beträgt \begin{math}
                                        \Theta(1)
     \end{math}
 
-    \subsection{IsBt}
+    \subsection{IsBt}\label{subsec:isbt}
 
     \begin{center}
         \includegraphics[width=1.2\columnwidth] {isBt}
@@ -72,7 +72,7 @@
                                        O(1)
     \end{math}
 
-    \subsection{EqualsBT}
+    \subsection{EqualsBT}\label{subsec:equalsbt}
     Prüft auf semantische Gleichheit zwischen zwei Bäumen.
     Entwurf ist ebenfalls trivial, da die inOrderBT-Funktion
     auf beide Bäume angewendet wird und die resultierenden Listen verglichen werden.
@@ -83,7 +83,7 @@
     da die Bäume unabhängig voneinander durchlaufen werden, im Anschluss wird
     ein Mal über eine Liste von n Elementen iteriert.
 
-    \subsection{InsertBT}
+    \subsection{InsertBT}\label{subsec:insertbt}
 
     \begin{center}
         \includegraphics[width=1\columnwidth] {insert}
@@ -110,7 +110,7 @@
     Durchschnittlich wird der Baum mit einer logarithmischen Komplexität
     traversiert, da wir ihn vertikal durchlaufen.
 
-    \subsection{DeleteBT}
+    \subsection{DeleteBT}\label{subsec:deletebt}
 
     \begin{center}
         \includegraphics[width=0.8\columnwidth] {delete}
@@ -134,7 +134,7 @@
     \end{math},
     aufgrund der bei InsertBT erwähnten Umstände.
 
-    \subsection{Find}
+    \subsection{Find}\label{subsec:find}
 
     \begin{center}
         \includegraphics[width=1.1\columnwidth] {find.pdf}
@@ -154,7 +154,7 @@
     \end{math},
     aufgrund der bei InsertBT erwähnten Umstände.
 
-    \subsection{InOrderBT}
+    \subsection{InOrderBT}\label{subsec:inorderbt}
 
     \begin{center}
         \includegraphics[width=0.4\columnwidth] {inorderhugo.pdf}
