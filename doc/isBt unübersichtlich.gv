@@ -1,0 +1,44 @@
+digraph Q {
+
+node [shape = box];
+compound = true;
+
+//insert
+    "isBT: btree -> bool" -> a1
+    a1 [label = "empty?" shape = diamond]
+    a1 -> true [label = "yes"]
+    a1 -> a2 [label = "no"]
+    a2 [label = "element integer?" shape = diamond]
+    a2 -> false [label = "no"]
+    a2 -> a3 [label = "yes"]
+    a3 [label = "element >= 0?" shape = diamond]
+    a3 -> false [label = "no"]
+    a3 -> a4 [label = "yes"]
+    a4 [label = "leaf?" shape = diamond]
+    a4 -> a5 [label = "yes"]
+    a4 -> a6 [label = "no"]
+    a5 [label = "height == 1?" shape = diamond]
+    a5 -> false [label = "no"]
+    a5 -> true [label = "yes"]
+    a6 [label = "height > 0?" shape = diamond]
+    a6 -> false [label = "no"]
+    a6 -> a7 [label = "yes"]
+    a7 [label = "height == max(height_left, height_right) + 1?" shape = diamond]
+    a7 -> false [label = "no"]
+    a7 -> a8 [label = "yes"]
+    a8 [label = "element > element_left?" shape = diamond]
+    a8 -> false [label = "no"]
+    a8 -> a9 [label = "yes"]
+    a9 [label = "element < element_right?" shape = diamond]
+    a9 -> false [label = "no"]
+    a9 -> a10 [label = "yes"]
+    a10 [label = "isBT(left_child)?" shape = diamond]
+    a10 -> false [label = "no"]
+    a10 -> a11 [label = "yes"]
+    a11 [label = "isBT(right_child)?" shape = diamond]
+    a11 -> false [label = "no"]
+    a11 -> true [label = "yes"]
+    true [label = "return true"]
+    false [label = "return false"]
+}
+
