@@ -87,28 +87,6 @@ insertBT({NodeElement, _, Left, Right}, Element) when Element > NodeElement ->
     end,
     {NodeElement, maxInt(LeftHeight, NewRightHeight)+1, Left, NewRight}.
 
-%% deletes a given element from a given tree
-deleteBT({NodeElement, Height, Left, Right}, Element) when Element < NodeElement ->
-    NewLeft = deleteBT(Left, Element),
-    {_, NewLeftHeight, _, _} = NewLeft,
-    case isEmptyBT(Right) of
-        false   -> {_, RightHeight, _, _} = Right;
-        true    -> RightHeight = 0
-    end,
-    {NodeElement, max(RightHeight, NewLeftHeight)+1, NewLeft, Right};
-deleteBT({NodeElement, Height, Left, Right}, Element) when Element > NodeElement ->
-    NewRight = deleteBT(Right, Element),
-    {_, NewRightHeight, _, _} = NewRight,
-    case isEmptyBT(Left) of
-        false   -> {_, LeftHeight, _, _} = Left;
-        true    -> LeftHeight = 0
-    end, 
-    {NodeElement, maxInt(LeftHeight, NewRightHeight)+1, Left, NewRight}.
-
-%% deletes the element and rearranges the tree
-% suche im linke tree nach dem größten element
-deleteAndRearrange({Element, Height, Left, Right}) -> btree.
-
 %% returns the greater of two integers
 maxInt(Int1, Int2) when Int1 > Int2 -> Int1;
 maxInt(Int1, Int2) when Int2 > Int1 -> Int2;
@@ -119,3 +97,13 @@ findBT({Element, Height, _, _}, Element) -> Height;
 findBT({NodeElement, _, Left, _}, Element) when Element < NodeElement -> findBT(Left, Element);
 findBT({NodeElement, _, _, Right}, Element) when Element > NodeElement -> findBT(Right, Element);
 findBT(_, _) -> -1.
+
+%% deletes a given element from a given tree
+deleteBT({}, Element) -> {};
+deleteBT({Element, Height, Left, Right}, Element) -> deleteAndRearrange({Element, Height, Left, Right}, Element) ->
+deleteBT({NodeElement, Height, Left, Right}, Element) when Element < NodeElement ->
+deleteBT({NodeElement, Height, Left, Right}, Element) when Element > NodeElement ->
+    
+%% deletes the element and rearranges the tree
+% suche im linke tree nach dem größten element
+deleteAndRearrange({Element, Height, Left, Right}) -> btree.
