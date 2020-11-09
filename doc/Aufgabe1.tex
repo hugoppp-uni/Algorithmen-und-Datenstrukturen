@@ -42,19 +42,25 @@
     \section{Entwürfe}\label{sec:entwürfe}
 
     \subsection{InitBT}
-
+    Liefert einen leeren Baum. Entwurf ist trivial.
     \subsection{IsEmptyBT}
-
+    Prüft einen Baum auf Leerheit. Entwurf ist trivial.
     \subsection{IsBt}
-
+    Prüft die vorgegebenen Rahmenbedingungen eines übergebenen
+    Baums. Hierbei werden alle Wahrheitswerte der verschiedenen
+    Vorgaben von jedem Knote miteinander in einen logischen
+    Zusammenhang gebracht.
     \subsection{EqualsBT}
-
+    Prüft auf semantische Gleichheit zwischen zwei Bäumen.
+    Entwurf ist ebenfalls trivial, da die inOrderBT-Funktion
+    auf beide Bäume angewendet wird und die resultierenden Listen verglichen werden.
     \subsection{InsertBT}
-
+    Fügt ein übergebenes Element einem übergebenem Baum hinzu. Zum Traversieren des Baumes wird bei jedem Schritt überprüft, ob das einzufügende Element kleiner oder größer dem derzeitigen Knoten-Element ist. Ist es kleiner geht man nach links, größer nach rechts. Die Höhe wird dynamisch angepasst. Ist ein leerer Platz gefunden, wird das Element dort eingefügt.
     \subsection{DeleteBT}
-
+    Löscht ein übergebenes Element aus einem übergebenem Baum. Traversierung des Baumes ist gleich wie in InsertBT. Ist das Ende des Baumes erreicht, ohne das Element gefunden zu haben, wird der Baum unverändert zurückgegeben. Wird das Element aufgefunden, kommt an seine Stelle das Element aus dem linken Teilbaum mit dem höchsten Wert. Die Höhe wird dynamisch angepasst.
     \subsection{Find}
-
+    Gibt die Höhe eines übergebenem Elements in einem übergebenem Baum aus. Traversieren des Baumes funktioniert hierbei gleich wie in InsertBT. Ist das Element gefunden, wird die Höhe des Knotens ausgegeben.
     \subsection{InOrderBT}
+    Gibt den Baum in Inorder in einer Liste aus. Es wird eine Liste mit dem Element des Knotens erstellt, wobei die Inorder des linken Kindes vorangestellt und die Inorder des rechten Kindes herangehängt wird. Ist das Ende des Baumes erreicht, wird eine leere Liste zurückgegeben.
 
 \end{document}
