@@ -3,7 +3,6 @@ digraph Q {
 node [shape = box];
 compound = true;
 
-//insert
     "isBT(BTree)" -> a1
     a1 [label = "empty?" shape = diamond]
     a1 -> true1 [label = "yes"]
@@ -16,12 +15,9 @@ compound = true;
     a3 -> a4 [label = "yes"]
     a4 [label = "leaf?" shape = diamond]
     a4 -> a5 [label = "yes"]
-    //a4 -> a6 [label = "no"]
     a5 [label = "height == 1?" shape = diamond]
     a5 -> false3 [label = "no"]
     a5 -> true2 [label = "yes"]
-    //a6 [label = "height > 0?" shape = diamond]
-    //a6 -> false [label = "no"]
     a4 -> a7 [label = "yes"]
     a7 [label = "height ==
      max(height_left,
@@ -40,7 +36,7 @@ compound = true;
     a11 [label = "isBT(right_child)?" shape = diamond]
     a11 -> false8 [label = "no"]
     a11 -> true3 [label = "yes"]
-    
+
     true1 [label = "return true"]
     true2 [label = "return true"]
     true3 [label = "return true"]
@@ -53,5 +49,4 @@ compound = true;
     false6 [label = "return false"]
     false7 [label = "return false"]
     false8 [label = "return false"]
-    
 }

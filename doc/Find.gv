@@ -16,15 +16,6 @@ compound = true;
     a4 -> larger [label = "YES"]
     a4 -> "Return BTree.heigth" [label = "NO (Element == BTree.Element)"]
     smaller [label = "Find(BTree.Left)"]
-    //smaller -> a1
     larger [label = "Find(BTree.Right)"]
-    //larger -> a1
-
-
-//a4 -> a3
-
-
-
-
 }
 

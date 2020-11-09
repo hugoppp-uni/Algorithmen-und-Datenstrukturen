@@ -3,7 +3,6 @@ digraph Q {
 node [shape = box];
 compound = true;
 
-//inOrder
     a1 [label = "InOrder(BTree)"]
     a1 -> a2
     a2 [label = "BTree.left exists?" shape = diamond]
@@ -20,10 +19,5 @@ compound = true;
     z2 -> a6
     a5 -> a6 [label = "NO"]
     a6 [label = "Return"]
-
-
-
-
-
 }
 
