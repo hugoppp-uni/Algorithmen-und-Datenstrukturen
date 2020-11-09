@@ -2,26 +2,17 @@ digraph Q {
 
 node [shape = box];
 compound = true;
-
-inOrder
-    a1 [label = InOrderBT(BTree)]
-    a1 - a2
-    a2 [label = BTree.left exists shape = diamond]
-    a2 - a3 [label = NO]
-    a3 [label = return empty list]
-    a4 [label = create list with Btree.Element]
-    a2 - a4 [label = YES]
-    a5 [label = prepend inOrderBT(Btree.Left)]
-    a6 [label = append inOrderBT(Btree.Right)]
-    a4 - a5
-    a5 - a6
-    a6 - a7
-    a7 [label = return list]
-    
-
-a4 - a3
-
-
-
-
+    a1 [label = "InOrderBT(BTree)"]
+    a1 -> a2
+    a2 [label = "BTree.left exists" shape = diamond]
+    a2 -> a3 [label = NO]
+    a3 [label = "return empty list"]
+    a4 [label = "create list with Btree.Element"]
+    a2 -> a4 [label = YES]
+    a5 [label = "prepend inOrderBT(Btree.Left)"]
+    a6 [label = "append inOrderBT(Btree.Right)"]
+    a4 -> a5
+    a5 -> a6
+    a6 -> a7
+    a7 [label = "return list"]
 }
