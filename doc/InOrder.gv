@@ -7,20 +7,20 @@ compound = true;
     a1 [label = "InOrder(BTree)"]
     a1 -> a2
     a2 [label = "BTree.left exists?" shape = diamond]
-    a2 -> a1 [label = "YES; inOrder(BTree.links)"]
-    a2 -> a3
-    a3 [label = "BTree.element exists?" shape = diamond]
-    a3 -> b1 [label = "NO"]
-    b1 [label = "Return"]
-    a3 -> a4 [label = "YES"]
+    a2 ->   z1[label = "YES"]
+    z1 [label = "inOrder(BTree.links)"]
+    z1 -> a4
+
+    a2 -> a4 [label = "NO"]
     a4 [label = "anhängen von BTree.element"]
     a4 -> a5
     a5 [label = "BTree.Right exists?", shape = diamond]
-    a5 -> a1 [label = "YES; inOrder(BTree.Right)"]
-    a5 -> a6 [label = ""]
+    a5 -> z2 [label = "YES"]
+    z2 [label = "inOrder(BTree.Right)"]
+    z2 -> a6
+    a5 -> a6 [label = "NO"]
     a6 [label = "Return"]
 
-//a4 -> a3
 
 
 
