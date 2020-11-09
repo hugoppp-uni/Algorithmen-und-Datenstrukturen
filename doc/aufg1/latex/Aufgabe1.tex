@@ -180,10 +180,13 @@
     da jedes Element des Baums durchlaufen wird.
     Hierbei ist zu beachten, dass die Gesamtkomplexität des weiteren von der
     Komplexität der Append- bzw. Prepend-Operation der Liste abhängt.
-    Dies kann zu einer Komplexität von bis zu
+    Falls die Komplexität dieser Operation
     \begin{math}
         O(n)
-    \end{math},
-    führen.
+    \end{math}
+    beträgt, ergibt sich daraus eine Gesamtkomplexität von
+    \begin{math}
+        O(log(n) \cdot n)
+    \end{math}
 
 \end{document}
