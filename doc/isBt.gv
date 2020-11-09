@@ -4,7 +4,7 @@ node [shape = box];
 compound = true;
 
 //insert
-    "isBT: btree -> bool" -> a1
+    "isBT(BTree)" -> a1
     a1 [label = "empty?" shape = diamond]
     a1 -> true1 [label = "yes"]
     a1 -> a2 [label = "no"]
@@ -23,7 +23,9 @@ compound = true;
     //a6 [label = "height > 0?" shape = diamond]
     //a6 -> false [label = "no"]
     a4 -> a7 [label = "yes"]
-    a7 [label = "height == max(height_left, height_right) + 1?" shape = diamond]
+    a7 [label = "height ==
+     max(height_left,
+      height_right) + 1?" shape = diamond]
     a7 -> false4 [label = "no"]
     a7 -> a8 [label = "yes"]
     a8 [label = "element > element_left?" shape = diamond]
@@ -40,10 +42,11 @@ compound = true;
     a11 -> true3 [label = "yes"]
     
     true1 [label = "return true"]
-    false1 [label = "return false"]
     true2 [label = "return true"]
-    false2 [label = "return false"]
     true3 [label = "return true"]
+
+    false1 [label = "return false"]
+    false2 [label = "return false"]
     false3 [label = "return false"]
     false4 [label = "return false"]
     false5 [label = "return false"]
