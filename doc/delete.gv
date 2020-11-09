@@ -1,0 +1,25 @@
+digraph Q {
+
+node [shape = box];
+compound = true;
+
+    a1 [label = "delete(BTree, element)"]
+    a1 -> a2
+    a2 [label = "Existiert BTree" shape = diamond]
+    a2-> b2 [label = "NO"]
+    b2 [label = "Ende"]
+    a2 -> a3 [label = "YES"]
+    a3 [label = "element < BTree.element" shape = diamond]
+    a3 -> smaller [label = "YES"]
+    a3 -> a4 [label = "NO"]
+    a4 [label = "element > BTree.element" shape = diamond]
+    a4 -> larger [label = "YES"]
+    a4 -> hilfs [label = "NO (Element == BTree .Element)"]
+    hilfs [label = "löschen von größten El in BTree.l;\nBTree.element = gelöschtes element"]
+    hilfs -> hohe
+    hohe [label = "Höhe neu berechnen"]
+
+    smaller [label = "Delete(BTree, left)"] smaller -> hohe
+    larger [label = "Delete(BTree, right)"] larger -> hohe
+}
+
