@@ -46,9 +46,16 @@
     Liefert einen leeren Baum.
     Der Entwurf ist trivial.
 
+    Die erwartete Laufzeit beträgt \begin{math}
+                                       \Theta(1)
+    \end{math}
+
     \subsection{IsEmptyBT}
     Prüft einen Baum auf Leerheit.
     Der Entwurf ist trivial.
+    Die erwartete Laufzeit beträgt \begin{math}
+                                       \Theta(1)
+    \end{math}
 
     \subsection{IsBt}
 
@@ -61,18 +68,26 @@
     Vorgaben von jedem Knote miteinander in einen logischen
     Zusammenhang gebracht.
 
+    Die erwartete Laufzeit beträgt \begin{math}
+                                       O(1)
+    \end{math}
+
     \subsection{EqualsBT}
     Prüft auf semantische Gleichheit zwischen zwei Bäumen.
     Entwurf ist ebenfalls trivial, da die inOrderBT-Funktion
     auf beide Bäume angewendet wird und die resultierenden Listen verglichen werden.
+
+    Die erwartete Laufzeit beträgt \begin{math}
+                                       O(n)
+    \end{math},
+    da die Bäume unabhängig voneinander durchlaufen werden, im Anschluss wird
+    ein Mal über eine Liste von n Elementen iteriert.
 
     \subsection{InsertBT}
 
     \begin{center}
         \includegraphics[width=1\columnwidth] {insert}
     \end{center}
-
-
 
     Fügt ein übergebenes Element einem übergebenem Baum hinzu.
     Zum Traversieren des Baumes wird bei jedem Schritt überprüft,
@@ -81,6 +96,19 @@
     Die Höhe wird dynamisch angepasst.
     Ist ein leerer Platz gefunden,
     wird das Element dort eingefügt.
+
+    Die erwartete Laufzeit beträgt
+    \begin{math}
+        O(n)
+    \end {math}
+    bzw.
+    \begin{math}
+        \Theta (log (n))
+    \end{math},
+    da der Baum im Worst-Case nicht ausgeglichen ist.
+    Das hat zur Folge, dass alle Elemente einmal durchlaufen werden müssen.
+    Durchschnittlich wird der Baum mit einer logarithmischen Komplexität
+    traversiert, da wir ihn vertikal durchlaufen.
 
     \subsection{DeleteBT}
 
@@ -96,6 +124,16 @@
     kommt an seine Stelle das Element aus dem linken Teilbaum mit dem höchsten Wert.
     Die Höhe wird dynamisch angepasst.
 
+    Die erwartete Laufzeit beträgt
+    \begin{math}
+        O(n)
+    \end {math}
+    bzw.
+    \begin{math}
+        \Theta (log (n))
+    \end{math},
+    aufgrund der bei InsertBT erwähnten Umstände.
+
     \subsection{Find}
 
     \begin{center}
@@ -105,6 +143,16 @@
     Gibt die Höhe eines übergebenem Elements in einem übergebenem Baum aus.
     Traversieren des Baumes funktioniert hierbei gleich wie in InsertBT.
     Ist das Element gefunden, wird die Höhe des Knotens ausgegeben.
+
+    Die erwartete Laufzeit beträgt
+    \begin{math}
+        O(n)
+    \end {math}
+    bzw.
+    \begin{math}
+        \Theta (log (n))
+    \end{math},
+    aufgrund der bei InsertBT erwähnten Umstände.
 
     \subsection{InOrderBT}
 
@@ -124,5 +172,18 @@
     Zum anderen gibt es die Möglichkeit, bei der Überprüfung der Komponenten
     vorauszueilen und immer auf die Kinder des derzeitigen Knotens zu achten (links).
     Die Auswahl des Entwurfes ist implementationsabhängig.
+
+    Die erwartete Laufzeit beträgt
+    \begin{math}
+        \Theta (n)
+    \end{math},
+    da jedes Element des Baums durchlaufen wird.
+    Hierbei ist zu beachten, dass die Gesamtkomplexität des weiteren von der
+    Komplexität der Append- bzw. Prepend-Operation der Liste abhängt.
+    Dies kann zu einer Komplexität von bis zu
+    \begin{math}
+        O(n)
+    \end{math},
+    führen.
 
 \end{document}
