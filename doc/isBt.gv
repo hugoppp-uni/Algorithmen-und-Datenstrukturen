@@ -1,0 +1,23 @@
+digraph Q {
+
+    node [shape = box];
+    compound = true;
+
+    "isBT(BTree)" ->isEmpty
+
+    isEmpty [shape = diamond]
+    isEmpty -> "return true" [label = "YES"]
+    isEmpty -> isLeaf [label = "NO" , shape = diamaond]
+    isLeaf -> hohe2
+    isLeaf -> elementIsValid [label = "NO"]
+    elementIsValid-> hoheCorrect [label = "YES"]
+    hoheCorrect -> "return true" [label = "YES"]
+
+    hohe2[label = ""]
+    isEmpty [label = "is empty?"]
+    isLeaf [label = "has children?" shape = diamond ]
+    elementIsValid [label = "isInteger & is >= 0" shape = diamond]
+    hoheCorrect [label = "höhe == 1?"shape = diamond]
+
+}
+
