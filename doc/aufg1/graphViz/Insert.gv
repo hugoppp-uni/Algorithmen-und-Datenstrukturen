@@ -23,7 +23,7 @@ compound = true;
     smaller -> checkReturnl
     checkReturnl [label = "wurde angehängt?" shape = diamond]
     checkReturnl -> checkReturnl2 [label = "YES"]
-    checkReturnl2 [label = "höhe rechts >= höhe links?" shape = diamond]
+    checkReturnl2 [label = "höhe links >= höhe rechts?" shape = diamond]
     checkReturnl2 -> ret  [label = YES]
     ret [label = "BTree.heigth++"]
 
