@@ -35,7 +35,7 @@
     %! suppress = MissingLabel
 
     \subsection{Aktueller Stand}
-    Die Entwürfe sind fertig gestellt und müssen Implementiert werden.
+    Die Entwürfe sind fertiggestellt und müssen implementiert werden.
 
     %! suppress = MissingLabel
 
@@ -99,12 +99,13 @@
     Fügt ein übergebenes Element einem übergebenem Baum hinzu.
     Zum Traversieren des Baumes wird bei jedem Schritt überprüft,
     ob das einzufügende Element kleiner oder größer dem derzeitigen Knoten-Element ist.
-    Ist es kleiner geht man nach links, größer nach rechts.
+    Ist es kleiner, geht man nach links, größer nach rechts.
     Wenn bereits ein Knoten mit dem gleichen Wert existiert, wird der Baum
     unverändert zurückgegeben.
     Wurde ein leerer Platz gefunden, wird das Element dort eingefügt.
     Falls ein Element eingefügt wurde, muss die Höhe aktualisiert werden.
-    Diese wird inkrementiert, falls der Zweig, an ein Element angefügt wurde,
+    Diese wird inkrementiert, falls der Zweig, der an ein Element angefügt
+    wurde,
     höhenbestimmend ist.
 
 
@@ -147,7 +148,7 @@
     bzw.
     \begin{math}
         \Theta (log (n))
-    \end{math},
+    \end{math}
     aufgrund der bei InsertBT erwähnten Umstände.
 
     \subsection{Find}\label{subsec:find}
@@ -167,7 +168,7 @@
     bzw.
     \begin{math}
         \Theta (log (n))
-    \end{math},
+    \end{math}
     aufgrund der bei InsertBT erwähnten Umstände.
 
     \subsection{InOrderBT}\label{subsec:inorderbt}
@@ -185,8 +186,8 @@
 
     Hier haben wir zwei Optionen dargestellt: Zum Einen kann bei jedem
     Funktionsdurchlauf der derzeitige Knoten selbst betrachtet werden (rechts).
-    Zum anderen gibt es die Möglichkeit, bei der Überprüfung der Komponenten
-    vorauszueilen und immer auf die Kinder des derzeitigen Knotens zu achten (links).
+    Zum anderen gibt es die Möglichkeit, vorausschauend zu arbeiten und immer
+    auf die Kinder des derzeitigen Knotens achten (links).
     Die Auswahl des Entwurfes ist implementationsabhängig.
 
     Die erwartete Laufzeit beträgt
@@ -194,7 +195,7 @@
         \Theta (n)
     \end{math},
     da jedes Element des Baums durchlaufen wird.
-    Hierbei ist zu beachten, dass die Gesamtkomplexität des weiteren von der
+    Hierbei ist zu beachten, dass die Gesamtkomplexität des Weiteren von der
     Komplexität der Append- bzw. Prepend-Operation der Liste abhängt.
     Falls die Komplexität dieser Operation
     \begin{math}
