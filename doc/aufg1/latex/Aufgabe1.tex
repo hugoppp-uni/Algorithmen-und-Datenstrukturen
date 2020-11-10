@@ -97,9 +97,13 @@
     Zum Traversieren des Baumes wird bei jedem Schritt überprüft,
     ob das einzufügende Element kleiner oder größer dem derzeitigen Knoten-Element ist.
     Ist es kleiner geht man nach links, größer nach rechts.
-    Die Höhe wird dynamisch angepasst.
-    Ist ein leerer Platz gefunden,
-    wird das Element dort eingefügt.
+    Wenn bereits ein Knoten mit dem gleichen Wert existiert, wird der Baum
+    unverändert zurückgegeben.
+    Wurde ein leerer Platz gefunden, wird das Element dort eingefügt.
+    Falls ein Element eingefügt wurde, muss die Höhe aktualisiert werden.
+    Diese wird inkrementiert, falls der Zweig, an ein Element angefügt wurde,
+    höhenbestimmend ist.
+
 
     Die erwartete Laufzeit beträgt
     \begin{math}
