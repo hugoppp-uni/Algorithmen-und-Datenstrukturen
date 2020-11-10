@@ -4,7 +4,7 @@ node [shape = box];
 compound = true;
     a1 [label = "InOrderBT(BTree)"]
     a1 -> a2
-    a2 [label = "BTree.left exists" shape = diamond]
+    a2 [label = "BTree exists" shape = diamond]
     a2 -> a3 [label = NO]
     a3 [label = "return empty list"]
     a4 [label = "create list with Btree.Element"]
