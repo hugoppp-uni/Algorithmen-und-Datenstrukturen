@@ -5,6 +5,10 @@
                 deleteBT/2, listAppend/2]).
 -include_lib("eunit/include/eunit.hrl").
 
+
+laufzeit_test() -> 
+    ok.
+
 all_test() ->
     initBT_test(),
     isEmptyBT_test(),
