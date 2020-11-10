@@ -67,7 +67,7 @@
 
     Prüft die vorgegebenen Rahmenbedingungen eines übergebenen Baums.
     Hierbei werden alle Wahrheitswerte der verschiedenen
-    Vorgaben von jedem Knote miteinander in einen logischen
+    Vorgaben von jedem Knoten miteinander in einen logischen
     Zusammenhang gebracht.
 
     Die erwartete Laufzeit beträgt
@@ -126,12 +126,12 @@
     \end{center}
 
     Löscht ein übergebenes Element aus einem übergebenem Baum.
-    Traversierung des Baumes ist gleich wie in InsertBT.
+    Die Traversierung des Baums ist gleich wie bei InsertBT.
     Ist das Ende des Baumes erreicht, ohne das Element gefunden zu haben,
     wird der Baum unverändert zurückgegeben.
     Wird das Element aufgefunden,
     kommt an seine Stelle das Element aus dem linken Teilbaum mit dem höchsten Wert.
-    Die Höhe wird dynamisch angepasst.
+    Die Höhe wird Bottom-Up angepasst.
 
     Die erwartete Laufzeit beträgt
     \begin{math}
@@ -150,7 +150,7 @@
     \end{center}
 
     Gibt die Höhe eines übergebenem Elements in einem übergebenem Baum aus.
-    Traversieren des Baumes funktioniert hierbei gleich wie in InsertBT.
+    Traversieren des Baums funktioniert hierbei gleich wie in InsertBT.
     Ist das Element gefunden, wird die Höhe des Knotens ausgegeben.
 
     Die erwartete Laufzeit beträgt
@@ -176,8 +176,8 @@
     Inorder des rechten Kindes herangehängt wird.
     Ist das Ende des Baumes erreicht, wird eine leere Liste zurückgegeben.
 
-    Hier haben wir zwei Optionen: Zum Einen kann bei jedem Funktionsdurchlauf
-    der derzeitige Knoten selbst betrachtet werden (rechts).
+    Hier haben wir zwei Optionen dargestellt: Zum Einen kann bei jedem
+    Funktionsdurchlauf der derzeitige Knoten selbst betrachtet werden (rechts).
     Zum anderen gibt es die Möglichkeit, bei der Überprüfung der Komponenten
     vorauszueilen und immer auf die Kinder des derzeitigen Knotens zu achten (links).
     Die Auswahl des Entwurfes ist implementationsabhängig.
