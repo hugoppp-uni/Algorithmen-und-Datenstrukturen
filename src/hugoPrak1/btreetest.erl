@@ -9,7 +9,7 @@
 -module(btreetest).
 -author("hugop").
 
--import(btree, [isEmptyBT/1, findBT/2, initBT/0]).
+-import(btree, [isEmptyBT/1, findBT/2, initBT/0, inOrderBT/1]).
 -include_lib("eunit/include/eunit.hrl").
 
 
@@ -24,6 +24,10 @@ findBT_test() ->
   ?assertEqual(1, findBT(correctTree2H(), 1250)),
   ?assertEqual(1, findBT(correctTree2H(), 2000)).
 
+inOrder_test() ->
+  ?assertEqual([],inOrderBT({})),
+  ?assertEqual([250|[500|[750|[1000|[1250|[1500|[2000]]]]]]]
+    ,inOrderBT(correctTree2H())).
 
 correctTree2H() ->
   {1000, 3,
