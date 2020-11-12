@@ -10,7 +10,7 @@
 -author("hugop").
 
 %% API
--export([isEmptyBT/1, findBT/2, initBT/0, inOrderBT/1]).
+-export([isEmptyBT/1, findBT/2, initBT/0, inOrderBT/1, insertBT/2]).
 
 %% initBT: ∅ → btree
 %% initBT()
@@ -23,9 +23,9 @@ isEmptyBT(_) -> false.
 
 %% findBT: btree × elem → integer
 %% findBT(<BTree>,<Element>)
-findBT({EToFind, H, _L, _R}, EToFind) -> H;
-findBT({E, _H, L, _R}, EToFind) when EToFind < E -> findBT(L, EToFind);
-findBT({E, _H, _L, R}, EToFind) when EToFind > E -> findBT(R, EToFind);
+findBT({Element, H, _L, _R}, Element) -> H;
+findBT({E, _H, L, _R}, Element) when Element < E -> findBT(L, Element);
+findBT({E, _H, _L, R}, Element) when Element > E -> findBT(R, Element);
 findBT(_, _) -> -1.
 
 
@@ -48,6 +48,23 @@ inOrderBT({E, _, L, R}, Acc) -> inOrderBT(L, Acc) ++ [E] ++ inOrderBT(R).
 
 %% insertBT: btree × elem → btree
 %% insertBT(<BTree>,<Element>)
+insertBT({}, Element) -> {Element, 1, {}, {}};
+insertBT({E, H, L, R}, Element) when Element < E ->
+  {E, maxHeight(insertBT(L, Element), R)+ 1, insertBT(L, Element), R};
+insertBT({E, H, L, R}, Element) when Element > E ->
+  {E, maxHeight(L, insertBT(R, Element)) + 1, L, insertBT(R, Element)}.
+
 
 %% deleteBT: btree × elem → btree
 %% deleteBT(<BTree>,<Element>)
+
+
+maxHeight({_, H1, _, _}, {_, H2, _, _})
+  -> max(H1, H2);
+maxHeight({}, {_E, H, _L, _R}) -> H;
+maxHeight({_E, H, _L, _R}, {}) -> H;
+maxHeight({}, {}) -> 0.
+
+
+max(A, B) when A > B -> A;
+max(_A, B) -> B.
