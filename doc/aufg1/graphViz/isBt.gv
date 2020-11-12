@@ -3,6 +3,7 @@ digraph Q {
 NOde [shape = box];
 compound = true;
 
+    //TODO height mit Intervallen
     "isBT(BTree)" -> a1
     a1 [label = "empty?" shape = diamond]
     a1 -> true1 [label = "YES"]
@@ -13,8 +14,8 @@ compound = true;
     a3 [label = "element >= 0?" shape = diamond]
     a3 -> false2 [label = "NO"]
     a3 -> a4 [label = "YES"]
-    a4 [label = "leaf?" shape = diamond]
-    a4 -> a5 [label = "YES"]
+    a4 [label = "Has at least one child?" shape = diamond]
+    a4 -> a5 [label = "NO"]
     a5 [label = "height == 1?" shape = diamond]
     a5 -> false3 [label = "NO"]
     a5 -> true2 [label = "YES"]

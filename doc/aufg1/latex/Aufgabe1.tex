@@ -55,8 +55,9 @@
 
     \subsection{IsEmptyBT}\label{subsec:isemptybt}
     Prüft einen Baum auf Leerheit.
-    Da der Baum nicht auf Korrektheit zu prüfen ist,
-    ist der Entwurf trivial.
+    Gibt true zurück, wenn der Baum InitBT entspricht, sonst false.
+
+
     Die erwartete Laufzeit beträgt
     \begin{math}
         \Theta(1)
@@ -80,8 +81,9 @@
 
     \subsection{EqualsBT}\label{subsec:equalsbt}
     Prüft auf semantische Gleichheit zwischen zwei Bäumen.
-    Entwurf ist ebenfalls trivial, da die inOrderBT-Funktion
-    auf beide Bäume angewendet wird und die resultierenden Listen verglichen werden.
+    Zuerst werden mit inOrderBT beide Bäume als sortierte Listen ausgegeben,
+    anschließen elementweise auf Gleichheit geprüft.
+    Falls die Listen nicht gleich sind, wird false zurückgegeben, sonst true.
 
     Die erwartete Laufzeit beträgt
     \begin{math}
