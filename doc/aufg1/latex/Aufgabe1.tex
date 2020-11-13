@@ -26,7 +26,10 @@
     %! suppress = MissingLabel
 
     \subsection{Quellenangaben}
+    
     Es wurden lediglich Vorlesungsmaterialien verwendet.
+    Jenke, Philipp. 2020. "Algorithmen und Datenstrukturen: 1. Abstrakte Datentypen". https://www.youtube.com/watch?v=X18uvLAHyjE&t=1254s.
+    Zuletzt aufgerufen am 13.11.2020.
 
     %! suppress = MissingLabel
 
@@ -46,17 +49,27 @@
     \section{Entwürfe}\label{sec:entwuerfe}
 
     \subsection{InitBT}\label{subsec:initbt}
+    
+    \begin{center}
+        \includegraphics[width=1\columnwidth] {init.pdf}
+    \end{center}
+    
     Liefert einen leeren Baum.
-    Der Entwurf ist trivial.
     Die erwartete Laufzeit beträgt
     \begin{math}
         \Theta(1)
     \end{math}
 
     \subsection{IsEmptyBT}\label{subsec:isemptybt}
+    
+    \begin{center}
+        \includegraphics[width=1\columnwidth] {isempty.pdf}
+    \end{center}
+    
     Prüft einen Baum auf Leerheit.
-    Gibt true zurück, wenn der Baum InitBT entspricht, sonst false.
-
+    Dies erfolgt durch einen Vergleich mit dem Resultat von
+    initBT. Liefert dieser true ist der Baum leer, bei false
+    nicht.
 
     Die erwartete Laufzeit beträgt
     \begin{math}
@@ -79,11 +92,17 @@
         O(n)
     \end{math}
 
-    \subsection{EqualsBT}\label{subsec:equalsbt}
+    \subsection{EqualBT}\label{subsec:equalbt}
+    
+    \begin{center}
+        \includegraphics[width=1.2\columnwidth] {equal.pdf}
+    \end{center}
+    
     Prüft auf semantische Gleichheit zwischen zwei Bäumen.
     Zuerst werden mit inOrderBT beide Bäume als sortierte Listen ausgegeben,
-    anschließen elementweise auf Gleichheit geprüft.
-    Falls die Listen nicht gleich sind, wird false zurückgegeben, sonst true.
+    Anschließend wird elementweise auf Gleichheit geprüft.
+    Die resultierenden Listen sind gleich wenn die Reihenfolgen der Elemente gleich sind.
+    Falls die Listen gleich sind, wird true zurückgegeben, sonst false.
 
     Die erwartete Laufzeit beträgt
     \begin{math}
@@ -95,7 +114,7 @@
     \subsection{InsertBT}\label{subsec:insertbt}
 
     \begin{center}
-        \includegraphics[width=1\columnwidth] {insert}
+        \includegraphics[width=1.2\columnwidth] {insert.pdf}
     \end{center}
 
     Fügt ein übergebenes Element einem übergebenem Baum hinzu.
@@ -105,10 +124,7 @@
     Wenn bereits ein Knoten mit dem gleichen Wert existiert, wird der Baum
     unverändert zurückgegeben.
     Wurde ein leerer Platz gefunden, wird das Element dort eingefügt.
-    Falls ein Element eingefügt wurde, muss die Höhe aktualisiert werden.
-    Diese wird inkrementiert, falls der Zweig, der an ein Element angefügt
-    wurde,
-    höhenbestimmend ist.
+    Die Höhe wird in jedem Knoten bottom-up mithilfe der Definition der Höhe neu berechnet. Das Größere der beiden Kindelemente wird um 1 addiert. So wird die Integrität der Höhe sichergestellt.
 
 
     Die erwartete Laufzeit beträgt
@@ -132,16 +148,14 @@
     \subsection{DeleteBT}\label{subsec:deletebt}
 
     \begin{center}
-        \includegraphics[width=0.8\columnwidth] {delete}
+        \includegraphics[width=0.8\columnwidth] {delete.pdf}
     \end{center}
 
     Löscht ein übergebenes Element aus einem übergebenem Baum.
     Die Traversierung des Baums ist gleich wie bei InsertBT.
     Ist das Ende des Baumes erreicht, ohne das Element gefunden zu haben,
     wird der Baum unverändert zurückgegeben.
-    Wird das Element aufgefunden,
-    kommt an seine Stelle das Element aus dem linken Teilbaum mit dem höchsten Wert.
-    Die Höhe wird Bottom-Up angepasst.
+    Wird das Element aufgefunden, muss eine Hilfsfunktion findAndDeleteMax() aufgerufen werden, die das größte Element aus dem linken Baum löscht und zurückgibt.Die Höhe wird wieder bottom-up laut Definition angepasst.
 
     Die erwartete Laufzeit beträgt
     \begin{math}
@@ -152,6 +166,26 @@
         \Theta (log (n))
     \end{math}
     aufgrund der bei InsertBT erwähnten Umstände.
+    
+    
+    \subsection{findAndDeleteMax}\label{subsec:findanddeletemax}
+
+    \begin{center}
+        \includegraphics[width=0.8\columnwidth] {findanddeletemax.pdf}
+    \end{center}
+
+    Löscht das größte Element aus einem übergebenem Baum und gibt dieses, zusammen mit dem neuen Baum, zurück. Auch hier wird die Höhe bottom-up berechnet.
+
+    Die erwartete Laufzeit beträgt
+    \begin{math}
+        O(n)
+    \end {math}
+    bzw.
+    \begin{math}
+        \Theta (log (n))
+    \end{math}
+    mit einer ähnlichen Begründung wie von InsertBT bzw. DeleteBT, da der Baum lediglich von dem Punkt aus, in dem die Funktion aufgerufen wird bis nach unten traversiert.
+    
 
     \subsection{Find}\label{subsec:find}
 

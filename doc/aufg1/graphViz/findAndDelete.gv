@@ -1,0 +1,22 @@
+digraph Q {
+
+node [shape = box];
+compound = true;
+
+//insert
+    a1 [label = "findAndDeleteMax(BTree)"]
+    a1 -> a2
+    a2 [label = "isEmpty(BTree.right)?" shape = diamond]
+    a2 -> a4 [label = "YES (größtes Element im linken\nTree is BTree.Element)"]
+
+    a4 [label = "return Btree.element und initBT(),\num das Element zu löschen"]
+    a2 -> a5 [label = "NO"]
+    a5 [label = "findAndDeleteMax(Btree.right)"]
+    a5 -> a6
+    a6 [label = "height_neuerBaum =
+     max(height_left,
+      height_right) + 1?"]
+    a6 -> a8
+    a8 [label = "return gefundenes Element und unveränderten Baum"]
+    
+}
