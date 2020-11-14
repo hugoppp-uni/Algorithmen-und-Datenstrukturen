@@ -53,7 +53,13 @@ isBT({Element, Height, Left, Right}) ->
     (isBT(Right)).
 
 %% checks for semantic equality of 2 given btrees
-equalBT(Btree1, Btree2) -> inOrderBT(Btree1) =:= inOrderBT(Btree2).
+equalBT(Btree1, Btree2) -> equalList(inOrderBT(Btree1), inOrderBT(Btree2));
+
+%% checks if two lists match
+equalList([], []) -> true;
+equalList([Head|Tail], [Head|Tail]) -> true;
+equalList(_, _) -> false.
+
 
 %% appends two lists
 listAppend([Head | Tail], List) ->
