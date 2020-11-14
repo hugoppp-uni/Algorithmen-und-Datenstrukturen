@@ -6,8 +6,8 @@
 -import(timer, [now_diff/2]).
 
 %% API Functions
--export([initBT/0, isEmptyBT/1, inOrderBT/1, insertBT/2, findBT/2, equalBT/2, isBT/1, deleteBT/2, 
-        listAppend/2]).
+-export([initBT/0, isEmptyBT/1, inOrderBT/1, insertBT/2, findBT/2, equalBT/2, isBT/1, deleteBT/2,
+  listAppend/2]).
 
 %% Internal functions
 
@@ -21,34 +21,34 @@ isEmptyBT(_) -> false.
 %% checks if a given btree is a valid btree
 isBT({}) -> true;
 isBT({Element, Height, {}, {}}) ->
-    (is_integer(Element)) and
-    (Element>=0) and
-    (Height==1);
+  (is_integer(Element)) and
+    (Element >= 0) and
+    (Height == 1);
 isBT({Element, Height, Left, {}}) ->
-    {ElementL, HeightL, _, _} = Left,
-    (is_integer(Element)) and
-    (Element>=0) and
-    (Height>0) and  
-    (Height==(HeightL+1)) and
-    (Element>ElementL) and
+  {ElementL, HeightL, _, _} = Left,
+  (is_integer(Element)) and
+    (Element >= 0) and
+    (Height > 0) and
+    (Height == (HeightL + 1)) and
+    (Element > ElementL) and
     (isBT(Left));
 isBT({Element, Height, {}, Right}) ->
-    {ElementR, HeightR, _, _} = Right,
-    (is_integer(Element)) and
-    (Element>=0) and
-    (Height>0) and  
-    (Height==(HeightR+1)) and
-    (Element>ElementR) and
+  {ElementR, HeightR, _, _} = Right,
+  (is_integer(Element)) and
+    (Element >= 0) and
+    (Height > 0) and
+    (Height == (HeightR + 1)) and
+    (Element > ElementR) and
     (isBT(Right));
 isBT({Element, Height, Left, Right}) ->
-    {ElementL, HeightL, _, _} = Left,
-    {ElementR, HeightR, _, _} = Right,
-    (is_integer(Element)) and
-    (Element>=0) and
-    (Height>0) and
-    (Height==(maxInt(HeightL, HeightR)+1)) and
-    (Element>ElementL) and
-    (Element<ElementR) and
+  {ElementL, HeightL, _, _} = Left,
+  {ElementR, HeightR, _, _} = Right,
+  (is_integer(Element)) and
+    (Element >= 0) and
+    (Height > 0) and
+    (Height == (maxInt(HeightL, HeightR) + 1)) and
+    (Element > ElementL) and
+    (Element < ElementR) and
     (isBT(Left)) and
     (isBT(Right)).
 
@@ -56,27 +56,29 @@ isBT({Element, Height, Left, Right}) ->
 equalBT(Btree1, Btree2) -> inOrderBT(Btree1) =:= inOrderBT(Btree2).
 
 %% appends two lists
-listAppend([Head|Tail], List) ->
-    [Head|listAppend(Tail, List)];
+listAppend([Head | Tail], List) ->
+  [Head | listAppend(Tail, List)];
 listAppend([], List) ->
-    List.
+  List.
 
 %% returns a list of all elements of a given btree in in_order
 inOrderBT({}) -> [];
-inOrderBT({Element, _, Left, Right}) -> listAppend(inOrderBT(Left), [Element|inOrderBT(Right)]).
+inOrderBT({Element, _, Left, Right}) ->
+  listAppend(inOrderBT(Left), [Element | inOrderBT(Right)]).
 
 %% inserts a given element into a given tree
-insertBT({}, Element) -> 
-    {Element, 1, {}, {}};
-insertBT({Element, Height, Left, Right}, Element) -> {Element, Height, Left, Right};
+insertBT({}, Element) ->
+  {Element, 1, {}, {}};
+insertBT({Element, Height, Left, Right}, Element) ->
+  {Element, Height, Left, Right};
 %% continue traversing left and count new height from bottom up
-insertBT({NodeElement, _, Left, Right}, Element) when Element < NodeElement -> 
-    NewLeft = insertBT(Left, Element),
-    {NodeElement, max(getHeight(Right), getHeight(NewLeft))+1, NewLeft, Right};
+insertBT({NodeElement, _, Left, Right}, Element) when Element < NodeElement ->
+  NewLeft = insertBT(Left, Element),
+  {NodeElement, max(getHeight(Right), getHeight(NewLeft)) + 1, NewLeft, Right};
 %% continue traversing right and count new height from bottom up
 insertBT({NodeElement, _, Left, Right}, Element) when Element > NodeElement ->
-    NewRight = insertBT(Right, Element),
-    {NodeElement, maxInt(getHeight(Left), getHeight(NewRight))+1, Left, NewRight}.
+  NewRight = insertBT(Right, Element),
+  {NodeElement, maxInt(getHeight(Left), getHeight(NewRight)) + 1, Left, NewRight}.
 
 %% returns the greater of two integers
 maxInt(Int1, Int2) when Int1 > Int2 -> Int1;
@@ -85,31 +87,34 @@ maxInt(Int, Int) -> Int.
 
 %% returns the height of a given element in a given tree
 findBT({Element, Height, _, _}, Element) -> Height;
-findBT({NodeElement, _, Left, _}, Element) when Element < NodeElement -> findBT(Left, Element);
-findBT({NodeElement, _, _, Right}, Element) when Element > NodeElement -> findBT(Right, Element);
+findBT({NodeElement, _, Left, _}, Element) when Element < NodeElement ->
+  findBT(Left, Element);
+findBT({NodeElement, _, _, Right}, Element) when Element > NodeElement ->
+  findBT(Right, Element);
 findBT(_, _) -> -1. % doesn't exist
 
 %% deletes a given element from a given tree
 deleteBT({}, _) -> {};
-deleteBT({Element, _, Left, Right}, Element) -> 
-    {Found, NewLeftTree} = findAndDeleteMax(Left),
-    case Found == -1 of
-        false -> {Found, maxInt(getHeight(NewLeftTree), getHeight(Right))+1, NewLeftTree, Right};
-        true -> {}
-    end;
+deleteBT({Element, _, Left, Right}, Element) ->
+  {Found, NewLeftTree} = findAndDeleteMax(Left),
+  case Found == -1 of
+    false ->
+      {Found, maxInt(getHeight(NewLeftTree), getHeight(Right)) + 1, NewLeftTree, Right};
+    true -> {}
+  end;
 deleteBT({NodeElement, _, Left, Right}, Element) when Element < NodeElement ->
-    NewLeftTree = deleteBT(Left, Element),
-    {NodeElement, maxInt(getHeight(NewLeftTree), getHeight(Right))+1, NewLeftTree, Right};
+  NewLeftTree = deleteBT(Left, Element),
+  {NodeElement, maxInt(getHeight(NewLeftTree), getHeight(Right)) + 1, NewLeftTree, Right};
 deleteBT({NodeElement, _, Left, Right}, Element) ->
-    NewRightTree = deleteBT(Right, Element),
-    {NodeElement, maxInt(getHeight(Left), getHeight(NewRightTree))+1, Left, NewRightTree}.
+  NewRightTree = deleteBT(Right, Element),
+  {NodeElement, maxInt(getHeight(Left), getHeight(NewRightTree)) + 1, Left, NewRightTree}.
 
 %% finds and deletes the biggest element in a given tree, returns element and new tree
 findAndDeleteMax({}) -> {-1, {}};
 findAndDeleteMax({Found, _, _, {}}) -> {Found, {}};
 findAndDeleteMax({NodeElement, _, Left, Right}) ->
-    {Found, NewRight} = findAndDeleteMax(Right),
-    {Found, {NodeElement, maxInt(getHeight(Left), getHeight(NewRight))+1, Left, NewRight}}.
+  {Found, NewRight} = findAndDeleteMax(Right),
+  {Found, {NodeElement, maxInt(getHeight(Left), getHeight(NewRight)) + 1, Left, NewRight}}.
 
 %% returns the height of a given tree
 getHeight({}) -> 0;
