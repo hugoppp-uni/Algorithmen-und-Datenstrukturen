@@ -50,9 +50,11 @@ inOrderBT({E, _, L, R}, Acc) -> inOrderBT(L, Acc) ++ [E] ++ inOrderBT(R).
 %% insertBT(<BTree>,<Element>)
 insertBT({}, Element) -> {Element, 1, {}, {}};
 insertBT({E, H, L, R}, Element) when Element < E ->
-  {E, maxHeight(insertBT(L, Element), R)+ 1, insertBT(L, Element), R};
+  L2 = insertBT(L, Element),
+  {E, maxHeight(R, L2) + 1, L2, R};
 insertBT({E, H, L, R}, Element) when Element > E ->
-  {E, maxHeight(L, insertBT(R, Element)) + 1, L, insertBT(R, Element)}.
+  R2 = insertBT(L, Element),
+  {E, maxHeight(L, R2) + 1, L, R2}.
 
 
 %% deleteBT: btree × elem → btree
