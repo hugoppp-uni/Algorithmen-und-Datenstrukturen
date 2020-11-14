@@ -10,7 +10,7 @@
 -author("hugop").
 
 %% API
--export([isEmptyBT/1, findBT/2, initBT/0, inOrderBT/1, insertBT/2]).
+%%-export([isEmptyBT/1, findBT/2, initBT/0, inOrderBT/1, insertBT/2, equalBT/2]).
 
 %% initBT: ∅ → btree
 %% initBT()
@@ -45,6 +45,12 @@ inOrderBT({E, _, L, R}, Acc) -> inOrderBT(L, Acc) ++ [E] ++ inOrderBT(R).
 
 %% equalBT: btree × btree → bool
 %% equalBT(<BTree>,<BTree>)
+equalBT(B1,B2) -> equalList(inOrderBT(B1), inOrderBT(B2)).
+
+
+equalList([],[]) -> true;
+equalList([H|T],[H|T]) -> true;
+equalList(_,_) -> false.
 
 %% insertBT: btree × elem → btree
 %% insertBT(<BTree>,<Element>)
