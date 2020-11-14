@@ -5,19 +5,20 @@ compound = true;
 
     a1 [label = "InOrder(BTree)"]
     a1 -> a2
-    a2 [label = "BTree.left exists?" shape = diamond]
-    a2 ->   z1[label = "YES"]
-    z1 [label = "inOrder(BTree.links)"]
+    a2 [label = "isEmptyBT(BTree.left)?" shape = diamond]
+    a2 ->   z1[label = "NO"]
+    z1 [label = "prepend inOrder(BTree.links)"]
     z1 -> a4
 
-    a2 -> a4 [label = "NO"]
-    a4 [label = "anhängen von BTree.element"]
+    a2 -> a4 [label = "YES"]
+    a4 [label = "create list with Btree.element"]
     a4 -> a5
-    a5 [label = "BTree.Right exists?", shape = diamond]
-    a5 -> z2 [label = "YES"]
-    z2 [label = "inOrder(BTree.Right)"]
+    a5 [label = "isEmptyBT(BTree.Right)?", shape = diamond]
+    a5 -> z2 [label = "NO"]
+    z2 [label = "append inOrder(BTree.Right)"]
     z2 -> a6
-    a5 -> a6 [label = "NO"]
-    a6 [label = "Return"]
+    a5 -> a6 [label = "YES"]
+    a6 [label = "Return list"]
 }
+
 

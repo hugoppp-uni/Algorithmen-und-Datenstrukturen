@@ -4,11 +4,11 @@ node [shape = box];
 compound = true;
     a1 [label = "InOrderBT(BTree)"]
     a1 -> a2
-    a2 [label = "BTree exists" shape = diamond]
-    a2 -> a3 [label = NO]
+    a2 [label = "isEmptyBT(BTree)?" shape = diamond]
+    a2 -> a3 [label = YES]
     a3 [label = "return empty list"]
     a4 [label = "create list with Btree.Element"]
-    a2 -> a4 [label = YES]
+    a2 -> a4 [label = NO]
     a5 [label = "prepend inOrderBT(Btree.Left)"]
     a6 [label = "append inOrderBT(Btree.Right)"]
     a4 -> a5

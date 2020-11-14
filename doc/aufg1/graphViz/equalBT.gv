@@ -1,0 +1,10 @@
+digraph Q {
+
+node [shape = box];
+compound = true;
+    a1 [label = "equalBT(Btree1, Btree2)"]
+    a1 -> a2
+    a2 [label = "ist bei den resultierenden Listen aus\ninOrderBT(BTree1) und inOrderBT(BTree2)\ndie Sortierung der Elemente gleich?" shape = diamond]
+    a2 -> true [label = "YES"]
+    a2 -> false [label = "NO"]
+}

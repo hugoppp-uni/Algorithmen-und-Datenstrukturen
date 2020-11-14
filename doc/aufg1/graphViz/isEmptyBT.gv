@@ -1,0 +1,12 @@
+digraph Q {
+
+node [shape = box];
+compound = true;
+
+//insert
+    a1 [label = "isEmptyBT(BTree)"]
+    a1 -> a2
+    a2 [label = "BTree == initBT()?" shape = diamond]
+    a2 -> true [label = "YES"]
+    a2 -> false [label = "NO"]
+}
