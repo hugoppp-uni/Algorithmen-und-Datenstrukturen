@@ -64,7 +64,17 @@ deleteBT_test() ->
   %element doesn't exists, return same tree
   ?assertEqual(correctTree3H(), deleteBT(correctTree3H(), 100)),
   %element gets deleted at the top
-  ?assertEqual(inOrderBT(correctTree3HRemove1000()), inOrderBT(deleteBT(correctTree3H(), 1000))).
+  ?assertEqual(inOrderBT(correctTree3HRemove1000()), inOrderBT(deleteBT(correctTree3H(), 1000))),
+  ?assertEqual({1000,2,{},{2000,1,{},{}}},deleteBT(tree1(),1500)).
+
+tree1() ->
+  {1000,3,
+    {},
+    {1500,2,
+      {},
+      {2000, 1, {}, {}}
+    }
+  }.
 
 correctTree3HRemove1000() ->
   {750, 3,
