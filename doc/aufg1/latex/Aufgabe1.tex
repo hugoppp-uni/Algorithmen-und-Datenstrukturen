@@ -63,7 +63,7 @@
     \subsection{InitBT}\label{subsec:initbt}
     
     \begin{center}
-        \includegraphics[width=1\columnwidth] {init.pdf}
+        \includegraphics[width=0.2\columnwidth] {init.pdf}
     \end{center}
     
     Liefert einen leeren Baum.
@@ -75,7 +75,7 @@
     \subsection{IsEmptyBT}\label{subsec:isemptybt}
     
     \begin{center}
-        \includegraphics[width=1\columnwidth] {isempty.pdf}
+        \includegraphics[width=0.39\columnwidth] {isempty.pdf}
     \end{center}
     
     Prüft einen Baum auf Leerheit.
@@ -108,7 +108,7 @@
     \subsection{EqualBT}\label{subsec:equalbt}
     
     \begin{center}
-        \includegraphics[width=1.2\columnwidth] {equal.pdf}
+        \includegraphics[width=0.7\columnwidth] {equal.pdf}
     \end{center}
     
     Prüft auf semantische Gleichheit zwischen zwei Bäumen.
@@ -127,7 +127,7 @@
     \subsection{InsertBT}\label{subsec:insertbt}
 
     \begin{center}
-        \includegraphics[width=1.2\columnwidth] {insert.pdf}
+        \includegraphics[width=1.1\columnwidth] {insert.pdf}
     \end{center}
 
     Fügt ein übergebenes Element einem übergebenem Baum hinzu.
@@ -184,7 +184,7 @@
     \subsection{findAndDeleteMax}\label{subsec:findanddeletemax}
 
     \begin{center}
-        \includegraphics[width=0.8\columnwidth] {findanddeletemax.pdf}
+        \includegraphics[width=0.65\columnwidth] {findanddeletemax.pdf}
     \end{center}
 
     Löscht das größte Element aus einem übergebenem Baum und gibt dieses, zusammen mit dem neuen Baum, zurück. Das tatsächliche Löschen des größten Elements erfolgt durch das zurückgeben des leeren Baumes sobald dieses gefunden wird. Auch hier wird die Höhe bottom-up berechnet.
@@ -258,8 +258,23 @@
 
     \section{Laufzeitmessung}\label{sec:laufzeitmessung}
 
-    Für den Versuch der Laufzeitmessung werden jeweils die Funktionen mit variierender Eingangsgröße getestet. Die Laufzeit wird anschließend mit besagter Eingangsgröße in Relation gesetzt.
-    Wir vergleichen den gemessenen funktionellen Zusammenhang mit dem Erwarteten, welcher in den Entwürfen der jeweiligen Funktion beschrieben ist.
+    Für den Versuch der Laufzeitmessung werden jeweils die Funktionen mit
+    variierender Elementanzahl getestet. Beginnend bei
+    annähernd 0 Elementen wird die Anzahl jeweils um eine feste Schrittgröße
+    erhöht. Hierbei ist das Ziel, die Schrittgröße so zu wählen, dass bei 20
+    Schritten eine maximale Laufzeit von ca. 5 Sekunden (5000ms) erreicht
+    wird. Wir mitteln über 3 Durchgänge.
+    Falls die Abweichungen zwischen den Durchgängen zu groß sind, kann die
+    Anzahl der dieser nachträglich angepasst werden.
+
+    Es werden drei Messungen, eine mit zufälligen, eine mit
+    aufsteigenden und eine mit absteigenden Zahlen, ausgeführt.
+    Bei absteigenden und aufsteigenden Zahlen erwarten wir jeweils den
+    Worst-Case, bei zufälligen den Average-Case.
+
+    Die Laufzeit wird anschließend mit besagter Eingangsgröße in Relation gesetzt.
+    Wir vergleichen den gemessenen funktionellen Zusammenhang mit dem Erwarteten,
+    welcher in den Entwürfen der jeweiligen Funktion beschrieben ist.
 
     Die Rahmenbedingungen der Messung sind hierbei vorgegeben.
 
