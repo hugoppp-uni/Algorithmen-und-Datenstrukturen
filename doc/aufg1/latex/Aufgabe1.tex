@@ -36,12 +36,26 @@
     %! suppress = MissingLabel
 
     \subsection{Aktueller Stand}
-    Die Entwürfe sind fertiggestellt und müssen implementiert werden.
+    Der Entwurf ist nach erhaltenem Feedback überarbeitet und fertiggestellt.
 
     %! suppress = MissingLabel
 
     \subsection{Änderungen des Entwurfes}
-    -- Nicht zutreffend --
+    InitBT ist nicht mehr "trivial" und besitzt nun ein eigenes Ablaufdiagramm mit Erläuterungen.
+    
+    In IsBT wird nun spezifiziert, wie ein "Blatt" auszusehen hat.
+    
+    Die Sortierung in IsBT wird nun durch dynamische Intervalle überprüft.
+    
+    EqualBT ist nicht mehr "trivial" und besitzt  nun ein eigenes Ablaufdiagramm mit Erläuterungen.
+    
+    Die Frage, ob ein Baum "existiert" wurde an allen vorkommenden Stellen im Entwurf überarbeitet zu der Frage, ob "ein Baum leer ist".
+    
+    Hilfsfunktion findAndDelete inkl. Ablaufdiagramm und Erläuterungen hinzugefügt.
+    
+    Löschvorgang von DeleteBT bzw. findAndDelete konkretisiert.
+    
+    Laufzeitanalyse wird nun im Detail durch einen eigenen Testentwurf beschrieben.
 
 
     \section{Entwürfe}\label{sec:entwuerfe}
@@ -154,7 +168,7 @@
     Die Traversierung des Baums ist gleich wie bei InsertBT.
     Ist das Ende des Baumes erreicht, ohne das Element gefunden zu haben,
     wird der Baum unverändert zurückgegeben.
-    Wird das Element aufgefunden, muss eine Hilfsfunktion findAndDeleteMax() aufgerufen werden, die das größte Element aus dem linken Baum löscht und zurückgibt.Die Höhe wird wieder bottom-up laut Definition angepasst.
+    Wird das Element aufgefunden, folgt der Aufruf einer Hilfsfunktion findAndDeleteMax, die das größte Element aus dem linken Baum löscht und zurückgibt. Das Element, das gelöscht werden soll wird nun durch das gefundene Element ersetzt. Die Höhe wird wieder bottom-up laut Definition angepasst.
 
     Die erwartete Laufzeit beträgt
     \begin{math}
@@ -173,7 +187,7 @@
         \includegraphics[width=0.8\columnwidth] {findanddeletemax.pdf}
     \end{center}
 
-    Löscht das größte Element aus einem übergebenem Baum und gibt dieses, zusammen mit dem neuen Baum, zurück. Auch hier wird die Höhe bottom-up berechnet.
+    Löscht das größte Element aus einem übergebenem Baum und gibt dieses, zusammen mit dem neuen Baum, zurück. Das tatsächliche Löschen des größten Elements erfolgt durch das zurückgeben des leeren Baumes sobald dieses gefunden wird. Auch hier wird die Höhe bottom-up berechnet.
 
     Die erwartete Laufzeit beträgt
     \begin{math}
