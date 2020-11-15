@@ -6,26 +6,6 @@ deleteBT/2, listAppend/2]).
 -include_lib("eunit/include/eunit.hrl").
 
 
-%TODO
-%%isBT_test() -> true.
-%%equalBT_test() -> true.
-%%insertBT_test() -> true.
-%%deleteBT_test() -> true.
-%%findBT_test() -> true.
-%%inOrderBT_test() -> true.
-%%listAppend_test() -> true.
-%%maxInt_test() -> true.
-
-all_test() ->
-  initBT_test(),
-  isEmptyBT_test(),
-  %%isBT_test(),
-  findBT_test(),
-  inOrderBT_test(),
-  insertBT_test(),
-  deleteBT_test(),
-  equalBT_test(),
-  success.
 
 initBT_test() ->
   ? assertEqual({}, initBT()).
@@ -65,7 +45,8 @@ deleteBT_test() ->
   ?assertEqual(correctTree3H(), deleteBT(correctTree3H(), 100)),
   %element gets deleted at the top
   ?assertEqual(inOrderBT(correctTree3HRemove1000()), inOrderBT(deleteBT(correctTree3H(), 1000))),
-  ?assertEqual({1000,2,{},{2000,1,{},{}}},deleteBT(tree1(),1500)).
+  ?assertEqual({1000,2,{},{2000,1,{},{}}},deleteBT(tree1(),1500)),
+?assertEqual({1000,2,{250,1,{},{}},{}},deleteBT(tree2(),500)).
 
 tree1() ->
   {1000,3,
@@ -74,6 +55,14 @@ tree1() ->
       {},
       {2000, 1, {}, {}}
     }
+  }.
+
+tree2() ->
+  {1000,3,
+    {500,2,
+      {250, 1},
+      {}},
+    {}
   }.
 
 correctTree3HRemove1000() ->
