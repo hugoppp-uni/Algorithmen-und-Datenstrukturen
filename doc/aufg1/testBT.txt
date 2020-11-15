@@ -1,0 +1,52 @@
+4> testBT:testBT().                                                                                       
+Dieser Test entbindet nicht von der Erstellung eigener Tests
+
+                         Ein erfolgreicher Lauf dieses Tests stellt nicht die Abnahme sicher.
+
+                         Fehler dieses Tets bei Abgabe sind zusammen mit einer Analyse bei der Abgabe zu melden.
+
+Folgende Hilfsfunktionen k÷nnen genutzt werden:
+
+                         isBT: pr³ft, ob der Baum ein (syntaktisch und semantisch) korrekter BT ist.
+
+                         printBT: erzeugt eine *.dot Datei, die mittels graphviz als Baum dargestellt werden kann.
+
+initBT leerer Baum: {} ({})
+insertBT ein Element in leeren Baum: {4711,1,{},{}}
+
+         acht Elemente in leeren Baum
+ {111,5,
+  {55,4,{22,3,{11,2,{},{17,1,{},{}}},{}},{88,1,{},{}}},
+  {155,2,{122,1,{},{}},{}}}
+insertBT ein Element ist es ein Baum? true; acht Elemente ist es ein Baum? true
+isBT FEHLER: falsche Sortierung, linkes Maximum 54 ist nicht kleiner als 22
+isBT FEHLER: falsche Hoehe 0 (soll: 1) bei Blatt 122
+isBT FEHLER: Typfehler null ist kein Integer
+isBT leerer Baum: true / true (true)
+
+         acht Elemente Baum: true / true (true)
+
+         acht Elemente falscher Baum Sortierung: false / false (false)
+
+         acht Elemente falscher Baum H÷he: false / false (false)
+
+         acht Elemente falscher Baum Typ: false / false (false)
+
+         88 Elemente Baum:  true / true (true)
+isEmptyBT leerer Baum: true (true) vs 88 Elemente Baum: false (false) ist es ein Baum? true (true)
+equalBT syntaktisch gleicher Baum: true (true)
+
+         semantisch gleicher, syntaktisch ungleicher Baum (true): true (true)
+
+         semantisch ungleiche Bõume: false (false)
+findBT Blatt: 1 (1) Wurzel: 5 (5) Mitte: 3 (3)
+
+         nicht vorhanden: -1 (0)
+inOrderBT acht Elemente Baum: [11,17,22,55,88,111,122,155] (sortiert? true)
+                                                  88 Elemente Baum: true (sortiert?)
+deleteBT Element 55 aus acht Elemente Baum: {111,3,
+                                             {22,2,{},{88,1,{},{}}},
+                                             {155,2,{122,1,{},{}},{}}} (ist noch ein Baum? true)
+
+         44 Elemente aus 88 Elemente Baum: {...} (ist noch ein Baum? true)
+ok
