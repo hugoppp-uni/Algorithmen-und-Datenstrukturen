@@ -108,10 +108,10 @@ findBT(_, _) -> -1. % doesn't exist
 deleteBT({}, _) -> {};
 deleteBT({Element, _, Left, Right}, Element) ->
   {Found, NewLeftTree} = findAndDeleteMax(Left),
-  case Found == -1 of
+  case Found == notfound of
     false ->
       {Found, maxInt(getHeight(NewLeftTree), getHeight(Right)) + 1, NewLeftTree, Right};
-    true -> {}
+    true -> Right
   end;
 deleteBT({NodeElement, _, Left, Right}, Element) when Element < NodeElement ->
   NewLeftTree = deleteBT(Left, Element),
@@ -121,7 +121,7 @@ deleteBT({NodeElement, _, Left, Right}, Element) ->
   {NodeElement, maxInt(getHeight(Left), getHeight(NewRightTree)) + 1, Left, NewRightTree}.
 
 %% finds and deletes the biggest element in a given tree, returns element and new tree
-findAndDeleteMax({}) -> {-1, {}};
+findAndDeleteMax({}) -> {notfound, {}};
 findAndDeleteMax({Found, _, _, {}}) -> {Found, {}};
 findAndDeleteMax({NodeElement, _, Left, Right}) ->
   {Found, NewRight} = findAndDeleteMax(Right),
