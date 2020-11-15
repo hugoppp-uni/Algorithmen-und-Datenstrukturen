@@ -19,41 +19,46 @@ isEmptyBT({}) -> true;
 isEmptyBT(_) -> false.
 
 %% checks if a given btree is a valid btree
-isBT({}) -> true;
-isBT({Element, Height, {}, {}}) ->
+isBT(Btree) -> isBT(Btree, -1, ok).
+isBT({}, _, _) -> true;
+isBT({Element, Height, {}, {}}, LowerLimit, UpperLimit) ->
   (is_integer(Element)) and
-    (Element >= 0) and
-    (Height == 1);
-isBT({Element, Height, Left, {}}) ->
-  {ElementL, HeightL, _, _} = Left,
+  (Element >= 0) and
+  (Element > LowerLimit) and 
+  (Element < UpperLimit) and
+  (Height == 1);
+isBT({Element, Height, Left, {}}, LowerLimit, UpperLimit) ->
+  {_, HeightL, _, _} = Left,
   (is_integer(Element)) and
-    (Element >= 0) and
-    (Height > 0) and
-    (Height == (HeightL + 1)) and
-    (Element > ElementL) and
-    (isBT(Left));
-isBT({Element, Height, {}, Right}) ->
-  {ElementR, HeightR, _, _} = Right,
+  (Element >= 0) and
+  (Element > LowerLimit) and 
+  (Element < UpperLimit) and
+  (Height > 0) and
+  (Height == (HeightL + 1)) and
+  (isBT(Left, LowerLimit, Element));
+isBT({Element, Height, {}, Right}, LowerLimit, UpperLimit) ->
+  {_, HeightR, _, _} = Right,
   (is_integer(Element)) and
-    (Element >= 0) and
-    (Height > 0) and
-    (Height == (HeightR + 1)) and
-    (Element > ElementR) and
-    (isBT(Right));
-isBT({Element, Height, Left, Right}) ->
-  {ElementL, HeightL, _, _} = Left,
-  {ElementR, HeightR, _, _} = Right,
+  (Element >= 0) and 
+  (Element > LowerLimit) and 
+  (Element < UpperLimit) and
+  (Height > 0) and
+  (Height == (HeightR + 1)) and
+  (isBT(Right, Element, UpperLimit));
+isBT({Element, Height, Left, Right}, LowerLimit, UpperLimit) ->
+  {_, HeightL, _, _} = Left,
+  {_, HeightR, _, _} = Right,
   (is_integer(Element)) and
-    (Element >= 0) and
-    (Height > 0) and
-    (Height == (maxInt(HeightL, HeightR) + 1)) and
-    (Element > ElementL) and
-    (Element < ElementR) and
-    (isBT(Left)) and
-    (isBT(Right)).
+  (Element >= 0) and
+  (Element > LowerLimit) and 
+  (Element < UpperLimit) and
+  (Height > 0) and
+  (Height == (maxInt(HeightL, HeightR) + 1)) and
+  (isBT(Left, LowerLimit, Element)) and
+  (isBT(Right, Element, UpperLimit)).
 
 %% checks for semantic equality of 2 given btrees
-equalBT(Btree1, Btree2) -> equalList(inOrderBT(Btree1), inOrderBT(Btree2));
+equalBT(Btree1, Btree2) -> equalList(inOrderBT(Btree1), inOrderBT(Btree2)).
 
 %% checks if two lists match
 equalList([], []) -> true;
