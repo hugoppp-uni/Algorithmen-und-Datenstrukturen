@@ -16,6 +16,17 @@ deleteBT/2, listAppend/2]).
 %%listAppend_test() -> true.
 %%maxInt_test() -> true.
 
+all_test() ->
+  initBT_test(),
+  isEmptyBT_test(),
+  %%isBT_test(),
+  findBT_test(),
+  inOrderBT_test(),
+  insertBT_test(),
+  deleteBT_test(),
+  equalBT_test(),
+  success.
+
 initBT_test() ->
   ? assertEqual({}, initBT()).
 
@@ -31,17 +42,17 @@ findBT_test() ->
   ?assertEqual(1, findBT(correctTree3H(), 2000)),
   ?assertEqual(-1, findBT(correctTree3H(), 1999)).
 
-inOrder_test() ->
+inOrderBT_test() ->
   ?assertEqual([], inOrderBT({})),
   ?assertEqual([250 | [500 | [750 | [1000 | [1250 | [1500 | [2000]]]]]]]
     , inOrderBT(correctTree3H())).
 
-insert_test() ->
+insertBT_test() ->
   ?assertEqual({1,1,{},{}}, insertBT({}, 1)),
   ?assertEqual(correctTree3HInsert100(), insertBT(correctTree3H(), 100)),
   ?assertEqual(correctTree3HInsert100(), insertBT(correctTree3HInsert100(), 100)).
 
-equal_test() ->
+equalBT_test() ->
   ?assertNot(equalBT(correctTree3H(), {})),
   ?assertNot(equalBT(correctTree3H(), correctTree3HInsert100())),
   ?assertNot(equalBT(correctTree3H(), insertBT(correctTree3H(), 999))),
