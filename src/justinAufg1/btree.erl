@@ -1,6 +1,8 @@
 %% @author Justin Hoffmann
+%% @author Hugo Protsch
 -module(btree).
 -author("Justin Hoffmann").
+-author("Hugo Protsch").
 
 -import(erlang, [timestamp/0]).
 -import(timer, [now_diff/2]).
