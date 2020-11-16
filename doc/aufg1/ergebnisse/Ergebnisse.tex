@@ -55,6 +55,7 @@
         \includegraphics[width=0.9\columnwidth] {ZeitAvg.pdf}
     \end{center}
 
+    \subsubsection{Einstellungen}
     Die Folgenden Einstellungen wurden bei der Messung verwendet:
     \begin{itemize}
         \item 0 Startelemente
@@ -62,17 +63,23 @@
         \item 20 Schritte
         \item Mitteln über 5 Messungen
     \end{itemize}
-    \begin{itemize}
-        \item InsertBT:
+    
+    \subsubsection{Ergebnisse}
+        \paragraph{InsertBT}
+        
+        Bei InsertBT ist die längste Laufzeit zu erkennen, da wir den Baum zum Anhängen immer bis zum Ende durchlaufen müssen. Außerdem ist bei einer höheren Elementanzahl ein Anstieg der Steigung zu erkennen. Dies könnte auf eine logarithmische Laufzeit hindeuten, wie bereits im Entwurf von uns erwartet.
 
-        \item DeleteBT
+        \paragraph{DeleteBT}  
+        
+        DeleteBT hat bei zufälligen Elementen eine dezent kürzere Laufzeit als InsertBT, da wir zum Entfernen eines Elementes nicht zwangsläufig bis zum Ende Laufen müssen. Falls jedoch im Knoten des zu löschenden Elements sowohl ein linker, als auch einen rechter Teilbaum existiert, muss der Baum bis zum größten Element des linken Teilbaums traversiert werden, um das Ersatzelement zu finden. Auch hier lässt sich bei größerer Elementanzahl ein leichter Anstieg der Steigung erkennen. Dies entspricht ebenfalls den Erwartungen einer logarithmischen Komplexität.
 
-        \item FindBT:
+        \paragraph{FindBT}
+        
+        FindBT hat eine deutlich kürzere Laufzeit als DeleteBT und InsertBT, da der Baum in jedem Fall nur bis zum gesuchten Element traversiert wird. Die Laufzeit-Komplexität.
 
-        \item EqualBT:
+        \paragraph{EqualBT}
 
-        \item IsBT:
-    \end{itemize}
+        \paragraph{IsBT}
 
     \subsection{Aufsteigend und Absteigend}\label{subsec:average}
 
@@ -83,6 +90,7 @@
         \includegraphics[width=0.9\columnwidth] {ZeitAuf.pdf}
     \end{center}
 
+    \subsubsection{Einstellungen}
     Die Folgenden Einstellungen wurden bei der Messung verwendet:
     \begin{itemize}
         \item 0 Startelemente
@@ -91,6 +99,7 @@
         \item Mitteln über 10 Messungen
     \end{itemize}
 
+    \subsubsection{Ergebnisse}
     \begin{itemize}
         \item InsertBT:
 
