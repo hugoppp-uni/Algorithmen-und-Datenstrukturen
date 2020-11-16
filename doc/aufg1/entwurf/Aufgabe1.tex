@@ -8,7 +8,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 
-\title{ADP Aufgabe 1, Abgabe 1}
+\title{ADP Aufgabe Entwurf, Abgabe 2}
 \author{Team 1\\Hugo Protsch, Justin Hoffmann}
 
 % Document
@@ -95,7 +95,10 @@
     \end{center}
 
     Prüft die vorgegebenen Rahmenbedingungen eines übergebenen Baums.
-    Die Sortierung der Elementwerte innerhalb des Bäumes wird hierbei mit einer oberen und unteren Grenze, die dynamisch angepasst wird sichergestellt. Im Default-Fall wertet die obere Grenze zu etwas aus, was größer als jeder Integer ist und die untere Grenze zu dem größten nicht erlaubten Wert.
+    Die Sortierung der Elementwerte innerhalb des Bäumes wird hierbei mit einer
+    oberen und unteren Grenze, die dynamisch angepasst wird sichergestellt.
+    Im Default-Fall wertet die obere Grenze zu etwas aus,
+    was größer als jeder Integer ist und die untere Grenze zu dem größten nicht erlaubten Wert.
     Alle Wahrheitswerte der verschiedenen
     Vorgaben von jedem Knoten werden miteinander in einen logischen
     Zusammenhang gebracht.
@@ -137,7 +140,9 @@
     Wenn bereits ein Knoten mit dem gleichen Wert existiert, wird der Baum
     unverändert zurückgegeben.
     Wurde ein leerer Platz gefunden, wird das Element dort eingefügt.
-    Die Höhe wird in jedem Knoten bottom-up mithilfe der Definition der Höhe neu berechnet. Das Größere der beiden Kindelemente wird um 1 addiert. So wird die Integrität der Höhe sichergestellt.
+    Die Höhe wird in jedem Knoten bottom-up mithilfe der Definition der Höhe neu berechnet.
+    Das Größere der beiden Kindelemente wird um 1 addiert.
+    So wird die Integrität der Höhe sichergestellt.
 
 
     Die erwartete Laufzeit beträgt
@@ -168,7 +173,10 @@
     Die Traversierung des Baums ist gleich wie bei InsertBT.
     Ist das Ende des Baumes erreicht, ohne das Element gefunden zu haben,
     wird der Baum unverändert zurückgegeben.
-    Wird das Element aufgefunden, folgt der Aufruf einer Hilfsfunktion findAndDeleteMax, die das größte Element aus dem linken Baum löscht und zurückgibt. Das Element, das gelöscht werden soll wird nun durch das gefundene Element ersetzt. Die Höhe wird wieder bottom-up laut Definition angepasst.
+    Wird das Element aufgefunden, folgt der Aufruf einer Hilfsfunktion findAndDeleteMax,
+    die das größte Element aus dem linken Baum löscht und zurückgibt.
+    Das Element, das gelöscht werden soll wird nun durch das gefundene Element ersetzt.
+    Die Höhe wird wieder bottom-up laut Definition angepasst.
 
     Die erwartete Laufzeit beträgt
     \begin{math}
@@ -187,7 +195,9 @@
         \includegraphics[width=0.65\columnwidth] {findanddeletemax.pdf}
     \end{center}
 
-    Löscht das größte Element aus einem übergebenem Baum und gibt dieses, zusammen mit dem neuen Baum, zurück. Das tatsächliche Löschen des größten Elements erfolgt durch das zurückgeben des leeren Baumes sobald dieses gefunden wird. Auch hier wird die Höhe bottom-up berechnet.
+    Löscht das größte Element aus einem übergebenem Baum und gibt dieses,
+    zusammen mit dem neuen Baum, zurück.
+    Das tatsächliche Löschen des größten Elements erfolgt durch das zurückgeben des leeren Baumes sobald dieses gefunden wird. Auch hier wird die Höhe bottom-up berechnet.
 
     Die erwartete Laufzeit beträgt
     \begin{math}
