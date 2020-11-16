@@ -67,15 +67,28 @@
     \subsubsection{Ergebnisse}
         \paragraph{InsertBT}
         
-        Bei InsertBT ist die längste Laufzeit zu erkennen, da wir den Baum zum Anhängen immer bis zum Ende durchlaufen müssen. Außerdem ist bei einer höheren Elementanzahl ein Anstieg der Steigung zu erkennen. Dies könnte auf eine logarithmische Laufzeit hindeuten, wie bereits im Entwurf von uns erwartet.
+        Bei InsertBT ist die längste Laufzeit zu erkennen,
+        da wir den Baum zum Anhängen immer bis zum Ende durchlaufen müssen.
+        Außerdem ist bei einer höheren Elementanzahl ein Anstieg der Steigung zu erkennen.
+        Dies könnte auf eine logarithmische Laufzeit hindeuten,
+        wie bereits im Entwurf von uns erwartet.
 
         \paragraph{DeleteBT}  
         
-        DeleteBT hat bei zufälligen Elementen eine dezent kürzere Laufzeit als InsertBT, da wir zum Entfernen eines Elementes nicht zwangsläufig bis zum Ende Laufen müssen. Falls jedoch im Knoten des zu löschenden Elements sowohl ein linker, als auch einen rechter Teilbaum existiert, muss der Baum bis zum größten Element des linken Teilbaums traversiert werden, um das Ersatzelement zu finden. Auch hier lässt sich bei größerer Elementanzahl ein leichter Anstieg der Steigung erkennen. Dies entspricht ebenfalls den Erwartungen einer logarithmischen Komplexität.
+        DeleteBT hat bei zufälligen Elementen eine dezent kürzere Laufzeit als InsertBT,
+        da wir zum Entfernen eines Elementes nicht zwangsläufig bis zum Ende Laufen müssen.
+        Falls jedoch im Knoten des zu löschenden Elements sowohl ein linker,
+        als auch einen rechter Teilbaum existiert,
+        muss der Baum bis zum größten Element des linken Teilbaums traversiert werden,
+        um das Ersatzelement zu finden.
+        Auch hier lässt sich bei größerer Elementanzahl ein leichter Anstieg der Steigung erkennen.
+        Dies entspricht ebenfalls den Erwartungen einer logarithmischen Komplexität.
 
         \paragraph{FindBT}
         
-        FindBT hat eine deutlich kürzere Laufzeit als DeleteBT und InsertBT, da der Baum in jedem Fall nur bis zum gesuchten Element traversiert wird. Die Laufzeit-Komplexität.
+        FindBT hat eine deutlich kürzere Laufzeit als DeleteBT und InsertBT,
+        da der Baum in jedem Fall nur bis zum gesuchten Element traversiert wird.
+        Die Laufzeit-Komplexität.
 
         \paragraph{EqualBT}
 
