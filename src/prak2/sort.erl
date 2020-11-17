@@ -7,7 +7,7 @@
 -author("Hugo Protsch").
 
 %% API
--export([]).
+-export([insertionS/1, qsort/3, hsort/1]).
 
 %% die Zahlen sind in der Erlang-Liste [ ] gehalten und zu sortieren.
 %% Der in der Vorlesung vorgestellte Algorithmus ist so auf die Verwendung
@@ -25,7 +25,7 @@ insertionS(List) -> List.
 %% Die Zahl <switch-number> entscheidet, ab welcher Länge Insertion Sort eingesetzt wird,
 %% d.h. Teillisten, die kürzer als diese Zahl sind, werden dann mit
 %% Insertion Sort sortiert und nicht mehr mit Quicksort.
-quicksort(PivotMethod, List, SwitchNumber) -> List.
+qsort(PivotMethod, List, SwitchNumber) -> List.
 
 %% die Zahlen sind in der Erlang-Liste [ ] als Eingabe und Ausgabe gehalten.
 %% Der in der Vorlesung vorgestellte Algorithmus ist auf die Verwendung
@@ -36,4 +36,4 @@ quicksort(PivotMethod, List, SwitchNumber) -> List.
 %% Die Begründung ist im Entwurf aufzuführen. Da das Verfahren eine
 %% Vorabkodierung des Pfades zum einfügen von Elementen an der nächsten freien
 %% Position benötigt, wird eine Berechnung (mit konstantem Aufwand!!) dazu hier angeboten: sort.erl.
-heapsort(List) -> List.
+hsort(List) -> List.
