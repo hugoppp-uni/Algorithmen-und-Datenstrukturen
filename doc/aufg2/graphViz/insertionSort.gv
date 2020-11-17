@@ -1,0 +1,28 @@
+digraph Q {
+
+    node [shape = box];
+    compound = true;
+
+    s0 [label = "insertionSort(list)"]
+    s0 -> s1
+    s1 [label = "curEl = second element"]
+    s1 -> s11
+    s11 [label = "prevEl = curEl.prev"]
+    s11 -> d1
+    d1 [label = "curEl < prevEl ?" shape = diamond];
+    d1 -> s2 [label = YES]
+    d1 -> s3 [label = NO]
+    s2[label = "prevEl.prev exists?" shape = diamond]
+    s2 -> s22 [label = "YES"]
+    s2 -> s23 [label = "NO (is beginning of list)"]
+    s22 [label = "prevEl = prevEl.previous"]
+    s22 -> d1
+    s23[label = "change pos of cureEl to before prevEl"]
+    s3[label = "change pos of curEl to after prevEl"]
+    s3 -> d3
+    d3[label = "curEl.next exists ?" shape = diamond]
+    d3 -> s33 [label = "YES"]
+    d3 -> "return sorted list" [label = "NO"]
+    s33[label = "curEl = curEl.next"]
+    s33 -> s11
+}
