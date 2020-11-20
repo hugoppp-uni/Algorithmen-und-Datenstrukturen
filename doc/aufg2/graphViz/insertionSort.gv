@@ -4,21 +4,21 @@ digraph Q {
 
     s1 [label = "insertionSort(list)"]
     s1 -> d1
-    d1 [label = "list length is 0 or 1?" shape = diamond]
+    d1 [label = "<N1> list length is 0 or 1?" shape = diamond]
     d1 -> "return original list" [label = "YES"];
     d1 -> s2 [label = "NO"];
     s2 [label = "n = 2"];
     s2 -> s33
-    s33 [label = "insert nth element in sublist(0, n - 1) "];
+    s33 [label = "<N2> insert nth element in sublist(0, n - 1) "];
     s33 -> s3
     s33 -> cluster1Connector [arrowhead = none, lhead = cluster1]
     s3 [label = "append rest of list"]
     s3 -> s4
     s4 [label = "n ++"];
     s4 -> d2
-    d2 [label = "n < length - 1?" shape = diamond];
-    d2 -> s33 [label = "YES"];
-    d2 -> "return sorted list" [label = "NO"];
+    d2 [label = "<N3> n < length - 1?" shape = diamond];
+    d2 -> s33 [label = "<E1> YES"];
+    d2 -> "<N4> return sorted list" [label = "NO"];
 
     subgraph cluster1 {
         node [shape = box];

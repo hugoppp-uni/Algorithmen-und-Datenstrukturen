@@ -9,17 +9,24 @@
 %% API
 -export([insertionS/1, qsort/3, hsort/1, insertToList/2]).
 
-%% die Zahlen sind in der Erlang-Liste [ ] gehalten und zu sortieren.
-%% Der in der Vorlesung vorgestellte Algorithmus ist so auf die Verwendung
-%% von Listen (statt array) zu transformieren,
-%% dass das Kernkonzept erhalten bleibt!
-%% Die Begründung dazu ist im Entwurf aufzuführen.
+% TODO: bisheriger Aufwand für Tests / Analyse aller Methoden: ~3h
+% TODO: bisheriger Aufwand für diese Methode (Entwurf): 2.5h (Code): 2.5h
+% NOTE: In the draft, all operations are made on a single list. In this
+% implementation, the list is split into two lists. This would corresponds to
+% splitting the list in the draft at the index n and does not affect the algorithm.
 insertionS(L) -> insertionS(L, []).
 
-insertionS([], Acc) -> Acc;
+% <N1> If original List length is 1, this will return a list with  element.
+% <N3> If n == length - 2 (last element of the list still to be inserted), this
+%     will insert the last element to the list <N2> and return the sorted list <4>.
 insertionS([H], Acc) -> insertToList(Acc, H);
-insertionS([H | T], Acc) -> insertionS(T, insertToList(Acc, H)).
+% <N2> If n < length - 2, this will insert the element and recall insertionS,
+%     which is equal to <E1>
+insertionS([H | T], Acc) -> insertionS(T, insertToList(Acc, H));
+% <N1> If original List length is 0, this will return empty list.
+insertionS([], Acc) -> Acc.
 
+% TODO: Add referencing comments
 insertToList([], E) -> [E];
 insertToList([H], E) when H > E -> [E, H];
 insertToList([H], E) -> [H, E];
