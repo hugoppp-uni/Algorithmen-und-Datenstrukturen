@@ -3,26 +3,36 @@ digraph Q {
     node [shape = box];
     compound = true;
 
-    s0 [label = "insertionSort(list)"]
-    s0 -> s1
-    s1 [label = "curEl = second element"]
-    s1 -> s11
-    s11 [label = "prevEl = curEl.prev"]
-    s11 -> d1
-    d1 [label = "curEl < prevEl ?" shape = diamond];
-    d1 -> s2 [label = YES]
-    d1 -> s3 [label = NO]
-    s2[label = "prevEl.prev exists?" shape = diamond]
-    s2 -> s22 [label = "YES"]
-    s2 -> s23 [label = "NO (is beginning of list)"]
-    s22 [label = "prevEl = prevEl.previous"]
-    s22 -> d1
-    s23[label = "change pos of cureEl to before prevEl"]
-    s3[label = "change pos of curEl to after prevEl"]
-    s3 -> d3
-    d3[label = "curEl.next exists ?" shape = diamond]
-    d3 -> s33 [label = "YES"]
-    d3 -> "return sorted list" [label = "NO"]
-    s33[label = "curEl = curEl.next"]
-    s33 -> s11
+    s1 [label = "insertionSort(list)"]
+    s1 -> d1
+    d1 [label = "list length is 0 or 1?" shape = diamond]
+    d1 -> "return original list" [label = "YES"];
+    d1 -> s2 [label = "NO"];
+    s2 [label = "n = 2"];
+    s2 -> s33
+    s33 [label = "insert nth element in sublist(0,n-1) "];
+    s33 -> s3
+    s33 -> cBegin [arrowhead=none, lhead=cluster1]
+    s3 [label = "append rest of list"]
+    s3 -> s4
+    s4 [label = "n ++"];
+    s4 -> d2
+    d2 [label = "n < length - 1?" shape = diamond];
+    d2 -> s33 [label = "YES"];
+    d2 -> "return sorted list" [label = "NO"];
+
+    subgraph cluster1 {
+        label = "insertIntoList"
+        cBegin [label = "iterator = first element"];
+        cBegin -> cd1
+        cd1 [label = "element to insert < iterator?" shape = diamond] ;
+        cd1 -> cs1 [label = "NO"];
+        cd1 -> cs2 [label = "YES"];
+        cs1 [label = "insert element before iterator and return" shape = box];
+        cs2 [label = "iterator = iterator.next" shape = box];
+        cs2 -> cd1
+
+    }
+
+
 }
