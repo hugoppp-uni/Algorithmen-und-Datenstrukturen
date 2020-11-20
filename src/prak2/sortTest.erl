@@ -19,7 +19,7 @@ hsort_test() ->
 runTests(Function) ->
   lists:foreach(
     fun(UnsortedList) ->
-      ?assertEqual(Function(UnsortedList), list1_sorted())
+      ?assertEqual(list1_sorted(), Function(UnsortedList))
     end, lists1()
   )
 .
@@ -62,3 +62,13 @@ qsort(L) ->
   ),
   H
 .
+
+
+%%%% HELPER TESTS %%%%
+
+insertToList_test() ->
+  ?assertEqual([1], sort:insertToList([], 1)),
+  ?assertEqual([1, 2, 3, 4], sort:insertToList([2, 3, 4], 1)),
+  ?assertEqual([1, 2, 3, 4], sort:insertToList([1, 3, 4], 2)),
+  ?assertEqual([1, 2, 3, 4], sort:insertToList([1, 2, 4], 3)),
+  ?assertEqual([1, 2, 3, 4], sort:insertToList([1, 2, 3], 4)).
