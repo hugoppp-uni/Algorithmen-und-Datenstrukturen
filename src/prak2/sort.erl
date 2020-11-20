@@ -7,14 +7,24 @@
 -author("Hugo Protsch").
 
 %% API
--export([insertionS/1, qsort/3, hsort/1]).
+-export([insertionS/1, qsort/3, hsort/1, insertToList/2]).
 
 %% die Zahlen sind in der Erlang-Liste [ ] gehalten und zu sortieren.
 %% Der in der Vorlesung vorgestellte Algorithmus ist so auf die Verwendung
 %% von Listen (statt array) zu transformieren,
 %% dass das Kernkonzept erhalten bleibt!
 %% Die Begründung dazu ist im Entwurf aufzuführen.
-insertionS(List) -> List.
+insertionS(L) -> insertionS(L, []).
+
+insertionS([], Acc) -> Acc;
+insertionS([H], Acc) -> insertToList(Acc, H);
+insertionS([H | T], Acc) -> insertionS(T, insertToList(Acc, H)).
+
+insertToList([], E) -> [E];
+insertToList([H], E) when H > E -> [E, H];
+insertToList([H], E) -> [H, E];
+insertToList([H | T], E) when H > E -> [E | [H | T]];
+insertToList([H | T], E) -> [H | insertToList(T, E)].
 
 %% die Zahlen sind in der Erlang-Liste [ ] gehalten und zu sortieren.
 %% Der in der Vorlesung vorgestellte Algorithmus ist so auf die Verwendung
