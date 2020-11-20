@@ -1,5 +1,4 @@
 digraph Q {
-
     node [shape = box];
     compound = true;
 
@@ -10,9 +9,9 @@ digraph Q {
     d1 -> s2 [label = "NO"];
     s2 [label = "n = 2"];
     s2 -> s33
-    s33 [label = "insert nth element in sublist(0,n-1) "];
+    s33 [label = "insert nth element in sublist(0, n - 1) "];
     s33 -> s3
-    s33 -> cBegin [arrowhead=none, lhead=cluster1]
+    s33 -> cluster1Connector [arrowhead = none, lhead = cluster1]
     s3 [label = "append rest of list"]
     s3 -> s4
     s4 [label = "n ++"];
@@ -22,17 +21,20 @@ digraph Q {
     d2 -> "return sorted list" [label = "NO"];
 
     subgraph cluster1 {
-        label = "insertIntoList"
-        cBegin [label = "iterator = first element"];
+        node [shape = box];
+        label = "Insert into list"
+        cluster1Connector [shape = point style = invis]
+        cBegin [label = "iterator = first element of list "];
         cBegin -> cd1
-        cd1 [label = "element to insert < iterator?" shape = diamond] ;
+        cd1 [label = "element to insert > iterator?" shape = diamond];
         cd1 -> cs1 [label = "NO"];
-        cd1 -> cs2 [label = "YES"];
-        cs1 [label = "insert element before iterator and return" shape = box];
-        cs2 [label = "iterator = iterator.next" shape = box];
+        cd1 -> cd2 [label = "YES"];
+        cs1 [label = "insert element before iterator and return"];
+        cs2 [label = "iterator = iterator.next"];
         cs2 -> cd1
-
+        cd2 [label = "end of list?" shape = diamond];
+        cd2 -> appendAndReturn [label = "YES"];
+        cd2 -> cs2 [label = "NO"];
+        appendAndReturn [label = "append element and return"]
     }
-
-
 }
