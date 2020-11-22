@@ -9,27 +9,36 @@
 %% API
 -export([insertionS/1, qsort/3, hsort/1, insertToList/2]).
 
-% TODO: bisheriger Aufwand für Tests / Analyse aller Methoden: ~3h
-% TODO: bisheriger Aufwand für diese Methode (Entwurf): 2.5h (Code): 2.5h
+% TODO: bisheriger Aufwand für Tests / Analyse aller Methoden: ~4h
+% TODO: bisheriger Aufwand für diese Methode (Entwurf): 2.5h (Code): 3h
+
+
 % NOTE: In the draft, all operations are made on a single list. In this
 % implementation, the list is split into two lists. This would corresponds to
 % splitting the list in the draft at the index n and does not affect the algorithm.
 insertionS(L) -> insertionS(L, []).
 
-% <N1> If original List length is 1, this will return a list with  element.
-% <N3> If n == length - 2 (last element of the list still to be inserted), this
-%      will insert the last element to the list <N2> and return the sorted list <N4>.
-% ----
-% <N2> If n < length - 2, this will insert the element and recall insertionS,
-%     which is equal to <E1>
+% <N2> Inserts nth element into the sorted List
+% <E1> Recalls insertionS with n = n + 1 (Element to insert = next element)
 insertionS([H | T], Acc) -> insertionS(T, insertToList(Acc, H));
-% <N1> If original List length is 0, this will return empty list.
+% <N1> If original List length is 0, this will return an empty list.
+% <N4> If the original List length is greater than 1, this will return the
+% sorted List, once n == length (the last element has already been inserted.
 insertionS([], Acc) -> Acc.
 
-% TODO: Add referencing comments
+
+% <N5> Returns list with element when list is empty or
+% <N8> when at the end of the list. (See <N8><N9> below)
 insertToList([], E) -> [E];
+% <N7> When the element to insert is smaller or equal to the current element,
+%      insert the element at the front.
 insertToList([H | T], E) when H > E -> [E | [H | T]];
+% <N8> <N9> When the element to insert is larger than the current element,
+%           insert it to the tail. There is no need to differentiate between
+%           the end of list and middle of the list, because insertToList()
+%           called with an empty list will return a list with the element in it.
 insertToList([H | T], E) -> [H | insertToList(T, E)].
+
 
 %% die Zahlen sind in der Erlang-Liste [ ] gehalten und zu sortieren.
 %% Der in der Vorlesung vorgestellte Algorithmus ist so auf die Verwendung

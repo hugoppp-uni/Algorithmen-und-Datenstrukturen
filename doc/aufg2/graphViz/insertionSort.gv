@@ -26,19 +26,19 @@ digraph Q {
         cluster1Connector [shape = point style = invis]
 
         cBegin [label = "List empty?"];
-        cBegin -> "return list with element" [label = "YES"];
+        cBegin -> "<N5> return list with element" [label = "YES"];
         cBegin -> c0 [label = "NO"];
-        c0 [label = "iterator = first element of list "];
+        c0 [label = "<N6> iterator = first element of list "];
         c0 -> cd1
         cd1 [label = "element to insert > iterator?" shape = diamond];
         cd1 -> cs1 [label = "NO"];
         cd1 -> cd2 [label = "YES"];
-        cs1 [label = "insert element before iterator and return"];
-        cs2 [label = "iterator = iterator.next"];
+        cs1 [label = "<N7> insert element before iterator and return"];
+        cs2 [label = "<N9> iterator = iterator.next"];
         cs2 -> cd1
         cd2 [label = "end of list?" shape = diamond];
         cd2 -> appendAndReturn [label = "YES"];
         cd2 -> cs2 [label = "NO"];
-        appendAndReturn [label = "append element and return"]
+        appendAndReturn [label = "<N8> append element and return"]
     }
 }
