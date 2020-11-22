@@ -28,8 +28,6 @@ insertionS([], Acc) -> Acc.
 
 % TODO: Add referencing comments
 insertToList([], E) -> [E];
-insertToList([H], E) when H > E -> [E, H];
-insertToList([H], E) -> [H, E];
 insertToList([H | T], E) when H > E -> [E | [H | T]];
 insertToList([H | T], E) -> [H | insertToList(T, E)].
 
