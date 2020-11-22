@@ -49,7 +49,36 @@ insertToList([H | T], E) -> [H | insertToList(T, E)].
 %% Die Zahl <switch-number> entscheidet, ab welcher Länge Insertion Sort eingesetzt wird,
 %% d.h. Teillisten, die kürzer als diese Zahl sind, werden dann mit
 %% Insertion Sort sortiert und nicht mehr mit Quicksort.
-qsort(PivotMethod, List, SwitchNumber) -> List.
+qsort(_, [], _) -> [];
+qsort(PivotMethod, List, SwitchNumber) ->
+  {Pivot, ListWithoutPivot, Length} = getPivotAndLength(List, PivotMethod),
+  if
+    Length =< SwitchNumber -> insertionS(List);
+    true ->
+      qsort(PivotMethod, [El || El <- ListWithoutPivot, El < Pivot], SwitchNumber) ++
+        [Pivot] ++
+        qsort(PivotMethod, [El || El <- ListWithoutPivot, El >= Pivot], SwitchNumber)
+  end
+.
+
+
+%% returns {pivot, <list without pivot>, <length>}
+getPivotAndLength([], _) -> {none, [], 0};
+getPivotAndLength([H | T], left) -> {H, T, listLength(T, 1)};
+getPivotAndLength(L, right) -> removeLastFromListAndGetLength(L, [], 0);
+getPivotAndLength(L, middle) -> notImplemented; %TODO
+getPivotAndLength(L, random) -> notImplemented; %TODO
+getPivotAndLength(L, median) -> notImplemented. %TODO
+
+
+%% returns {<last element>, <List without last>, <length>}
+removeLastFromListAndGetLength([H | []], Acc, Cnt) -> {H, Acc, Cnt + 1};
+removeLastFromListAndGetLength([H | T], Acc, Cnt) ->
+  removeLastFromListAndGetLength(T, Acc ++ [H], Cnt + 1).
+
+
+listLength([], Cnt) -> Cnt;
+listLength([_ | T], Cnt) -> listLength(T, Cnt + 1).
 
 %% die Zahlen sind in der Erlang-Liste [ ] als Eingabe und Ausgabe gehalten.
 %% Der in der Vorlesung vorgestellte Algorithmus ist auf die Verwendung
