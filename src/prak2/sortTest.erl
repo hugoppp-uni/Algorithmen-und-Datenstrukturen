@@ -18,27 +18,55 @@ hsort_test() ->
 
 runTests(Function) ->
   lists:foreach(
-    fun(UnsortedList) ->
-      ?assertEqual(list1_sorted(), Function(UnsortedList))
-    end, lists1()
+    fun({Sorted, UnsortedLists}) ->
+      lists:foreach(
+        fun(Unsorted) ->
+          io:format("inner\r\n"),
+          ?assertEqual(Sorted, Function(Unsorted))
+        end, UnsortedLists)
+    end, data()
   )
 .
 
-list1_sorted() -> [1, 2, 3, 4, 5, 6, 7].
 
-lists1() ->
+%%% List of Tupels with the following structure:
+%%% { correctlySortedList, [nonSortedLs1, nonSortedLs2, nonSortedLs3, ...] }
+data() ->
   [
-    [7, 6, 5, 4, 3, 2, 1],
-    [2, 1, 3, 4, 5, 6, 7],
-    [7, 6, 5, 4, 3, 2, 1]
+    {
+      [1, 2, 3, 4, 5, 6, 7],
+      [
+        [7, 6, 5, 4, 3, 2, 1],
+        [2, 1, 3, 4, 5, 6, 7],
+        [7, 6, 5, 4, 3, 2, 1]
+      ]
+    },
+    {
+      [1, 2, 3],
+      [
+        [1, 2, 3],
+        [3, 2, 1],
+        [2, 3, 1],
+        [2, 1, 3]
+      ]
+    },
+    {
+      [1, 2],
+      [
+        [2, 1],
+        [1, 2]
+      ]
+    },
+    {[1], [[1]]},
+    {[], [[]]}
   ].
 
 qsortSwitchNumbers() -> [1, 2, 4].
 
-%%%% Runs qsort/3 on the List L with all piviot-methods
-%%%% and all switch-numbers defined in qsortSwitchNumbers.
-%%%% Returns the sorted list, if all results are the same,
-%%%% otherwise throws assert exception.
+%%% Runs qsort/3 on the List L with all piviot-methods
+%%% and all switch-numbers defined in qsortSwitchNumbers.
+%%% Returns the sorted list, if all results are the same,
+%%% otherwise throws assert exception.
 qsort(L) ->
   Results = lists:map(
     fun(N) ->
@@ -62,7 +90,6 @@ qsort(L) ->
   ),
   H
 .
-
 
 %%%% HELPER TESTS %%%%
 
