@@ -24,8 +24,12 @@ digraph Q {
         node [shape = box];
         label = "Insert into list"
         cluster1Connector [shape = point style = invis]
-        cBegin [label = "iterator = first element of list "];
-        cBegin -> cd1
+
+        cBegin [label = "List empty?"];
+        cBegin -> "return list with element" [label = "YES"];
+        cBegin -> c0 [label = "NO"];
+        c0 [label = "iterator = first element of list "];
+        c0 -> cd1
         cd1 [label = "element to insert > iterator?" shape = diamond];
         cd1 -> cs1 [label = "NO"];
         cd1 -> cd2 [label = "YES"];
