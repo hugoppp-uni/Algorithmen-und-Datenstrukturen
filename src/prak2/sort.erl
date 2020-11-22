@@ -18,8 +18,8 @@ insertionS(L) -> insertionS(L, []).
 
 % <N1> If original List length is 1, this will return a list with  element.
 % <N3> If n == length - 2 (last element of the list still to be inserted), this
-%     will insert the last element to the list <N2> and return the sorted list <4>.
-insertionS([H], Acc) -> insertToList(Acc, H);
+%      will insert the last element to the list <N2> and return the sorted list <N4>.
+% ----
 % <N2> If n < length - 2, this will insert the element and recall insertionS,
 %     which is equal to <E1>
 insertionS([H | T], Acc) -> insertionS(T, insertToList(Acc, H));
