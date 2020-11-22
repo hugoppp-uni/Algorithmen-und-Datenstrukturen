@@ -10,6 +10,21 @@
 insertionS_test() ->
   runTests(fun sort:insertionS/1).
 
+qsortLeft_test() ->
+  runTests(fun(L) -> sort:qsort(left,L,0) end).
+
+qsortRight_test() ->
+  runTests(fun(L) -> sort:qsort(right,L,0) end).
+
+qsortMedian_test() ->
+  runTests(fun(L) -> sort:qsort(median,L,0) end).
+
+qsortMiddle_test() ->
+  runTests(fun(L) -> sort:qsort(middle,L,0) end).
+
+qsortRandom_test() ->
+  runTests(fun(L) -> sort:qsort(random,L,0) end).
+
 qsort_test() ->
   runTests(fun qsort/1).
 
@@ -21,7 +36,6 @@ runTests(Function) ->
     fun({Sorted, UnsortedLists}) ->
       lists:foreach(
         fun(Unsorted) ->
-          io:format("inner\r\n"),
           ?assertEqual(Sorted, Function(Unsorted))
         end, UnsortedLists)
     end, data()
@@ -63,6 +77,7 @@ data() ->
 
 qsortSwitchNumbers() -> [1, 2, 4].
 
+
 %%% Runs qsort/3 on the List L with all piviot-methods
 %%% and all switch-numbers defined in qsortSwitchNumbers.
 %%% Returns the sorted list, if all results are the same,
@@ -82,7 +97,7 @@ qsort(L) ->
       R1
     end, qsortSwitchNumbers()),
 
-  [H, T] = Results,
+  [H | T] = Results,
   lists:foreach(
     fun(N) ->
       ?assertEqual(N, H)
