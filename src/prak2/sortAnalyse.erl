@@ -12,7 +12,27 @@
 -include_lib("eunit/include/eunit.hrl").
 
 test_test() ->
-  ?assertEqual(0, analyze(fun qsortLeft/1, 50, 100111)).
+  ?assertEqual(0, analyzeAll(10000, 10000, 5, 20)).
+
+
+allFuncList() -> [fun sort:insertionS/1, fun qsortLeft/1, fun qsortRight/1].
+%%allFuncList() -> [fun qsortLeft/1, fun qsortRight/1, fun qsortMedian/1,
+%%  fun qsortMiddle/1, fun qsortRandom/1, fun sort:insertionS/1, fun sort:hsort/1].
+
+analyzeAll(ListStartLength, StepSize, StepCount, AvgOver) ->
+  Elements = lists:seq(ListStartLength, ListStartLength + StepCount * StepSize,
+    StepSize),
+  Times = lists:map(
+    fun(Func) ->
+      Res = lists:map(
+        fun(Length) ->
+          analyze(Func, AvgOver, Length)
+        end, Elements
+      ),
+    Res
+    end, allFuncList()),
+   [Elements | Times].
+
 
 
 analyze(Function, Count, Length) ->
