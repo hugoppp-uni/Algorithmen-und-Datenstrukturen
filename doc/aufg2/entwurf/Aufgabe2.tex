@@ -7,8 +7,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage{hyphenat}
 
-\title{ADP Aufgabe 2, Abgabe 1}
+\title{ADP Aufgabe 2 Entwurf, Abgabe 1}
 \author{Team 1\\Hugo Protsch, Justin Hoffmann}
 
 % Document
@@ -16,29 +18,61 @@
 
     \maketitle
 
+    \tableofcontents
 
-    \section{Formales}\label{sec:Formales}
+
+    \section*{Formales}\label{sec:Formales}
 
     %! suppress = MissingLabel
 
-    \subsection{Aufgabenaufteilung}
+    \subsection*{Aufgabenaufteilung}
+    Der Entwurf für Insertion Sort wurde zusammen entwickelt.\\
+    Der Entwurf für Quick Sort wurde von Hugo entwickelt.\\
+    Der Entwurf für Heap Sort wurde von Justin entwickelt.
     %! suppress = MissingLabel
 
-    \subsection{Quellenangaben}
+    \subsection*{Quellenangaben}
     Es wurden lediglich Vorlesungsmaterialien verwendet.
     %! suppress = MissingLabel
 
-    \subsection{Bearbeitungszeitraum}
+    \subsection*{Bearbeitungszeitraum}
+    Der gesamte Arbeitsaufwand für den Entwurf belief sich auf ca. 6 Stunden.
+    %2 Organisatorisches +
+    %4 Insertion Sort +
+    %TODO Quicksort +
+    %TODO Heapsort
+
     %! suppress = MissingLabel
 
-    \subsection{Aktueller Stand}
+    \subsection*{Aktueller Stand}
     %! suppress = MissingLabel
 
-    \subsection{Änderungen des Entwurfes}
+    \subsection*{Änderungen des Entwurfes}
     -- nicht zutreffend --
 
+    \newpage
 
-    \section{Entwurf}\label{sec:entwurf}
 
+    \section{Insertion Sort}\label{sec:insertion-sort}
+    Siehe Abbildung~\ref{fig:insertionS}.
+    Bei Insertion Sort wird eine Liste durch das Einfügen von Elementen aus
+    einem unsortierten Bereich (zunächst die komplette List) in einen sortieren
+    Bereich (zunächst leer, <N1>) sortiert.
+
+    Bei dem Einfügen eines Elements E in den sortierten Bereich muss dabei
+    jeweils der Bereich bis zu dem Element durchlaufen werden, hinter das das
+    Element E eingefügt werden muss (Siehe "Insert into sorted list" Subgraph).
+
+    Somit wird der sortierte Bereich mit jeder Iteration um 1 erhöht <E1>.
+    Sobald der sortierte Bereich alle Elemente enthält, wird die Liste
+    zurückgegeben.
+    Bei der Implementation des Algorithmus auf einfach verkettete Listen
+    kann der sortierte und unsortierte Bereich getrennt werden.
+
+    \begin{figure}[hbt]
+        \caption{Insertion Sort}
+        \centering
+        \includegraphics[width = 8cm]{insertionS}\label{fig:insertionS}
+    \end{figure}
 
 \end{document}
