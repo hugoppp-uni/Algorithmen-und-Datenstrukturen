@@ -75,7 +75,10 @@ getLeftRightFromPivot([H | T], Pivot, L, R) ->
 getPivotAndLength([], _) -> {none, [], 0};
 getPivotAndLength([H | T], left) -> {H, T, listLength(T, 1)};
 getPivotAndLength(L, right) -> removeLastFromListAndGetLength(L, [], 0);
-getPivotAndLength(L, middle) -> notImplemented; %TODO
+getPivotAndLength(L, middle) ->
+  Length = listLength(L, 0),
+  {Pivot, Rest} = listGetNthAndRest(L, Length div 2, []),
+  {Pivot, Rest, Length};
 getPivotAndLength(L, random) -> notImplemented; %TODO
 getPivotAndLength(L, median) -> notImplemented. %TODO
 
@@ -85,6 +88,11 @@ removeLastFromListAndGetLength([H | []], Acc, Cnt) -> {H, Acc, Cnt + 1};
 removeLastFromListAndGetLength([H | T], Acc, Cnt) ->
   removeLastFromListAndGetLength(T, Acc ++ [H], Cnt + 1).
 
+listGetNth([H | T], 0) -> H;
+listGetNth([_ | T], N) -> listGetNth(T, N - 1).
+
+listGetNthAndRest([H | T], 0, Acc) -> {H, T ++ Acc};
+listGetNthAndRest([H | T], N, Acc) -> listGetNthAndRest(T, N - 1, Acc ++ [H]).
 
 listLength([], Cnt) -> Cnt;
 listLength([_ | T], Cnt) -> listLength(T, Cnt + 1).
