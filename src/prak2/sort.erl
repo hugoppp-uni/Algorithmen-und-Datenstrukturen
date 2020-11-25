@@ -54,11 +54,21 @@ qsort(PivotMethod, List, SwitchNumber) ->
   if
     Length =< SwitchNumber -> insertionS(List);
     true ->
-      qsort(PivotMethod, [El || El <- ListWithoutPivot, El < Pivot], SwitchNumber) ++
+      {Left, Right} = getLeftRightFromPivot(ListWithoutPivot, Pivot),
+      qsort(PivotMethod, Left, SwitchNumber) ++
         [Pivot] ++
-        qsort(PivotMethod, [El || El <- ListWithoutPivot, El >= Pivot], SwitchNumber)
+        qsort(PivotMethod, Right, SwitchNumber)
   end
 .
+
+getLeftRightFromPivot(List, Pivot) ->
+  getLeftRightFromPivot(List, Pivot, [], []).
+
+getLeftRightFromPivot([], _Pivot, L, R) -> {L, R};
+getLeftRightFromPivot([H | T], Pivot, L, R) when H < Pivot ->
+  getLeftRightFromPivot(T, Pivot, [H | L], R);
+getLeftRightFromPivot([H | T], Pivot, L, R) ->
+  getLeftRightFromPivot(T, Pivot, L, [H | R]).
 
 
 %% returns {pivot, <list without pivot>, <length>}
