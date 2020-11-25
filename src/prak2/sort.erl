@@ -80,7 +80,7 @@ getPivotAndLength(L, middle) ->
   {Pivot, Rest} = listGetNthAndRest(L, Length div 2, []),
   {Pivot, Rest, Length};
 getPivotAndLength(L, random) -> notImplemented; %TODO
-getPivotAndLength(L, median) -> notImplemented. %TODO
+getPivotAndLength(L, median) -> listGetMedianAndLength(L).
 
 
 %% returns {<last element>, <List without last>, <length>}
@@ -96,6 +96,23 @@ listGetNthAndRest([H | T], N, Acc) -> listGetNthAndRest(T, N - 1, Acc ++ [H]).
 
 listLength([], Cnt) -> Cnt;
 listLength([_ | T], Cnt) -> listLength(T, Cnt + 1).
+
+%% returns {medianElement, listWithoutMedian, length}
+listGetMedianAndLength(L) ->
+  [First | _] = L,
+  {Last, _, Length} = removeLastFromListAndGetLength(L, [], 0),
+  {Middle, _} = listFindFirstLargerThanAndRest(L, Length / 2),
+  {M, R} = listFindFirstLargerThanAndRest(L, (First + Last + Middle) div Length),
+  {M, R, Length}.
+
+
+%% returns {firstValLargerThanVal, listWithoutVal}
+listFindFirstLargerThanAndRest(L, Val) ->
+  listFindFirstLargerThanAndRest(L, Val, []).
+listFindFirstLargerThanAndRest([H | []], Val, Acc) -> {H, Acc};
+listFindFirstLargerThanAndRest([H | T], Val, Acc) when H < Val ->
+  listFindFirstLargerThanAndRest(T, Val, Acc ++ [H]);
+listFindFirstLargerThanAndRest([H | T], Val, Acc) -> {H, Acc ++ T}.
 
 %% die Zahlen sind in der Erlang-Liste [ ] als Eingabe und Ausgabe gehalten.
 %% Der in der Vorlesung vorgestellte Algorithmus ist auf die Verwendung
