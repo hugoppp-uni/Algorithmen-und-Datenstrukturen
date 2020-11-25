@@ -3,42 +3,38 @@ digraph Q {
     compound = true;
 
     s1 [label = "insertionSort(list)"]
-    s1 -> d1
-    d1 [label = "<N1> list length is 0 or 1?" shape = diamond]
-    d1 -> "return original list" [label = "YES"];
-    d1 -> s2 [label = "NO"];
-    s2 [label = "n = 2"];
-    s2 -> s33
-    s33 [label = "<N2> insert nth element in sublist(0, n - 1) "];
-    s33 -> s3
-    s33 -> cluster1Connector [arrowhead = none, lhead = cluster1]
-    s3 [label = "append rest of list"]
-    s3 -> s4
-    s4 [label = "n ++"];
-    s4 -> d2
-    d2 [label = "<N3> n < length - 1?" shape = diamond];
-    d2 -> s33 [label = "<E1> YES"];
-    d2 -> "<N4> return sorted list" [label = "NO"];
+    s1 -> s2
+    s2 [label = "<N1> sortedSectionLength = 0"];
+    s2 -> d2
+    d2 [label = "<N2> sortedSectionLength == list.length?" shape = diamond]
+    d2 -> "<N3> return list" [label = "YES"];
+    d2 -> s3 [label = "NO"];
+    s3 [label = "<N4> insert Element at index <sortedSectionLength> into sorted
+    section"]
+    s3 -> cluster1Connector [arrowhead = none, lhead = cluster1]
+    s3 -> d2 [label = "<E1> sortedSectionLength++"]
+
 
     subgraph cluster1 {
-        node [shape = box];
-        label = "Insert into list"
-        cluster1Connector [shape = point style = invis]
+    node [shape = box];
+    label = "Insert into sorted list"
+    cluster1Connector [shape = point style = invis]
 
-        cBegin [label = "List empty?"];
-        cBegin -> "<N5> return list with element" [label = "YES"];
-        cBegin -> c0 [label = "NO"];
-        c0 [label = "<N6> iterator = first element of list "];
-        c0 -> cd1
-        cd1 [label = "element to insert > iterator?" shape = diamond];
-        cd1 -> cs1 [label = "NO"];
-        cd1 -> cd2 [label = "YES"];
-        cs1 [label = "<N7> insert element before iterator and return"];
-        cs2 [label = "<N9> iterator = iterator.next"];
-        cs2 -> cd1
-        cd2 [label = "end of list?" shape = diamond];
-        cd2 -> appendAndReturn [label = "YES"];
-        cd2 -> cs2 [label = "NO"];
-        appendAndReturn [label = "<N8> append element and return"]
+    cBegin [label = "List empty?"];
+    cBegin -> "<N5> return list with element" [label = "YES"];
+    cBegin -> c0 [label = "NO"];
+    c0 [label = "<N6> iterator = first element of list "];
+    c0 -> cd1
+    cd1 [label = "element to insert val > iterator val?" shape = diamond];
+    cd1 -> cs1 [label = "NO"];
+    cd1 -> cd2 [label = "YES"];
+    cs1 [label = "<N7> insert element before iterator and return"];
+    cs2 [label = "<N9> iterator = iterator.next"];
+    cs2 -> cd1
+    cd2 [label = "end of list?" shape = diamond];
+    cd2 -> appendAndReturn [label = "YES"];
+    cd2 -> cs2 [label = "NO"];
+    appendAndReturn [label = "<N8> append element and return"]
     }
+
 }

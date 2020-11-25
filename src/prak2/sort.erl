@@ -15,15 +15,14 @@
 
 % NOTE: In the draft, all operations are made on a single list. In this
 % implementation, the list is split into two lists. This would corresponds to
-% splitting the list in the draft at the index n and does not affect the algorithm.
+% splitting the list in the draft at <sortedSectionLength> and does not affect the
+% algorithm.
 insertionS(L) -> insertionS(L, []).
 
-% <N2> Inserts nth element into the sorted List
-% <E1> Recalls insertionS with n = n + 1 (Element to insert = next element)
+% When list is not yet completely sorted <N2>, insert the current element to the
+% sorted list <N4> and look at the next element in the list <E1>
 insertionS([H | T], Acc) -> insertionS(T, insertToList(Acc, H));
-% <N1> If original List length is 0, this will return an empty list.
-% <N4> If the original List length is greater than 1, this will return the
-% sorted List, once n == length (the last element has already been inserted.
+% When whole list is sorted <N2>, return it <N3>.
 insertionS([], Acc) -> Acc.
 
 
