@@ -61,6 +61,7 @@ qsort(PivotMethod, List, SwitchNumber) ->
   end
 .
 
+%% returns {numbersSmallerThanPivot, numbersLargerThanPivot}
 getLeftRightFromPivot(List, Pivot) ->
   getLeftRightFromPivot(List, Pivot, [], []).
 
@@ -71,7 +72,7 @@ getLeftRightFromPivot([H | T], Pivot, L, R) ->
   getLeftRightFromPivot(T, Pivot, L, [H | R]).
 
 
-%% returns {pivot, <list without pivot>, <length>}
+%% returns {pivot, listWithoutPivot, length}
 getPivotAndLength([], _) -> {none, [], 0};
 getPivotAndLength([H | T], left) -> {H, T, listLength(T, 1)};
 getPivotAndLength(L, right) -> removeLastFromListAndGetLength(L, [], 0);
@@ -83,7 +84,7 @@ getPivotAndLength(L, random) -> notImplemented; %TODO
 getPivotAndLength(L, median) -> listGetMedianAndLength(L).
 
 
-%% returns {<last element>, <List without last>, <length>}
+%% returns {lastElement, listWithoutLast, length}
 removeLastFromListAndGetLength([H | []], Acc, Cnt) -> {H, Acc, Cnt + 1};
 removeLastFromListAndGetLength([H | T], Acc, Cnt) ->
   removeLastFromListAndGetLength(T, Acc ++ [H], Cnt + 1).
