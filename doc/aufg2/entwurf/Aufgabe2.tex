@@ -20,8 +20,9 @@
 
     \tableofcontents
 
+    \newpage
 
-    \section*{Formales}\label{sec:Formales}
+    \section{Formales}\label{sec:Formales}
 
     %! suppress = MissingLabel
 
@@ -36,10 +37,7 @@
     %! suppress = MissingLabel
 
     \subsection*{Bearbeitungszeitraum}
-    Der gesamte Arbeitsaufwand für den Entwurf belief sich auf ca. 6 Stunden.
-    %2 Organisatorisches +
-    %4 Insertion Sort +
-    %TODO Quicksort +
+    Der gesamte Arbeitsaufwand für den Entwurf belief sich auf ca. 8 Stunden.
     %TODO Heapsort
 
     %! suppress = MissingLabel
@@ -50,10 +48,11 @@
     \subsection*{Änderungen des Entwurfes}
     -- nicht zutreffend --
 
-    \newpage
 
 
     \section{Insertion Sort}\label{sec:insertion-sort}
+
+    \subsection{Algorithmus}\label{subsec:Ialgorithmus}
     Siehe Abbildung~\ref{fig:insertionS}.
     Bei Insertion Sort wird eine Liste durch das Einfügen von Elementen aus
     einem unsortierten Bereich (zunächst die komplette List) in einen sortieren
@@ -61,7 +60,8 @@
 
     Bei dem Einfügen eines Elements E in den sortierten Bereich muss dabei
     jeweils der Bereich bis zu dem Element durchlaufen werden, hinter das das
-    Element E eingefügt werden muss (Siehe "Insert into sorted list" Subgraph).
+    Element E eingefügt werden muss (Siehe \frqq Insert into sorted list\flqq
+    Subgraph).
 
     Somit wird der sortierte Bereich mit jeder Iteration um 1 erhöht <E1>.
     Sobald der sortierte Bereich alle Elemente enthält, wird die Liste
@@ -69,10 +69,61 @@
     Bei der Implementation des Algorithmus auf einfach verkettete Listen
     kann der sortierte und unsortierte Bereich getrennt werden.
 
+    \subsection{Laufzeit}\label{subsec:Ilaufzeit}
+
     \begin{figure}[hbt]
         \caption{Insertion Sort}
         \centering
         \includegraphics[width = 8cm]{insertionS}\label{fig:insertionS}
     \end{figure}
+
+
+    \section{Quick Sort}\label{sec:quick-sort}
+
+    \subsection{Algorithmus}\label{subsec:Qalgorithmus}
+    Siehe Abbildung~\ref{fig:qsort}.
+    Bei Quick Sort wird zunächst willkürlich ein Pivot-Element aus der List
+    ausgewählt.
+
+    Anschließend wird die Liste in zwei Teile aufgeteilt: Die Liste L hält alle
+    Elemente, die kleiner als das Pivot-Element sind, die Liste R alle
+    Elemente, die größer als das Pivot-Element sind.
+    Dafür wird die Liste elementweise durchlaufen und jedes Element mit dem
+    Pivot-Element verglichen.
+    Die Reihenfolge der Elemente in den Listen spielt keine Rolle.
+    Das Pivot-Element selber kommt nicht in den Listen vor.
+
+    Da alle Elemente, die kleiner als das Pivot-Element sind und alle Elemente,
+    die größer als das Pivot-Element sind, nun getrennt vorliegen, ist die
+    Position des Pivots eindeutig als zwischen den Listen L und R bestimmt.
+    Somit kann der Algorithmus rekursiv auf die jeweiligen Listen erneut
+    angewandt werden.
+
+    Das Pivot-Element wird an die Liste R vorangestellt.
+    Die Liste L wird der Liste R, inklusive Pivot, vorangestellt.
+    Die Liste ist nun sortiert.
+
+    \begin{figure}[hbt]
+        \caption{Insertion Sort}
+        \centering
+        \includegraphics[width = 8cm]{qsort.pdf}\label{fig:qsort}
+    \end{figure}
+
+    \subsection{Laufzeit}\label{subsec:Qlaufzeit}
+
+
+    \section{Heap Sort}\label{sec:heap-sort}
+
+    \subsection{Algorithmus}\label{subsec:Halgorithmus}
+    Siehe Abbildung~\ref{fig:hsort}.
+
+
+    \begin{figure}[hbt]
+        \caption{Insertion Sort}
+        \centering
+        \includegraphics[width = 8cm]{qsort.pdf}\label{fig:hsort}
+    \end{figure}
+
+    \subsection{Laufzeit}\label{subsec:Hlaufzeit}
 
 \end{document}
