@@ -22,6 +22,7 @@
 
     \newpage
 
+
     \section{Formales}\label{sec:Formales}
 
     %! suppress = MissingLabel
@@ -44,10 +45,10 @@
 
     \subsection*{Aktueller Stand}
     %! suppress = MissingLabel
+    %TODO
 
     \subsection*{Änderungen des Entwurfes}
     -- nicht zutreffend --
-
 
 
     \section{Insertion Sort}\label{sec:insertion-sort}
@@ -70,6 +71,17 @@
     kann der sortierte und unsortierte Bereich getrennt werden.
 
     \subsection{Laufzeit}\label{subsec:Ilaufzeit}
+    Die erwartete Laufzeit beträgt \(O(n^2)\), da bei jeder Iteration das
+    einzufügende Element mit allen noch nicht sortierten Elementen verglichen
+    wird.
+    Im Fall einer bereits sortierten Liste tritt der Best-Case ein.
+    Hierbei müssen nur \(n\) Vergleiche durchgeführt werden.
+    Somit beträgt die Laufzeit \(\Theta(n)\).
+
+    Bei der Laufzeitmessung überprüfen wir, ob der gemessene Zusammenhang mit
+    dem erwarteten übereinstimmt.
+    Dafür verwenden wir für den Best-Case zufällige Listen, im Worst-Case
+    bereits sortierte Listen.
 
     \begin{figure}[hbt]
         \caption{Insertion Sort}
@@ -110,6 +122,24 @@
     \end{figure}
 
     \subsection{Laufzeit}\label{subsec:Qlaufzeit}
+
+    Die Laufzeit beträgt im Best-Case \(\Omega (n \cdot \log(n))\), da bei
+    gut gewähltem Pivot-Elementen die Anzahl an vergleichen mit jeder
+    iteration halbiert wird.
+    Wenn das Pivot-Element bei jeder Iteration schlecht gewählt ist (kleinstes
+    oder größtes Element in der List), beträgt die Laufzeit \(O(n^2)\), da
+    jeweils eine Partition die Größe 1 hat und die Anzahl an vergleichen
+    somit nicht reduziert wird.
+
+    Bei der Laufzeitmessung testen wir, ob die Komplexität des implementierten
+    Algorithmus mit dem erwarteten übereinstimmt.
+    Um den Worst-Case zu überprüfen, nutzten wir bereits sortierte Listen und
+    wählen das letzte bzw. erste Element als Pivot-Element.
+    Für den Best-Case nutzten wir zufällig generierte Listen.\\
+    Wir ermitteln des Weiteren die Elementanzahl, ab der Quicksort schneller
+    als Insertion Sort ist.
+    Außerdem wird die Implementation mit Erlang List Comprehension der
+    eigenen gegenübergestellt.
 
 
     \section{Heap Sort}\label{sec:heap-sort}
