@@ -1,0 +1,25 @@
+    
+
+digraph G {
+
+    node [shape = box];
+    compound = true;
+    
+    a1 [label = "buildMaxHeap(List)" shape = ellipse]
+    a2 [label = "split List into Head and Tail"]
+    a1 -> a2
+    a3 [label = "Heap Empty?" shape = diamond]
+    a2 -> a3
+    a3 -> a4 [label = true]
+    a3 -> a5 [label = false]
+    a4 [label = "put Head as root of Heap and return"]
+    a5 [label = "insert head into heap; index = size+1"]
+    a6 [label = "inserted node > previous node?" shape = diamond]
+    a5 -> a6
+    a6 -> a1 [label = "false; continue with Tail"]
+    a6 -> a8 [label = "true  "]
+    a8 [label = "swap inserted and previous node"]
+    a9 [label = " previous node = one node above\nprevious node"]
+    a8 -> a9
+    a9 -> a6
+}

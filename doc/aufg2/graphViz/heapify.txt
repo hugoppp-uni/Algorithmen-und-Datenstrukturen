@@ -1,0 +1,30 @@
+digraph G {
+
+    node [shape = box];
+    compound = true;
+    
+    begin [label = "heapify(Heap)" shape = ellipse]
+    a1 [label = "tmp = root node" ]
+    cond1 [label = "tmp < left child node?" shape = diamond]
+    cond2 [label = "tmp < right child node?" shape = diamond]
+    cond1 -> a2 [label = true]
+    cond1 -> cond2 [label = false]
+    begin -> a1
+    a1 -> abortcond
+    abortcond -> abortcond2 [label = "emtpy"]
+    abortcond -> cond1 [label = "not empty"]
+    a2 [label = "swap left child node and tmp"]
+    abortcond [label = "left child empty?" shape = diamond]
+    abortcond2 [label = "right child empty?" shape = diamond]
+    abortcond2 -> abort2 [label = "empty"]
+    abortcond2 -> cond2 [label = "not empty"]
+    abort [label = "return Heap with\ncurrent position of tmp"]
+    cond2 -> abort [label = false]
+    cond2 -> a3 [label = "true"]
+    a3 [label = "swap right child node and tmp"]
+    a3 -> abortcond [label = "continue\nwith\nnew\nposition\nof\ntmp"]
+    a2 -> abortcond [label = "continue\nwith\nnew\nposition\nof\ntmp"]
+    abort2 [label = "return Heap with\ncurrent position of tmp"]
+    
+
+}

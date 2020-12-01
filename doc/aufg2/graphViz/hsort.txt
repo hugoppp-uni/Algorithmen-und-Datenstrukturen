@@ -1,0 +1,31 @@
+digraph G {
+
+    node [shape = box];
+    compound = true;
+    
+    a1 [label = "hsort(List)" shape = ellipse]
+    a2 [label = "create Max-Heap\nfrom List with buildMaxHeap/1"]
+    a3 [label = "get Output-List from\noverloaded hsort(Max-Heap)"]
+    a4 [label = "return Output-List"]
+    b1 [label = "hsort(Max-Heap)" shape = ellipse]
+    b2 [label = "get root element\nfrom Max-Heap\nand prepend to\nOutput-List"]
+    b3 [label = "swap root element and\nlast element in Max-Heap"]
+    b4 [label = "remove former root\n(now last element) from\nMax-Heap"]
+    b5 [label = "use heapify/1 reduced Heap (back to Max-Heap)"]
+        
+    a1 -> a2
+    a2 -> a3
+    a3 -> a4
+
+    b2 -> b3
+    b3 -> b4
+    b4 -> b5
+    b5 -> b1 [label = " continue with reduced heap"]
+    
+    abort1 [label = "heap empty?" shape = diamond]
+    abort2 [label = "return empty heap and Outputlist"]
+    
+    b1 -> abort1
+    abort1 -> b2 [label = "false"]
+    abort1 -> abort2 [label = " true"]
+}

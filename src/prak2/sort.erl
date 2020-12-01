@@ -39,6 +39,9 @@ insertToList([H | T], E) when H > E -> [E | [H | T]];
 insertToList([H | T], E) -> [H | insertToList(T, E)].
 
 
+
+
+
 %% die Zahlen sind in der Erlang-Liste [ ] gehalten und zu sortieren.
 %% Der in der Vorlesung vorgestellte Algorithmus ist so auf die Verwendung
 %% von Listen (statt array) zu transformieren, dass das Kernkonzept erhalten bleibt!
@@ -124,4 +127,25 @@ listFindFirstLargerThanAndRest([H | T], Val, Acc) -> {H, Acc ++ T}.
 %% Die Begründung ist im Entwurf aufzuführen. Da das Verfahren eine
 %% Vorabkodierung des Pfades zum einfügen von Elementen an der nächsten freien
 %% Position benötigt, wird eine Berechnung (mit konstantem Aufwand!!) dazu hier angeboten: sort.erl.
-hsort(List) -> List.
+hsort([]) -> [];
+hsort(List) -> 
+  Heap = buildMaxHeap(List),
+  {_, _, OutputList} = hsort(Heap, List, []),
+  OutputList.
+
+hsort({}, InputList, OutputList) -> {{}, InputList, OutputList};
+hsort(Heap, InputList, OutputList) ->
+  {MaxElement, _, _} = Heap,
+  RootLastSwappedHeap = swapRootWithLast(Heap),
+  NewHeap = removeSwappedRoot(RootLastSwappedHeap),
+  NewMaxHeap = heapify(NewHeap),
+  hsort(NewMaxHeap, InputList, [MaxElement|OutputList]).
+
+buildMaxHeap([]) -> {};
+buildMaxHeap([Head|[]]) -> {Head, {}, {}, 1}.
+
+swapRootWithLast(Heap) -> ok.
+
+removeSwappedRoot(Heap) -> ok.
+
+heapify(Heap) -> ok.  
