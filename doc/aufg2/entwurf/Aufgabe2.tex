@@ -116,7 +116,7 @@
     Die Liste ist nun sortiert.
 
     \begin{figure}[hbt]
-        \caption{Insertion Sort}
+        \caption{Quicksort}
         \centering
         \includegraphics[width = 8cm]{qsort.pdf}\label{fig:qsort}
     \end{figure}
@@ -124,22 +124,35 @@
     \subsection{Laufzeit}\label{subsec:Qlaufzeit}
 
     Die Laufzeit beträgt im Best-Case \(\Omega (n \cdot \log(n))\), da bei
-    gut gewähltem Pivot-Elementen die Anzahl an vergleichen mit jeder
-    iteration halbiert wird.
+    gut gewähltem Pivot-Elementen die Anzahl an vergleichen mit jedem
+    Rekursionsschritt halbiert wird, wobei die Teillisten trotzdem durchlaufen
+    werden müssen.
     Wenn das Pivot-Element bei jeder Iteration schlecht gewählt ist (kleinstes
     oder größtes Element in der List), beträgt die Laufzeit \(O(n^2)\), da
     jeweils eine Partition die Größe 1 hat und die Anzahl an vergleichen
     somit nicht reduziert wird.
 
     Bei der Laufzeitmessung testen wir, ob die Komplexität des implementierten
-    Algorithmus mit dem erwarteten übereinstimmt.
+    Algorithmus mit der erwarteten übereinstimmt.
     Um den Worst-Case zu überprüfen, nutzten wir bereits sortierte Listen und
     wählen das letzte bzw. erste Element als Pivot-Element.
     Für den Best-Case nutzten wir zufällig generierte Listen.\\
+
     Wir ermitteln des Weiteren die Elementanzahl, ab der Quicksort schneller
-    als Insertion Sort ist.
+    als Insertion Sort ist und wie sich die unterschiedlich Methoden, das
+    Pivot-Element auszuwählen, auf die Laufzeit auswirken.
+
     Außerdem wird die Implementation mit Erlang List Comprehension der
     eigenen gegenübergestellt.
+    Wir erwarten bei der List Comprehension eine leicht langsamere Laufzeit als
+    bei der eigenen Implementierung, da bei der List Comprehension die Liste
+    zwei Mal durchlaufen wird:
+    Das erste Mal um alle Elemente, die größer -- das zweite Mal
+    um alle Elemente, die kleiner als das Pivot-Element sind, zu filtern.
+    Bei der eigenen Implementation wird die Liste lediglich ein Mal
+    durchlaufen.
+    Hierbei ist es interessant zu sehen, inwiefern sich die Anzahl an
+    Durchläufen durch die Liste in der Laufzeit wieder spiegelt.
 
 
     \section{Heap Sort}\label{sec:heap-sort}
