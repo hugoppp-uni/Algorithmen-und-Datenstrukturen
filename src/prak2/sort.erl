@@ -7,7 +7,7 @@
 -author("Hugo Protsch").
 
 %% API
--export([insertionS/1, qsort/3, hsort/1, insertToList/2]).
+-export([insertionS/1, qsort/3, hsort/1, insertToList/2, heap_sort/1]).
 
 % TODO: bisheriger Aufwand für Tests / Analyse aller Methoden: ~4h
 % TODO: bisheriger Aufwand für diese Methode (Entwurf): 2.5h (Code): 3h
@@ -92,7 +92,7 @@ removeLastFromListAndGetLength([H | []], Acc, Cnt) -> {H, Acc, Cnt + 1};
 removeLastFromListAndGetLength([H | T], Acc, Cnt) ->
   removeLastFromListAndGetLength(T, Acc ++ [H], Cnt + 1).
 
-listGetNth([H | T], 0) -> H;
+listGetNth([H | _], 0) -> H;
 listGetNth([_ | T], N) -> listGetNth(T, N - 1).
 
 listGetNthAndRest([H | T], 0, Acc) -> {H, T ++ Acc};
@@ -149,3 +149,39 @@ swapRootWithLast(Heap) -> ok.
 removeSwappedRoot(Heap) -> ok.
 
 heapify(Heap) -> ok.  
+
+
+
+heap_sort([]) -> [];
+heap_sort(L) ->
+    Size = length(L),
+    lists:foldl(fun(X, I) -> put(I, X), I+1 end, 1, L),
+    lists:foreach(fun(I) -> make_heap(I, get(I)) end, lists:seq(2, Size)),
+    lists:foreach(fun(I) -> down_heap(I) end, lists:seq(Size, 2, -1)),
+    lists:foldl(fun(I, R) -> [get(I)|R] end, [], lists:seq(Size, 1, -1)).
+
+make_heap(I, A) ->
+    J = I div 2,
+    B = get(J),
+    if  J<1 orelse A=<B -> put(I, A);
+        true            -> put(I, B),
+                           make_heap(J, A)
+    end.
+
+down_heap(I) ->
+    Root = 1,
+    Val = put(I, put(Root, get(I))),     % exchange Root <-> I
+    down_heap(I-1, Root, 2*Root, Val).
+
+down_heap(Limit, Parent, Child, Val) when Limit < Child ->
+    put(Parent, Val);
+down_heap(Limit, Parent, Child, Val) ->
+    V0 = get(Child),
+    V1 = get(Child+1),
+    {C, V} = if  Child < Limit andalso V0 < V1 -> {Child+1, V1};
+                 true                          -> {Child,   V0}
+             end,
+    if  Val >= V -> put(Parent, Val);
+        true     -> put(Parent, V),
+                    down_heap(Limit, C, 2*C, Val)
+    end.
