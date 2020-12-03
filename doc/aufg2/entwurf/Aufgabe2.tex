@@ -96,7 +96,8 @@
     Bei Quick Sort wird zunächst willkürlich ein Pivot-Element aus der Liste
     ausgewählt.
 
-    Anschließend wird die Liste in zwei Teile aufgeteilt: Die Liste L erhält alle
+    Anschließend wird die Liste in zwei Teile aufgeteilt: Die Liste L erhält
+    alle
     Elemente, die kleiner als das Pivot-Element sind, die Liste R alle
     Elemente, die größer als das Pivot-Element sind.
     Dafür wird die Liste elementweise durchlaufen und jedes Element mit dem
@@ -157,48 +158,72 @@
     \section{Heap Sort}\label{sec:heap-sort}
 
     \subsection{Algorithmus}\label{subsec:Halgorithmus}
-        \subsubsection{Allgemeiner Aufbau}
+
+    \subsubsection{Allgemeiner Aufbau}
     Betrachte Abbildung~\ref{fig:hsort}.
     Im Allgemeinen besteht Heap Sort im Wesentlichen aus zwei Teilen:
-    Dem Bauen eines Max-Heaps aus der zu sortierenden Liste und dem eigentlichen Sortieren mithilfe dieses Heaps.
-    Der sogenannte Max-Heap ist eine binaere Baum-Datenstruktur, in der jeder Kindwert kleiner dem Elternwert ist, die entscheidende Eigenschaft fuer den Heap-Sort. 
-    
-    Strukturell haben wir einen "Divide and Conquer"-Ansatz gewaehlt und den Algorithmus in mehrere Subroutinen unterteilt.
-    
+    Dem Bauen eines Max-Heaps aus der zu sortierenden Liste und dem
+    eigentlichen Sortieren mithilfe dieses Heaps.
+    Der sogenannte Max-Heap ist eine binäre Baum-Datenstruktur, in der jeder
+    Kindwert kleiner dem Elternwert ist, die entscheidende Eigenschaft für
+    den Heap-Sort.
+
+    Strukturell haben wir einen "Divide and Conquer"-Ansatz gewählt und den
+    Algorithmus in mehrere Subroutinen unterteilt.
+
     \subsubsection{Bauen des Max-Heaps}
-    Der Bau-Algorithmus des Max-Heaps beginnt mit dem Einsetzen des ersten Elements der Liste als Wurzel des Baumes.
-    Jedes nachfolgende Element wird unten eingefuegt. Der Baum wird von links nach rechts aufgebaut.
-    Ist das nun eingefuegte Element groesser als sein Elternknoten, werden die Knoten vertauscht, wodurch das eingefuegte Element nach oben wandert.
-    Dieser Vergleich wird solange durchgefuehrt, bis das Element eine passende Position im Max-Heap gefunden hat.
-    In Abbildung~\ref{fig:buildMaxHeap} spiegelt sich dieser Aufsteig-Vorgang in der unteren Schleife wieder. 
-    
+    Der Bau-Algorithmus des Max-Heaps beginnt mit dem Einsetzen des ersten
+    Elements der Liste als Wurzel des Baumes.
+    Jedes nachfolgende Element wird unten eingefügt. Der Baum wird von links
+    nach rechts aufgebaut.
+    Ist das nun eingefügte Element größer als sein Elternknoten, werden die
+    Knoten vertauscht, wodurch das eingefügte Element nach oben wandert.
+    Dieser Vergleich wird solange durchgeführt, bis das Element eine passende
+    Position im Max-Heap gefunden hat.
+    In Abbildung~\ref{fig:buildMaxHeap} spiegelt sich dieser Aufsteig-Vorgang
+    in der unteren Schleife wieder.
+
     \subsubsection{Heapify}
-    In Heapify machen wir uns die Tatsache zunutze, dass eigentlich ein Max-Heap vorliegt und sich nur ein einziges Element an der falschen Stelle befindet.
-    Dieses Element wird, falls noetig, zu einer passenden Position nach unten "durchsickern".
-    
-    Zunaechst wird ueberprueft, ob das Wurzelelement groesser als das linke Kind ist (Aufbau von links nach rechts).
-    Ist dies der Fall muessen die Positionen getauscht werden und das Element wandert hinab.
-    Gibt es kein linkes Kind geschieht der gleiche Prozess analog mit dem rechten Kind.
-    Nach dem Tauschen fragt man erneut ab und tauscht wenn noetig, bis eine der folgenden Bedingungen erfuellt ist.
-    Existiert auch kein rechtes Kind, hat das Element eine passende Position gefunden und der Heap ist wieder ein Max-Heap.
-    Sind beide Kinder kleiner als das Elternelement, hat das Element eine passende Position gefunden und der Heap ist wieder ein Max-Heap.
-    
-    So wird der Heap fuer die weitere Sortierung "heapified".
+    In Heapify machen wir uns die Tatsache zunutze, dass eigentlich ein
+    Max-Heap vorliegt und sich nur ein einziges Element an der falschen
+    Stelle befindet.
+    Dieses Element wird, falls nötig, zu einer passenden Position nach unten
+    "durchsickern".
+
+    Zunächst wird überprüft, ob das Wurzelelement größer als das linke Kind
+    ist (Aufbau von links nach rechts).
+    Ist dies der Fall müssen die Positionen getauscht werden und das Element
+    wandert hinab.
+    Gibt es kein linkes Kind geschieht der gleiche Prozess analog mit dem
+    rechten Kind.
+    Nach dem Tauschen fragt man erneut ab und tauscht wenn nötig, bis eine
+    der folgenden Bedingungen erfüllt ist.
+    Existiert auch kein rechtes Kind, hat das Element eine passende Position
+    gefunden und der Heap ist wieder ein Max-Heap.
+    Sind beide Kinder kleiner als das Elternelement, hat das Element eine
+    passende Position gefunden und der Heap ist wieder ein Max-Heap.
+
+    So wird der Heap für die weitere Sortierung "heapified".
 
     \subsubsection{Sortierung}
     Auf das Umwandeln der Liste in einen Max-Heap wurde bereits eingegangen.
     Der erstellte Max-Heap wird dann zum Sortieren benutzt.
-    Wie oben bereits erwaehnt ist die bestimmende Eigenschaft eines Max-Heaps der ausschlaggebende Aspekt dieses Sortier-Algorithmus.
-    Wir fuegen also das Wurzelelement des Heaps in die Output-Liste ein.
-    Dieses Element gilt nun als sortiert (alle Elemente muessen vorne angefuegt werden). 
-    Nun wird das letzte Element des Heaps mit der Wurzel getauscht und die ehemalige Wurzel entfernt.
-    Die Struktur des Max-Heaps wird, wie oben beschrieben, durch Heapify wieder hergestellt.
-    Dieser Vorgang wiederholt sich nachfolgend mit dem jeweils reduzierten Max-Heap, bis keine Elemente mehr im Heap vorhanden sind.
-    Abschliessend kann eine vollstaendige sortierte Liste zurueckgegeben werden.
-    
-    
-    
-    
+    Wie oben bereits erwähnt ist die bestimmende Eigenschaft eines Max-Heaps
+    der ausschlaggebende Aspekt dieses Sortier-Algorithmus.
+    Wir fügen also das Wurzelelement des Heaps in die Output-Liste ein.
+    Dieses Element gilt nun als sortiert (alle Elemente müssen vorne angefügt
+    werden).
+    Nun wird das letzte Element des Heaps mit der Wurzel getauscht und die
+    ehemalige Wurzel entfernt.
+    Die Struktur des Max-Heaps wird, wie oben beschrieben, durch Heapify
+    wieder hergestellt.
+    Dieser Vorgang wiederholt sich nachfolgend mit dem jeweils reduzierten
+    Max-Heap, bis keine Elemente mehr im Heap vorhanden sind.
+    Abschließend kann eine vollständige sortierte Liste zurückgegeben werden.
+
+
+
+
     \begin{figure}[hbt]
         \caption{Heap Sort}
         \centering
@@ -210,29 +235,30 @@
         \centering
         \includegraphics[width = 8cm]{heapify.pdf}\label{fig:heapify}
     \end{figure}
-    
+
     \begin{figure}[hbt]
         \caption{Build Max-Heap}
         \centering
         \includegraphics[width = 8cm]{buildMaxHeap.pdf}\label{fig:buildMaxHeap}
     \end{figure}
-    
+
     \subsection{Laufzeit}\label{subsec:Hlaufzeit}
-    Die Laufzeit betraegt im Worst-Case \(O(n\cdot log\ n)\). Dieser tritt ein, wenn eine bereits weitgehend vorsortierte Liste vorliegt, da die Liste beim Heap-Aufbau gewissermassen invertiert wird und somit viele Vergleiche pro Element erforderlich sind.
-    Wuenschenswert waere demnach eine invertiert-sortierte Liste, wodurch die Anzahl der Vergleiche auf 1 pro Element minimiert ist.
-    Es gilt mit den Laufzeittests herauszufinden, ob unsere Komplexitaets-Annahmen realistisch sind.
-    Um Heap-Sort hinreichend zu testen, binden wir den Algorithmus erweiternd in den Quick-Sort-Test mit ein und stellen beide gegenueber.
-    Diese drei Faelle werden untersucht und verglichen:
+    Die Laufzeit beträgt im Worst-Case \(O(n\cdot log\ n)\). Dieser tritt
+    ein, wenn eine bereits weitgehend vorsortierte Liste vorliegt, da die
+    Liste beim Heap-Aufbau gewissermaßen invertiert wird und somit viele
+    Vergleiche pro Element erforderlich sind.
+    Wünschenswert wäre demnach eine invertiert-sortierte Liste, wodurch die
+    Anzahl der Vergleiche auf 1 pro Element minimiert ist.
+    Es gilt mit den Laufzeittests herauszufinden, ob unsere
+    Komplexitäts--Annahmen realistisch sind.
+    Um Heap-Sort hinreichend zu testen, binden wir den Algorithmus erweiternd
+    in den Quick-Sort-Test mit ein und stellen beide gegenüber.
+    Diese drei Fälle werden untersucht und verglichen:
     \begin{itemize}
         \item Vorsortierte Liste
         \item Invertiert sortierte Liste
-        \item Zufaellig generierte Liste
+        \item Zufällig generierte Liste
     \end{itemize}
-    
-
-    
-    
-    
 
 
 \end{document}
