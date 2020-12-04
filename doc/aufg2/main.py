@@ -76,7 +76,7 @@ figure.savefig('out/' + 'pivotMethods_Implementation2b.pdf', bbox_inches='tight'
 
 # ---
 
-figure = generate_graph('1', xl, yl, desc,
+figure = generate_graph('', xl, yl, desc,
                         [
                             'data/qsort/run3/right.csv',
                             'data/qsort/run1/right.csv',
@@ -86,7 +86,7 @@ figure = generate_graph('1', xl, yl, desc,
                         ['right 3rd Impl.', 'right 1st Impl.', 'middle 3rd', 'middle 1st'])
 figure.savefig('out/' + 'pivotMethods_Implementation3a.pdf', bbox_inches='tight')
 
-figure = generate_graph('1', xl, yl, desc,
+figure = generate_graph('', xl, yl, desc,
                         [
                             'data/qsort/run3/median.csv',
                             'data/qsort/run1/median.csv',
