@@ -39,9 +39,6 @@ insertToList([H | T], E) when H > E -> [E | [H | T]];
 insertToList([H | T], E) -> [H | insertToList(T, E)].
 
 
-
-
-
 %% die Zahlen sind in der Erlang-Liste [ ] gehalten und zu sortieren.
 %% Der in der Vorlesung vorgestellte Algorithmus ist so auf die Verwendung
 %% von Listen (statt array) zu transformieren, dass das Kernkonzept erhalten bleibt!
@@ -78,7 +75,10 @@ getLeftRightFromPivot([H | T], Pivot, L, R) ->
 %% returns {pivot, listWithoutPivot, length}
 getPivotAndLength([], _) -> {none, [], 0};
 getPivotAndLength([H | T], left) -> {H, T, listLength(T, 1)};
-getPivotAndLength(L, right) -> removeLastFromListAndGetLength(L, [], 0);
+getPivotAndLength(L, right) ->
+  Length = listLength(L, 0),
+  {Pivot, Rest} = listGetNthAndRest(L, Length - 1, []),
+  {Pivot, Rest, Length};
 getPivotAndLength(L, middle) ->
   Length = listLength(L, 0),
   {Pivot, Rest} = listGetNthAndRest(L, Length div 2, []),
@@ -88,16 +88,9 @@ getPivotAndLength(L, median) -> listGetMedianAndLength(L).
 
 
 getRandomAndLength(L) ->
-  random:seed(erlang:now()),
   Length = listLength(L, 0),
-  {Nth, Rest} =  listGetNthAndRest(L,0,[]),
+  {Nth, Rest} = listGetNthAndRest(L, 0, []),
   {Nth, Rest, Length}.
-
-
-%% returns {lastElement, listWithoutLast, length}
-removeLastFromListAndGetLength([H | []], Acc, Cnt) -> {H, Acc, Cnt + 1};
-removeLastFromListAndGetLength([H | T], Acc, Cnt) ->
-  removeLastFromListAndGetLength(T, Acc ++ [H], Cnt + 1).
 
 listGetNth([H | _], 0) -> H;
 listGetNth([_ | T], N) -> listGetNth(T, N - 1).
@@ -111,10 +104,10 @@ listLength([_ | T], Cnt) -> listLength(T, Cnt + 1).
 %% returns {medianElement, listWithoutMedian, length}
 listGetMedianAndLength(L) ->
   [First | _] = L,
-  {Last, _, Length} = removeLastFromListAndGetLength(L, [], 0),
+  {Last, _, Length} = getPivotAndLength(L, right),
   {Middle, _} = listFindFirstLargerThanAndRest(L, Length / 2),
-  {M, R} = listFindFirstLargerThanAndRest(L, (First + Last + Middle) div Length),
-  {M, R, Length}.
+  {Median, R} = listFindFirstLargerThanAndRest(L, (First + Last + Middle) div Length),
+  {Median, R, Length}.
 
 
 %% returns {firstValLargerThanVal, listWithoutVal}
@@ -146,49 +139,49 @@ hsort(Heap, InputList, OutputList) ->
   RootLastSwappedHeap = swapRootWithLast(Heap),
   NewHeap = removeSwappedRoot(RootLastSwappedHeap),
   NewMaxHeap = heapify(NewHeap),
-  hsort(NewMaxHeap, InputList, [MaxElement|OutputList]).
+  hsort(NewMaxHeap, InputList, [MaxElement | OutputList]).
 
 buildMaxHeap([]) -> {};
-buildMaxHeap([Head|[]]) -> {Head, {}, {}, 1}.
+buildMaxHeap([Head | []]) -> {Head, {}, {}, 1}.
 
 swapRootWithLast(Heap) -> ok.
 
 removeSwappedRoot(Heap) -> ok.
 
-heapify(Heap) -> ok.  
+heapify(Heap) -> ok.
 
 
 
 heap_sort([]) -> [];
 heap_sort(L) ->
-    Size = length(L),
-    lists:foldl(fun(X, I) -> put(I, X), I+1 end, 1, L),
-    lists:foreach(fun(I) -> make_heap(I, get(I)) end, lists:seq(2, Size)),
-    lists:foreach(fun(I) -> down_heap(I) end, lists:seq(Size, 2, -1)),
-    lists:foldl(fun(I, R) -> [get(I)|R] end, [], lists:seq(Size, 1, -1)).
+  Size = length(L),
+  lists:foldl(fun(X, I) -> put(I, X), I + 1 end, 1, L),
+  lists:foreach(fun(I) -> make_heap(I, get(I)) end, lists:seq(2, Size)),
+  lists:foreach(fun(I) -> down_heap(I) end, lists:seq(Size, 2, -1)),
+  lists:foldl(fun(I, R) -> [get(I) | R] end, [], lists:seq(Size, 1, -1)).
 
 make_heap(I, A) ->
-    J = I div 2,
-    B = get(J),
-    if  J<1 orelse A=<B -> put(I, A);
-        true            -> put(I, B),
-                           make_heap(J, A)
-    end.
+  J = I div 2,
+  B = get(J),
+  if J < 1 orelse A =< B -> put(I, A);
+    true -> put(I, B),
+      make_heap(J, A)
+  end.
 
 down_heap(I) ->
-    Root = 1,
-    Val = put(I, put(Root, get(I))),     % exchange Root <-> I
-    down_heap(I-1, Root, 2*Root, Val).
+  Root = 1,
+  Val = put(I, put(Root, get(I))),     % exchange Root <-> I
+  down_heap(I - 1, Root, 2 * Root, Val).
 
 down_heap(Limit, Parent, Child, Val) when Limit < Child ->
-    put(Parent, Val);
+  put(Parent, Val);
 down_heap(Limit, Parent, Child, Val) ->
-    V0 = get(Child),
-    V1 = get(Child+1),
-    {C, V} = if  Child < Limit andalso V0 < V1 -> {Child+1, V1};
-                 true                          -> {Child,   V0}
-             end,
-    if  Val >= V -> put(Parent, Val);
-        true     -> put(Parent, V),
-                    down_heap(Limit, C, 2*C, Val)
-    end.
+  V0 = get(Child),
+  V1 = get(Child + 1),
+  {C, V} = if Child < Limit andalso V0 < V1 -> {Child + 1, V1};
+             true -> {Child, V0}
+           end,
+  if Val >= V -> put(Parent, Val);
+    true -> put(Parent, V),
+      down_heap(Limit, C, 2 * C, Val)
+  end.
