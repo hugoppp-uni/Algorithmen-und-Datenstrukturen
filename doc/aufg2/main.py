@@ -44,30 +44,30 @@ yl = 'Time / ms'
 desc = "Average over 20 runs, random numbers"
 
 figure = generate_graph('', xl, yl, desc,
-                        ['data/qsort/firstRun/left.csv',
-                         'data/qsort/firstRun/right.csv',
-                         'data/qsort/firstRun/middle.csv',
+                        ['data/qsort/run1/left.csv',
+                         'data/qsort/run1/right.csv',
+                         'data/qsort/run1/middle.csv',
                          'data/qsort/firstRun/median.csv',
-                         'data/qsort/firstRun/random.csv'],
+                         'data/qsort/run1/random.csv'],
                         ['left', 'right', 'middle', 'median', 'random'])
 figure.savefig('out/' + 'pivotMethods_Implementation1.pdf', bbox_inches='tight')
 
 figure = generate_graph('', xl, yl, desc,
                         [
-                            'data/qsort/secondRun/right.csv',
-                            'data/qsort/firstRun/right.csv',
-                            'data/qsort/secondRun/middle.csv',
-                            'data/qsort/firstRun/middle.csv'
+                            'data/qsort/run2/right.csv',
+                            'data/qsort/run1/right.csv',
+                            'data/qsort/run2/middle.csv',
+                            'data/qsort/run1/middle.csv'
                         ],
                         ['right 2nd Impl.', 'right 1st Impl.', 'middle 2nd', 'middle 1st'])
 figure.savefig('out/' + 'pivotMethods_Implementation2a.pdf', bbox_inches='tight')
 
 figure = generate_graph('', xl, yl, desc,
                         [
-                            'data/qsort/secondRun/median.csv',
-                            'data/qsort/firstRun/median.csv',
-                            'data/qsort/secondRun/middle.csv',
-                            'data/qsort/firstRun/middle.csv'
+                            'data/qsort/run2/median.csv',
+                            'data/qsort/run1/median.csv',
+                            'data/qsort/run2/middle.csv',
+                            'data/qsort/run1/middle.csv'
                         ],
                         ['median 2nd Impl.', 'median 1st Impl.', 'middle 2nd', 'middle 1st'])
 figure.savefig('out/' + 'pivotMethods_Implementation2b.pdf', bbox_inches='tight')
