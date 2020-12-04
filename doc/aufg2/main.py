@@ -44,7 +44,7 @@ xl = 'Elements'
 yl = 'Time / ms'
 desc = "Average over 20 runs, random numbers, 'left' pivot method"
 
-generate_graph(t, xl, yl, desc,
+generate_graph('', xl, yl, desc,
                ['data/qsort/firstRun/left.csv',
                 'data/qsort/firstRun/right.csv',
                 'data/qsort/firstRun/middle.csv',

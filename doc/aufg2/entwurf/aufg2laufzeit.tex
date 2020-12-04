@@ -1,0 +1,40 @@
+\subsection{Insertion Sort}\label{subsec:insertion-sort-laufzeit}
+
+\subsection{Quick Sort}\label{subsec:quick-sort-laufzeit}
+
+\subsubsection{Pivot Methoden}
+
+\paragraph{Erste Implementation}
+Bei der ersten Implementation vom Quicksort Algorithmus ist bei der
+Verwendung der Pivot-Methoden \(right\) und \(median\)  eine deutlich längere
+Laufzeit aufgefallen (siehe Abbildung~\ref{fig:qsort-first-impl}).
+Gleichzeit ist die Laufzeit von der \(middle\) Pivot Methode besser, obwohl
+die Erwartung dieser schlechter ist:
+Diese muss eineinhalb mal -- einmal zum finden der Länge \(l\) komplett, danach
+bis zum \(l/2\) Element -- durchlaufen werden.
+Die Pivot Methode \(right\) muss nur einmal bis zum Ende der Liste laufen.
+
+\begin{figure}[hbt]
+    \caption{Vergleich der Pivot Methoden 1}
+    \centering
+    \includegraphics[width = 8cm]
+    {../out/pivotMethods_firstImplementation}\label{fig:qsort-first-impl}
+\end{figure}
+
+Unsere erste Vermutung war, dass unsere Methoden, die in einem
+Durchlauf die Länge und gleichzeitig dass Pivot-Element ermitteln dafür
+verantwortlich sein könnten.
+In der Methoden zum Finden des letzten Elementes, die auch von der median
+Pivot Methode verwendet wird, benutzten wir Pattern Matching, um zwischen dem
+Letzten und vorletztem Element zu unterscheiden.
+Dabei muss allerdings jeweils vorausgeschaut werden, was die schlechte
+Performance erklären könnte.
+
+Somit die Vermutung, dass man die Performance verbessern kann, indem man
+zunächst die Länge der Liste ermittelt und anschließend diese zum Finden des
+n-ten Elements ein zweites mal durchläuft.
+
+
+\FloatBarrier
+
+\subsection{Heap Sort}\label{subsec:heap-sort-laufzeit}
