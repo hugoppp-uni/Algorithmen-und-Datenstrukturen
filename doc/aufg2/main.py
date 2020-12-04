@@ -42,7 +42,7 @@ def generate_graph(titl, xla, yla, d, pathArray, filename, legend, clipBegin=0.0
 t = 'Pivot Methods Comparison - First Implementation'
 xl = 'Elements'
 yl = 'Time / ms'
-desc = "Average over 20 runs, random numbers, 'left' pivot method"
+desc = "Average over 20 runs, random numbers"
 
 generate_graph('', xl, yl, desc,
                ['data/qsort/firstRun/left.csv',
