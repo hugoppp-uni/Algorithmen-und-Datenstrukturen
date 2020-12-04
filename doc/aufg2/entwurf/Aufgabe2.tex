@@ -117,6 +117,12 @@
     Die Liste L wird der Liste R, inklusive Pivot, vorangestellt.
     Die Liste ist nun sortiert.\\
 
+    \begin{figure}[hbt]
+        \caption{Quicksort}
+        \centering
+        \includegraphics[width = 8cm]{qsort.pdf}\label{fig:qsort}
+    \end{figure}
+
     Für die Wahl des Pivot-Elementes werden insgesamt 5 Methoden implementiert:
     \begin{itemize}
         \item left -- wählt das erste Elemente der Liste
@@ -126,11 +132,11 @@
         \item random -- wählt ein zufällig ausgewähltes Element der Liste
     \end{itemize}
 
-    \begin{figure}[hbt]
-        \caption{Quicksort}
-        \centering
-        \includegraphics[width = 8cm]{qsort.pdf}\label{fig:qsort}
-    \end{figure}
+    Des Weiteren soll bei der Implementation des Algorithmus ab einem
+    Schwellenwert auf Insertion Sort umgeschaltet werden.
+    Dafür wird zu Beginn die Länge der Liste abgefragt, falls diese unter dem
+    übergebenem Schwellenwert liegt, wird restliche Liste stattdessen
+    mithilfe von Insertion Sort sortiert.
 
     \subsection{Laufzeit}\label{subsec:Qlaufzeit}
 
