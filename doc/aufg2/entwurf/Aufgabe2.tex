@@ -38,16 +38,19 @@
     %! suppress = MissingLabel
 
     \subsection*{Bearbeitungszeitraum}
-    Der gesamte Arbeitsaufwand für den Entwurf belief sich auf ca. 16 Stunden.
+    Der gesamte Arbeitsaufwand für den Entwurf belief sich auf ca. 17 Stunden.
 
     %! suppress = MissingLabel
 
     \subsection*{Aktueller Stand}
     %! suppress = MissingLabel
-    Der Entwurf steht zur Implementation zur Verfuegung.
+    Der Entwurf steht zur Implementation zur Verfugung.
 
     \subsection*{Änderungen des Entwurfes}
-    -- nicht zutreffend --
+    \begin{itemize}
+        \item Quicksort: Pivot-Element Wahl hinzugefügt
+        \item
+    \end{itemize}
 
 
     \section{Insertion Sort}\label{sec:insertion-sort}
@@ -97,8 +100,7 @@
     ausgewählt.
 
     Anschließend wird die Liste in zwei Teile aufgeteilt: Die Liste L erhält
-    alle
-    Elemente, die kleiner als das Pivot-Element sind, die Liste R alle
+    alle Elemente, die kleiner als das Pivot-Element sind, die Liste R alle
     Elemente, die größer als das Pivot-Element sind.
     Dafür wird die Liste elementweise durchlaufen und jedes Element mit dem
     Pivot-Element verglichen.
@@ -113,7 +115,16 @@
 
     Das Pivot-Element wird an die Liste R vorangestellt.
     Die Liste L wird der Liste R, inklusive Pivot, vorangestellt.
-    Die Liste ist nun sortiert.
+    Die Liste ist nun sortiert.\\
+
+    Für die Wahl des Pivot-Elementes werden insgesamt 5 Methoden implementiert:
+    \begin{itemize}
+        \item left -- wählt das erste Elemente der Liste
+        \item middle -- wählt das mittlere Element der Liste
+        \item right -- wählt das letzte Element der Liste
+        \item median -- wählt den Median der drei obigen Werte
+        \item random -- wählt ein zufällig ausgewähltes Element der Liste
+    \end{itemize}
 
     \begin{figure}[hbt]
         \caption{Quicksort}
@@ -221,16 +232,13 @@
     Max-Heap, bis keine Elemente mehr im Heap vorhanden sind.
     Abschließend kann eine vollständige sortierte Liste zurückgegeben werden.
 
-
-
-
     \begin{figure}[hbt]
         \caption{Heap Sort}
         \centering
         \includegraphics[width = 8cm]{hsort.pdf}\label{fig:hsort}
     \end{figure}
 
-    \begin{figure}[hbt]
+    \begin{figure}[hb]
         \caption{Heapify}
         \centering
         \includegraphics[width = 8cm]{heapify.pdf}\label{fig:heapify}
