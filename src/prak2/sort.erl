@@ -83,8 +83,15 @@ getPivotAndLength(L, middle) ->
   Length = listLength(L, 0),
   {Pivot, Rest} = listGetNthAndRest(L, Length div 2, []),
   {Pivot, Rest, Length};
-getPivotAndLength(L, random) -> notImplemented; %TODO
+getPivotAndLength(L, random) -> getRandomAndLength(L);
 getPivotAndLength(L, median) -> listGetMedianAndLength(L).
+
+
+getRandomAndLength(L) ->
+  random:seed(erlang:now()),
+  Length = listLength(L, 0),
+  {Nth, Rest} =  listGetNthAndRest(L,0,[]),
+  {Nth, Rest, Length}.
 
 
 %% returns {lastElement, listWithoutLast, length}
@@ -128,7 +135,7 @@ listFindFirstLargerThanAndRest([H | T], Val, Acc) -> {H, Acc ++ T}.
 %% Vorabkodierung des Pfades zum einfügen von Elementen an der nächsten freien
 %% Position benötigt, wird eine Berechnung (mit konstantem Aufwand!!) dazu hier angeboten: sort.erl.
 hsort([]) -> [];
-hsort(List) -> 
+hsort(List) ->
   Heap = buildMaxHeap(List),
   {_, _, OutputList} = hsort(Heap, List, []),
   OutputList.
