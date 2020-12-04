@@ -54,10 +54,11 @@
         \item Quicksort: Verzweigung zu Insertion Sort hinzugefügt
     \end{itemize}
 
+    \section{Entwurf}\label{sec:entwurf}
 
-    \section{Insertion Sort}\label{sec:insertion-sort}
+    \subsection{Insertion Sort}\label{subsec:insertion-sort}
 
-    \subsection{Algorithmus}\label{subsec:Ialgorithmus}
+    \paragraph{Algorithmus}\label{subsec:Ialgorithmus}
     Siehe Abbildung~\ref{fig:insertionS}.
     Bei Insertion Sort wird eine Liste durch das Einfügen von Elementen aus
     einem unsortierten Bereich (zunächst die komplette Liste) in einen sortieren
@@ -82,7 +83,7 @@
     \end{figure}
     \FloatBarrier
 
-    \subsection{Laufzeit}\label{subsec:Ilaufzeit}
+    \paragraph{Laufzeit}\label{subsubsec:ilaufzeit}
     Die erwartete Laufzeit beträgt \(O(n^2)\), da bei jeder Iteration das
     einzufügende Element mit allen noch nicht sortierten Elementen verglichen
     wird.
@@ -96,9 +97,9 @@
     bereits sortierte Listen.
 
 
-    \section{Quick Sort}\label{sec:quick-sort}
+    \subsection{Quick Sort}\label{subsec:quick-sort}
 
-    \subsection{Algorithmus}\label{subsec:Qalgorithmus}
+    \paragraph{Algorithmus}\label{subsec:Qalgorithmus}
     Siehe Abbildung~\ref{fig:qsort}.
     Bei Quick Sort wird zunächst willkürlich ein Pivot-Element aus der Liste
     ausgewählt.
@@ -144,7 +145,7 @@
 
     \FloatBarrier
 
-    \subsection{Laufzeit}\label{subsec:Qlaufzeit}
+    \paragraph{Laufzeit}\label{subsec:Qlaufzeit}
 
     Die Laufzeit beträgt im Best-Case \(\Omega (n \cdot \log(n))\), da bei
     gut gewähltem Pivot-Elementen die Anzahl an Vergleichen mit jedem
@@ -178,11 +179,11 @@
     Durchläufen durch die Liste in der Laufzeit wieder spiegelt.
 
 
-    \section{Heap Sort}\label{sec:heap-sort}
+    \subsection{Heap Sort}\label{subsec:heap-sort}
 
-    \subsection{Algorithmus}\label{subsec:Halgorithmus}
+    \paragraph{Algorithmus}\label{subsubsec:halgorithmus}
 
-    \subsubsection{Allgemeiner Aufbau}
+    \subparagraph{Allgemeiner Aufbau}
     Betrachte Abbildung~\ref{fig:hsort}.
     Im Allgemeinen besteht Heap Sort im Wesentlichen aus zwei Teilen:
     Dem Bauen eines Max-Heaps aus der zu sortierenden Liste und dem
@@ -194,7 +195,7 @@
     Strukturell haben wir einen "Divide and Conquer"-Ansatz gewählt und den
     Algorithmus in mehrere Subroutinen unterteilt.
 
-    \subsubsection{Bauen des Max-Heaps}
+    \subparagraph{Bauen des Max-Heaps}
     Der Bau-Algorithmus des Max-Heaps beginnt mit dem Einsetzen des ersten
     Elements der Liste als Wurzel des Baumes.
     Jedes nachfolgende Element wird unten eingefügt. Der Baum wird von links
@@ -206,7 +207,7 @@
     In Abbildung~\ref{fig:buildMaxHeap} spiegelt sich dieser Aufsteig-Vorgang
     in der unteren Schleife wieder.
 
-    \subsubsection{Heapify}
+    \subparagraph{Heapify}
     In Heapify (siehe Abbildung~\ref{fig:heapify}) machen wir uns die
     Tatsache zunutze, dass eigentlich ein
     Max-Heap vorliegt und sich nur ein einziges Element an der falschen
@@ -229,7 +230,7 @@
 
     So wird der Heap für die weitere Sortierung "heapified".
 
-    \subsubsection{Sortierung}
+    \subparagraph{Sortierung}
     Auf das Umwandeln der Liste in einen Max-Heap wurde bereits eingegangen.
     Der erstellte Max-Heap wird dann zum Sortieren benutzt.
     Wie oben bereits erwähnt ist die bestimmende Eigenschaft eines Max-Heaps
@@ -263,7 +264,7 @@
         \includegraphics[width = 10cm]{buildMaxHeap.pdf}\label{fig:buildMaxHeap}
     \end{figure}
 
-    \subsection{Laufzeit}\label{subsec:Hlaufzeit}
+    \paragraph{Laufzeit}\label{subsec:Hlaufzeit}
     Die Laufzeit beträgt im Worst-Case \(O(n\cdot log\ n)\). Dieser tritt
     ein, wenn eine bereits weitgehend vorsortierte Liste vorliegt, da die
     Liste beim Heap-Aufbau gewissermaßen invertiert wird und somit viele
@@ -282,6 +283,8 @@
             \item Zufällig generierte Liste
         \end{itemize}
     \end{samepage}
+
+    \section{Laufzeitmessung}\label{sec:laufzeitmessung}
 
 
 \end{document}
