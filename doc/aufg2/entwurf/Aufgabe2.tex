@@ -9,6 +9,7 @@
 \usepackage{lmodern}
 \usepackage[ngerman]{babel}
 \usepackage{hyphenat}
+\usepackage{placeins}
 
 \title{ADP Aufgabe 2 Entwurf, Abgabe 1}
 \author{Team 1\\Hugo Protsch, Justin Hoffmann}
@@ -72,6 +73,14 @@
     Bei der Implementation des Algorithmus auf einfach verkettete Listen
     kann der sortierte und unsortierte Bereich getrennt werden.
 
+
+    \begin{figure}[hbt]
+        \caption{Insertion Sort}
+        \centering
+        \includegraphics[width = 8cm]{insertionS}\label{fig:insertionS}
+    \end{figure}
+    \FloatBarrier
+
     \subsection{Laufzeit}\label{subsec:Ilaufzeit}
     Die erwartete Laufzeit beträgt \(O(n^2)\), da bei jeder Iteration das
     einzufügende Element mit allen noch nicht sortierten Elementen verglichen
@@ -84,12 +93,6 @@
     dem erwarteten übereinstimmt.
     Dafür verwenden wir für den Best-Case zufällige Listen, im Worst-Case
     bereits sortierte Listen.
-
-    \begin{figure}[hbt]
-        \caption{Insertion Sort}
-        \centering
-        \includegraphics[width = 8cm]{insertionS}\label{fig:insertionS}
-    \end{figure}
 
 
     \section{Quick Sort}\label{sec:quick-sort}
@@ -137,6 +140,8 @@
     Dafür wird zu Beginn die Länge der Liste abgefragt, falls diese unter dem
     übergebenem Schwellenwert liegt, wird restliche Liste stattdessen
     mithilfe von Insertion Sort sortiert.
+
+    \FloatBarrier
 
     \subsection{Laufzeit}\label{subsec:Qlaufzeit}
 
@@ -201,7 +206,8 @@
     in der unteren Schleife wieder.
 
     \subsubsection{Heapify}
-    In Heapify machen wir uns die Tatsache zunutze, dass eigentlich ein
+    In Heapify (siehe Abbildung~\ref{fig:heapify}) machen wir uns die
+    Tatsache zunutze, dass eigentlich ein
     Max-Heap vorliegt und sich nur ein einziges Element an der falschen
     Stelle befindet.
     Dieses Element wird, falls nötig, zu einer passenden Position nach unten
@@ -241,19 +247,19 @@
     \begin{figure}[hbt]
         \caption{Heap Sort}
         \centering
-        \includegraphics[width = 8cm]{hsort.pdf}\label{fig:hsort}
+        \includegraphics[width = 11cm]{hsort.pdf}\label{fig:hsort}
     \end{figure}
 
     \begin{figure}[hb]
         \caption{Heapify}
         \centering
-        \includegraphics[width = 8cm]{heapify.pdf}\label{fig:heapify}
+        \includegraphics[width = 10cm]{heapify.pdf}\label{fig:heapify}
     \end{figure}
 
     \begin{figure}[hbt]
         \caption{Build Max-Heap}
         \centering
-        \includegraphics[width = 8cm]{buildMaxHeap.pdf}\label{fig:buildMaxHeap}
+        \includegraphics[width = 10cm]{buildMaxHeap.pdf}\label{fig:buildMaxHeap}
     \end{figure}
 
     \subsection{Laufzeit}\label{subsec:Hlaufzeit}
@@ -268,11 +274,13 @@
     Um Heap-Sort hinreichend zu testen, binden wir den Algorithmus erweiternd
     in den Quick-Sort-Test mit ein und stellen beide gegenüber.
     Diese drei Fälle werden untersucht und verglichen:
-    \begin{itemize}
-        \item Vorsortierte Liste
-        \item Invertiert sortierte Liste
-        \item Zufällig generierte Liste
-    \end{itemize}
+    \begin{samepage}
+        \begin{itemize}
+            \item Vorsortierte Liste
+            \item Invertiert sortierte Liste
+            \item Zufällig generierte Liste
+        \end{itemize}
+    \end{samepage}
 
 
 \end{document}
