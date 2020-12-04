@@ -64,6 +64,15 @@ Bei beiden überarbeiteten Implementationen ist keine Besserung der Laufzeit zu
 erkennen, was darauf schließen lässt, dass das in der ersten Implementation
 verwendete Pattern Matching nicht der Grund der schlechten Performance war.
 
+\paragraph{Weitere Mögliche Ursachen}
+Eine weitere Mögliche Ursache für die Ergebnisse ist der Fakt, das bei der
+Methode zum finden des n-ten Elementes und des Restes (\(listGetNthAndRest()\))
+die Erlang List Concatenation (\(++\)) verwendet wird, und somit bei jedem
+Rekursionsschritt ein zusätzlicher Aufwand von \(n\), wobei \(n\) die
+Anzahl der Elemente in der Subliste darstellt, hinzukommt.
+
+Aus zeitlichen Gründen werden wir diese Möglichkeit nicht weiterverfolgen.
+
 \FloatBarrier
 
 \subsection{Heap Sort}\label{subsec:heap-sort-laufzeit}
