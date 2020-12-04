@@ -36,6 +36,33 @@ n-ten Elements ein zweites mal durchläuft.
 
 \paragraph{Zweite Implementation}
 
+In der zweiten Implementation wurden die Ermittlung des Pivots und das Finden
+der Länge der Liste getrennt.
+Das letzte Elements wurde nun ermittelt, indem zunächst
+die Länge \(l\) der Liste berechnet, anschließend mithilfe dieser zum
+\(l-1\) -ten Element gelaufen wird.
+\begin{figure}[hbt]
+    \centering
+    \caption{Zweite Implementation}
+    \subfloat[median]{
+    \includegraphics[width = 0.47\textwidth]
+    {../out/pivotMethods_Implementation2b.pdf}\label{fig:qsort-impl2b} }
+    \hfill
+    \subfloat[right]{
+    \includegraphics[width = 0.47\textwidth]
+    {../out/pivotMethods_Implementation2a.pdf}\label{fig:qsort-impl2a} }
+\end{figure}
+
+
+In Abbildung~\ref{fig:qsort-impl2b} und~\ref{fig:qsort-impl2a} sind jeweils die
+Ergebnisse der Laufzeitmessung der zweiten Implementation von \(median\) und
+\(right\) zu sehen.
+Damit systematische Unterschiede zwischen den beiden Kompilationen
+ausgeschlossen sind, ist zusätzlich die gleiche Implementation, von \(middle\)
+dargestellt.
+Bei beiden überarbeiteten Implementationen ist keine Besserung der Laufzeit zu
+erkennen, was darauf schließen lässt, dass das in der ersten Implementation
+verwendete Pattern Matching nicht der Grund der schlechten Performance war.
 
 \FloatBarrier
 
