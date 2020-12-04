@@ -50,7 +50,7 @@ figure = generate_graph('', xl, yl, desc,
                          'data/qsort/firstRun/median.csv',
                          'data/qsort/firstRun/random.csv'],
                         ['left', 'right', 'middle', 'median', 'random'])
-figure.savefig('out/' + 'pivotMethods_firstImplementation.pdf', bbox_inches='tight')
+figure.savefig('out/' + 'pivotMethods_Implementation1.pdf', bbox_inches='tight')
 
 figure = generate_graph('', xl, yl, desc,
                         [
