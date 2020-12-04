@@ -66,13 +66,41 @@ verwendete Pattern Matching nicht der Grund der schlechten Performance war.
 
 \paragraph{Weitere Mögliche Ursachen}
 Eine weitere Mögliche Ursache für die Ergebnisse ist der Fakt, das bei der
-Methode zum finden des n-ten Elementes und des Restes (\(listGetNthAndRest()\))
-die Erlang List Concatenation (\(++\)) verwendet wird, und somit bei jedem
-Rekursionsschritt ein zusätzlicher Aufwand von \(n\), wobei \(n\) die
-Anzahl der Elemente in der Subliste darstellt, hinzukommt.
+Methode zum finden des n-ten Elementes und des Restes
+\textit{listGetNthAndRest()} die Erlang List Concatenation (\(++\)) verwendet
+wird, und somit bei jedem Rekursionsschritt ein zusätzlicher Aufwand von
+\(n\), wobei \(n\) die Anzahl der Elemente in der Subliste darstellt, hinzukommt.
+Dies würde auch erklären, warum \textit{middle} eine bessere Laufzeit
+aufweist, da dabei nur ein zusätzlicher Aufwand von \(n/2\) halbe dazukommt.
 
-Aus zeitlichen Gründen werden wir diese Möglichkeit nicht weiterverfolgen.
+\paragraph{Dritte Implementation}
+In der dritten Implementation wurde die List Concatenation ersetzt.
+
+\begin{figure}[hbt]
+    \centering
+    \caption{Dritte Implementation}
+    \subfloat[median]{
+    \includegraphics[width = 0.47\textwidth]
+    {../out/pivotMethods_Implementation3b.pdf}\label{fig:qsort-impl3b} }
+    \hfill
+    \subfloat[right]{
+    \includegraphics[width = 0.47\textwidth]
+    {../out/pivotMethods_Implementation3a.pdf}\label{fig:qsort-impl3a} }
+\end{figure}
+
+Wie in Abbildung~\ref{fig:qsort-impl3b} und~\ref{fig:qsort-impl3a} zu sehen,
+verbessert dies die Laufzeit dramatisch.
+Die Laufzeit der Pivot Methode \textit{middle} ist auch verbessert, was
+darauf zurückzuführen ist, dass diese ebenfalls die \textit{listGetNthAndRest
+()} Methode verwendet.
 
 \FloatBarrier
+
+\subsubsection{Switch Number}
+Bei der Implementation des Quicksort-Algorithmus wird ein Parameter
+\textit{switchnumber} übergeben, welches den Schwellenwert angibt, ab wann
+von Quicksort auf Insertion Sort umgeschaltet werden soll.
+Zum Finden des optimalen Wertes dieses Parameters verwenden wir die Pivot
+Methode \textit{left},
 
 \subsection{Heap Sort}\label{subsec:heap-sort-laufzeit}

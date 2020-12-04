@@ -77,11 +77,11 @@ getPivotAndLength([], _) -> {none, [], 0};
 getPivotAndLength([H | T], left) -> {H, T, listLength(T, 1)};
 getPivotAndLength(L, right) ->
   Length = listLength(L, 0),
-  {Pivot, Rest} = listGetNthAndRest(L, Length - 1, []),
+  {Pivot, Rest} = listGetNthAndRest(L, Length - 1),
   {Pivot, Rest, Length};
 getPivotAndLength(L, middle) ->
   Length = listLength(L, 0),
-  {Pivot, Rest} = listGetNthAndRest(L, Length div 2, []),
+  {Pivot, Rest} = listGetNthAndRest(L, Length div 2),
   {Pivot, Rest, Length};
 getPivotAndLength(L, random) -> getRandomAndLength(L);
 getPivotAndLength(L, median) -> listGetMedianAndLength(L).
@@ -89,14 +89,14 @@ getPivotAndLength(L, median) -> listGetMedianAndLength(L).
 
 getRandomAndLength(L) ->
   Length = listLength(L, 0),
-  {Nth, Rest} = listGetNthAndRest(L, 0, []),
+  {Nth, Rest} = listGetNthAndRest(L, 0),
   {Nth, Rest, Length}.
 
-listGetNth([H | _], 0) -> H;
-listGetNth([_ | T], N) -> listGetNth(T, N - 1).
 
-listGetNthAndRest([H | T], 0, Acc) -> {H, T ++ Acc};
-listGetNthAndRest([H | T], N, Acc) -> listGetNthAndRest(T, N - 1, Acc ++ [H]).
+listGetNthAndRest([Nth | Rest], 0) -> {Nth, Rest};
+listGetNthAndRest([H | T], N) ->
+  {Nth, Rest} = listGetNthAndRest(T, N - 1),
+  {Nth, [H | Rest]}.
 
 listLength([], Cnt) -> Cnt;
 listLength([_ | T], Cnt) -> listLength(T, Cnt + 1).
