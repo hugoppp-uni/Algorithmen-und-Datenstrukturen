@@ -9,7 +9,7 @@ digraph Q {
     d2 [label = "<N2> sortedSectionLength == list.length?" shape = diamond]
     d2 -> "<N3> return list" [label = "YES"];
     d2 -> s3 [label = "NO"];
-    s3 [label = "<N4> insert Element at index <sortedSectionLength> into sorted
+    s3 [label = "<N4> insert Element at begin of unsorted section into sorted
     section"]
     s3 -> cluster1Connector [arrowhead = none, lhead = cluster1]
     s3 -> d2 [label = "<E1> sortedSectionLength++"]
