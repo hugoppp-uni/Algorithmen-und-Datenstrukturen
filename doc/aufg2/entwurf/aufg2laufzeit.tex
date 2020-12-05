@@ -69,7 +69,8 @@ Eine weitere Mögliche Ursache für die Ergebnisse ist der Fakt, das bei der
 Methode zum finden des n-ten Elementes und des Restes
 \textit{listGetNthAndRest()} die Erlang List Concatenation (\(++\)) verwendet
 wird, und somit bei jedem Rekursionsschritt ein zusätzlicher Aufwand von
-\(n\), wobei \(n\) die Anzahl der Elemente in der Subliste darstellt, hinzukommt.
+\(n\), wobei \(n\) die Anzahl der Elemente in der Subliste darstellt,
+hinzukommt.
 Dies würde auch erklären, warum \textit{middle} eine bessere Laufzeit
 aufweist, da dabei nur ein zusätzlicher Aufwand von \(n/2\) halbe dazukommt.
 
@@ -115,8 +116,21 @@ siehe Abbildung~\ref{fig:qsort-switchPivot}
 \begin{figure}[hbt]
     \centering
     \caption{Vergleich der Switch Number}
-    \includegraphics[width=8cm]
+    \subfloat{
+    \includegraphics[width = 0.47\textwidth]
     {../out/switchPivot.pdf}\label{fig:qsort-switchPivot}
+    }
+    \subfloat{
+    \includegraphics[width = 0.47\textwidth]
+    {../out/switchWorstCase.pdf}\label{fig:qsort-switchWorst}
+    }
+    \hfill
 \end{figure}
+
+% TODO avg kann so niedrig sein weil aufsteigend, heisst keine varianz der
+%zahlen
+% hier eigentlich vergleich von isort und qsort
+% right, absteigend geht auf null, da die isort laufzeit von sortierten
+% listen thetha(n) (?) ist
 
 \subsection{Heap Sort}\label{subsec:heap-sort-laufzeit}

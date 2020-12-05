@@ -110,3 +110,10 @@ figure = generate_graph('', xl, yl, desc,
                          'data/qsort/switchPivot/random.csv'],
                         ['left', 'right', 'middle', 'median', 'random'])
 figure.savefig('out/' + 'switchPivot.pdf', bbox_inches='tight')
+
+desc = "Average over 5 runs, 2500 numbers"
+figure = generate_graph('', xl, yl, desc,
+                        ['data/qsort/switchWorstCase/left.csv',
+                         'data/qsort/switchWorstCase/right.csv'],
+                        ['left, aufsteigend', 'right, absteigend'])
+figure.savefig('out/' + 'switchWorstCase.pdf', bbox_inches='tight')
