@@ -7,7 +7,7 @@
 -author("Hugo Protsch").
 
 %% API
--export([insertionS/1, qsort/3, hsort/1, insertToList/2, heap_sort/1]).
+-export([insertionS/1, qsort/3, hsort/1, insertToList/2, heap_sort/1, buildMaxHeap/1, heapify/2, calcPath/1]).
 
 % TODO: bisheriger Aufwand für Tests / Analyse aller Methoden: ~4h
 % TODO: bisheriger Aufwand für diese Methode (Entwurf): 2.5h (Code): 3h
@@ -113,10 +113,10 @@ listGetMedianAndLength(L) ->
 %% returns {firstValLargerThanVal, listWithoutVal}
 listFindFirstLargerThanAndRest(L, Val) ->
   listFindFirstLargerThanAndRest(L, Val, []).
-listFindFirstLargerThanAndRest([H | []], Val, Acc) -> {H, Acc};
+listFindFirstLargerThanAndRest([H | []], _, Acc) -> {H, Acc};
 listFindFirstLargerThanAndRest([H | T], Val, Acc) when H < Val ->
   listFindFirstLargerThanAndRest(T, Val, Acc ++ [H]);
-listFindFirstLargerThanAndRest([H | T], Val, Acc) -> {H, Acc ++ T}.
+listFindFirstLargerThanAndRest([H | T], _, Acc) -> {H, Acc ++ T}.
 
 %% die Zahlen sind in der Erlang-Liste [ ] als Eingabe und Ausgabe gehalten.
 %% Der in der Vorlesung vorgestellte Algorithmus ist auf die Verwendung
@@ -136,20 +136,72 @@ hsort(List) ->
 %% returns {{}, InputList, OutputList}
 hsort({}, InputList, OutputList) -> {{}, InputList, OutputList};
 hsort(Heap, InputList, OutputList) ->
-  {MaxElement, _, _} = Heap,
+  {MaxElement, _, _, _} = Heap,
   RootAndLastSwappedHeap = swapRootWithLast(Heap),
   NewHeap = removeSwappedRoot(RootAndLastSwappedHeap),
-  NewMaxHeap = heapify(NewHeap),
+  {_, _, _, ReducedSize} = NewHeap,
+  NewMaxHeap = heapify(NewHeap, ReducedSize),
   hsort(NewMaxHeap, InputList, [MaxElement | OutputList]).
 
-buildMaxHeap([]) -> {};
-buildMaxHeap([Head | []]) -> {Head, {}, {}, 1}.
+%% returns Max-Heap
+% TODO LEFT HAS TO BE SMALLER THAN RIGHT 
+buildMaxHeap(List) -> buildMaxHeap(List, {}, 0).
+
+buildMaxHeap([], AccHeap, _) -> AccHeap;
+buildMaxHeap(InputList, AccHeap, Size) -> 
+  [Head|Tail] = InputList,
+  NewSize = Size + 1,
+  ElementInserted = insertIntoHeap(AccHeap, Head, NewSize),
+  buildMaxHeap(Tail, ElementInserted, NewSize).
+
+insertIntoHeap({}, InsertElement, Size) -> {InsertElement, {}, {}, Size};
+insertIntoHeap(HostHeap, InsertElement, Size) ->
+  Path = calcPath(Size),
+  insertWithPath(HostHeap, InsertElement, Size, Path).
+
+insertWithPath({}, InsertElement, Size, _) -> {InsertElement, {}, {}, Size};
+insertWithPath({NodeElement, Left, Right, Index}, InsertElement, Size, [l|RemainingPath]) when NodeElement >= InsertElement ->
+  {NodeElement, insertWithPath(Left, InsertElement, Size, RemainingPath), Right, Index};
+insertWithPath({NodeElement, Left, Right, Index}, InsertElement, Size, [l|RemainingPath]) when NodeElement < InsertElement ->
+  {InsertElement, insertWithPath(Left, NodeElement, Size, RemainingPath), Right, Index};
+insertWithPath({NodeElement, Left, Right, Index}, InsertElement, Size, [r|RemainingPath]) when NodeElement >= InsertElement ->
+  {NodeElement, Left, insertWithPath(Right, InsertElement, Size, RemainingPath), Index};
+insertWithPath({NodeElement, Left, Right, Index}, InsertElement, Size, [r|RemainingPath]) when NodeElement < InsertElement ->
+  {InsertElement, Left, insertWithPath(Right, NodeElement, Size, RemainingPath), Index}.
+
+%% returns Max-Heap 
+heapify(Heap, Size) ->
+  Path = calcPath(Size),
+  sinkToBottom(Heap, Path).
+
+sinkToBottom(Heap, []) -> Heap;
+sinkToBottom({NodeElement, {LeftElement, LeftL, RightL, IndexL}, Right, Index}, [l|RemainingPath]) when NodeElement >= LeftElement -> 
+  {NodeElement, sinkToBottom({LeftElement, LeftL, RightL, IndexL}, RemainingPath), Right, Index};
+sinkToBottom({NodeElement, {LeftElement, LeftL, RightL, IndexL}, Right, Index}, [l|RemainingPath]) when NodeElement < LeftElement ->
+  {LeftElement, sinkToBottom({NodeElement, LeftL, RightL, IndexL}, RemainingPath), Right, Index};
+sinkToBottom({NodeElement, Left, {RightElement, LeftR, RightR, IndexR}, Index}, [r|RemainingPath]) when NodeElement >= RightElement ->
+  {NodeElement, Left, sinkToBottom({RightElement, LeftR, RightR, IndexR}, RemainingPath), Index};
+sinkToBottom({NodeElement, Left, {RightElement, LeftR, RightR, IndexR}, Index}, [r|RemainingPath]) when NodeElement < RightElement ->
+  {RightElement, Left, sinkToBottom({NodeElement, LeftR, RightR, IndexR}, RemainingPath), Index}.
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
 
 swapRootWithLast(Heap) -> ok.
 
 removeSwappedRoot(Heap) -> ok.
-
-heapify(Heap) -> ok.
 
 % Kodierung des Feldes: Nachfolger von Position i ist 2*i links und 2*i+1 rechts
 % berechnet den Pfad zur ersten leeren Position
