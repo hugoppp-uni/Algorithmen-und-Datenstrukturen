@@ -133,11 +133,12 @@ hsort(List) ->
   {_, _, OutputList} = hsort(Heap, List, []),
   OutputList.
 
+%% returns {{}, InputList, OutputList}
 hsort({}, InputList, OutputList) -> {{}, InputList, OutputList};
 hsort(Heap, InputList, OutputList) ->
   {MaxElement, _, _} = Heap,
-  RootLastSwappedHeap = swapRootWithLast(Heap),
-  NewHeap = removeSwappedRoot(RootLastSwappedHeap),
+  RootAndLastSwappedHeap = swapRootWithLast(Heap),
+  NewHeap = removeSwappedRoot(RootAndLastSwappedHeap),
   NewMaxHeap = heapify(NewHeap),
   hsort(NewMaxHeap, InputList, [MaxElement | OutputList]).
 
@@ -149,6 +150,7 @@ swapRootWithLast(Heap) -> ok.
 removeSwappedRoot(Heap) -> ok.
 
 heapify(Heap) -> ok.
+
 
 
 
