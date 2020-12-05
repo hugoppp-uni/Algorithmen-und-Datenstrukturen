@@ -15,7 +15,7 @@ bis zum \(l/2\) Element -- durchlaufen werden.
 Die Pivot Methode \(right\) muss nur einmal bis zum Ende der Liste laufen.
 
 \begin{figure}[hbt]
-    \caption{Vergleich der Pivot Methoden 1}
+    \caption{Vergleich der Pivot Methoden -- erste Implementation}
     \centering
     \includegraphics[width = 8cm]
     {../out/pivotMethods_Implementation1.pdf}\label{fig:qsort-first-impl}
@@ -43,7 +43,7 @@ die Länge \(l\) der Liste berechnet, anschließend mithilfe dieser zum
 \(l-1\) -ten Element gelaufen wird.
 \begin{figure}[hbt]
     \centering
-    \caption{Zweite Implementation}
+    \caption{Zweite Implementation vs. erste Implementation}
     \subfloat[median]{
     \includegraphics[width = 0.47\textwidth]
     {../out/pivotMethods_Implementation2b.pdf}\label{fig:qsort-impl2b} }
@@ -78,7 +78,7 @@ In der dritten Implementation wurde die List Concatenation ersetzt.
 
 \begin{figure}[hbt]
     \centering
-    \caption{Dritte Implementation}
+    \caption{Dritte Implementation vs. erste Implementation}
     \includegraphics[width=8cm]
     {../out/pivotMethods_Implementation3.pdf}\label{fig:qsort-impl3}
 \end{figure}
@@ -88,6 +88,18 @@ verbessert dies die Laufzeit dramatisch.
 Die Laufzeit der Pivot Methode \textit{middle} hat sich auch verbessert, was
 darauf zurückzuführen ist, dass diese ebenfalls die \textit{listGetNthAndRest
 ()} Methode verwendet.
+
+\paragraph{Vergleich der Pivot Methoden}
+
+In Abbildung~\ref{fig:qsort-impl3-2} ist die Laufzeit der Pivot Methoden der
+dritten Implementation dargestellt.
+
+\begin{figure}[hbt]
+    \centering
+    \caption{Vergleiche der Pivot Methoden -- Dritte Implementation}
+    \includegraphics[width=8cm]
+    {../out/pivotMethods.pdf}\label{fig:qsort-impl3-2}
+\end{figure}
 
 \FloatBarrier
 
