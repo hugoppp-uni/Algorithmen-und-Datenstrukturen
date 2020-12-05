@@ -15,7 +15,7 @@ bis zum \(l/2\) Element -- durchlaufen werden.
 Die Pivot Methode \(right\) muss nur einmal bis zum Ende der Liste laufen.
 
 \begin{figure}[hbt]
-    \caption{Vergleich der Pivot Methoden 1}
+    \caption{Vergleich der Pivot Methoden -- erste Implementation}
     \centering
     \includegraphics[width = 8cm]
     {../out/pivotMethods_Implementation1.pdf}\label{fig:qsort-first-impl}
@@ -43,7 +43,7 @@ die Länge \(l\) der Liste berechnet, anschließend mithilfe dieser zum
 \(l-1\) -ten Element gelaufen wird.
 \begin{figure}[hbt]
     \centering
-    \caption{Zweite Implementation}
+    \caption{Zweite Implementation vs. erste Implementation}
     \subfloat[median]{
     \includegraphics[width = 0.47\textwidth]
     {../out/pivotMethods_Implementation2b.pdf}\label{fig:qsort-impl2b} }
@@ -69,7 +69,8 @@ Eine weitere Mögliche Ursache für die Ergebnisse ist der Fakt, das bei der
 Methode zum finden des n-ten Elementes und des Restes
 \textit{listGetNthAndRest()} die Erlang List Concatenation (\(++\)) verwendet
 wird, und somit bei jedem Rekursionsschritt ein zusätzlicher Aufwand von
-\(n\), wobei \(n\) die Anzahl der Elemente in der Subliste darstellt, hinzukommt.
+\(n\), wobei \(n\) die Anzahl der Elemente in der Subliste darstellt,
+hinzukommt.
 Dies würde auch erklären, warum \textit{middle} eine bessere Laufzeit
 aufweist, da dabei nur ein zusätzlicher Aufwand von \(n/2\) halbe dazukommt.
 
@@ -78,29 +79,88 @@ In der dritten Implementation wurde die List Concatenation ersetzt.
 
 \begin{figure}[hbt]
     \centering
-    \caption{Dritte Implementation}
-    \subfloat[median]{
-    \includegraphics[width = 0.47\textwidth]
-    {../out/pivotMethods_Implementation3b.pdf}\label{fig:qsort-impl3b} }
-    \hfill
-    \subfloat[right]{
-    \includegraphics[width = 0.47\textwidth]
-    {../out/pivotMethods_Implementation3a.pdf}\label{fig:qsort-impl3a} }
+    \caption{Dritte Implementation vs. erste Implementation}
+    \includegraphics[width=8cm]
+    {../out/pivotMethods_Implementation3.pdf}\label{fig:qsort-impl3}
 \end{figure}
 
-Wie in Abbildung~\ref{fig:qsort-impl3b} und~\ref{fig:qsort-impl3a} zu sehen,
+Wie in Abbildung~\ref{fig:qsort-impl3} zu sehen,
 verbessert dies die Laufzeit dramatisch.
-Die Laufzeit der Pivot Methode \textit{middle} ist auch verbessert, was
+Die Laufzeit der Pivot Methode \textit{middle} hat sich auch verbessert, was
 darauf zurückzuführen ist, dass diese ebenfalls die \textit{listGetNthAndRest
 ()} Methode verwendet.
 
+\paragraph{Vergleich der Pivot Methoden}
+
+In Abbildung~\ref{fig:qsort-impl3-2} ist die Laufzeit der Pivot Methoden der
+dritten Implementation dargestellt.
+
+\begin{figure}[hbt]
+    \centering
+    \caption{Vergleiche der Pivot Methoden -- Dritte Implementation}
+    \includegraphics[width=8cm]
+    {../out/pivotMethods.pdf}\label{fig:qsort-impl3-2}
+\end{figure}
+
 \FloatBarrier
 
-\subsubsection{Switch Number}
+\subsubsection{Switch Number}\label{subsubsec:switch-number}
 Bei der Implementation des Quicksort-Algorithmus wird ein Parameter
 \textit{switchnumber} übergeben, welches den Schwellenwert angibt, ab wann
 von Quicksort auf Insertion Sort umgeschaltet werden soll.
 Zum Finden des optimalen Wertes dieses Parameters verwenden wir die Pivot
-Methode \textit{left},
+Methode \textit{left}, da %TODO
 
+%TODO
+Siehe Abbildung~\ref{fig:qsort-switchPivot} und~\ref{fig:qsort-switchWorst}
+
+\begin{figure}[hbt]
+    \centering
+    \caption{Vergleich der Switch Number}
+    \subfloat[Average Case]{
+    \includegraphics[width = 0.47\textwidth]
+    {../out/switchPivot.pdf}\label{fig:qsort-switchPivot} }
+    \subfloat[Worst Case]{
+    \includegraphics[width = 0.47\textwidth]
+    {../out/switchWorstCase.pdf}\label{fig:qsort-switchWorst} }
+\end{figure}
+
+\subsubsection{Best Case}\label{subsubsec:qsort-best-case}
+
+An dem linearen Plot (Abbildung~\ref{fig:qsort-complexity})
+ist kaum zu erkennen, ob eine lineare oder
+über-logarithmische Komplexität vorliegt.
+Wir haben uns erhofft, dies mithilfe eines Log-Log Plots
+(Abbildung~\ref{fig:qsort-complexity-log}) genauer zu untersuchen.
+Auf solchem ist Anhand der Steigung des Graphen der Exponent zu erkennen.
+Somit müsste die Steigung unserer Messkurve zwischen den beiden Funktionen
+\(f(x)=x\) und \(f(x)=x^2\) liegen, falls diese über-logarithmisch ist.
+
+Leider lässt sich auch auf diesem nicht zwischen dem linearem und, nach
+unserer Erwartung, über-logarithmischen Messkurve unterscheiden.
+
+\begin{figure}[hbt]
+    \centering
+    \caption{Best Case}
+    \subfloat[Linearer Plot]{
+    \includegraphics[width = 0.47\textwidth]
+    {../out/complexity.pdf}\label{fig:qsort-complexity} }
+    \subfloat[Log-Log Plot]{
+    \includegraphics[width = 0.47\textwidth]
+    {../out/complexityLog.pdf}\label{fig:qsort-complexity-log} }
+\end{figure}
+
+
+\subsubsection{Worst Case}\label{subsubsec:worst-case}
+Die Laufzeit zum Worst Case wurde kurz im
+Abschnitt~\ref{subsubsec:switch-number} besprochen.
+Aus zeitlichen Gründen werden wir nicht weiter darauf eingehen.
+
+% TODO avg kann so niedrig sein weil aufsteigend, heisst keine varianz der
+%zahlen
+% hier eigentlich vergleich von isort und qsort
+% right, absteigend geht auf null, da die isort laufzeit von sortierten
+% listen thetha(n) (?) ist
+
+\FloatBarrier
 \subsection{Heap Sort}\label{subsec:heap-sort-laufzeit}

@@ -80,18 +80,62 @@ figure = generate_graph('', xl, yl, desc,
                         [
                             'data/qsort/run3/right.csv',
                             'data/qsort/run1/right.csv',
-                            'data/qsort/run3/middle.csv',
-                            'data/qsort/run1/middle.csv'
-                        ],
-                        ['right 3rd Impl.', 'right 1st Impl.', 'middle 3rd Impl.', 'middle 1st Impl.'])
-figure.savefig('out/' + 'pivotMethods_Implementation3a.pdf', bbox_inches='tight')
-
-figure = generate_graph('', xl, yl, desc,
-                        [
                             'data/qsort/run3/median.csv',
                             'data/qsort/run1/median.csv',
                             'data/qsort/run3/middle.csv',
                             'data/qsort/run1/middle.csv'
                         ],
-                        ['median 3rd Impl.', 'median 1st Impl.', 'middle 3rd Impl.', 'middle 1st Impl.'])
-figure.savefig('out/' + 'pivotMethods_Implementation3b.pdf', bbox_inches='tight')
+                        ['right 3rd Impl.', 'right 1st Impl.', 'median 3rd Impl', 'median 1st Impl.' ,'middle 3rd Impl.', 'middle 1st Impl.'])
+figure.savefig('out/' + 'pivotMethods_Implementation3.pdf', bbox_inches='tight')
+
+# ---
+
+figure = generate_graph('', xl, yl, desc,
+                        ['data/qsort/pivotMethod/left.csv',
+                         'data/qsort/pivotMethod/right.csv',
+                         'data/qsort/pivotMethod/middle.csv',
+                         'data/qsort/pivotMethod/median.csv',
+                         'data/qsort/pivotMethod/random.csv'],
+                        ['left', 'right', 'middle', 'median', 'random'])
+figure.savefig('out/' + 'pivotMethods.pdf', bbox_inches='tight')
+
+# ---
+
+desc = "Average over 20 runs, random numbers, 100k numbers"
+figure = generate_graph('', xl, yl, desc,
+                        ['data/qsort/switchPivot/left.csv',
+                         'data/qsort/switchPivot/right.csv',
+                         'data/qsort/switchPivot/middle.csv',
+                         'data/qsort/switchPivot/median.csv',
+                         'data/qsort/switchPivot/random.csv'],
+                        ['left', 'right', 'middle', 'median', 'random'])
+figure.savefig('out/' + 'switchPivot.pdf', bbox_inches='tight')
+
+desc = "Average over 5 runs, 2500 numbers"
+figure = generate_graph('', xl, yl, desc,
+                        ['data/qsort/switchWorstCase/left.csv',
+                         'data/qsort/switchWorstCase/right.csv'],
+                        ['left, aufsteigend', 'right, absteigend'])
+figure.savefig('out/' + 'switchWorstCase.pdf', bbox_inches='tight')
+
+
+
+desc = "left pivot, random numbers, switch after 0"
+figure = generate_graph('', xl, yl, desc,
+                        ['data/qsort/complexity.csv',
+                         'data/qsort/complexity2.csv',
+                         'data/qsort/complexity3.csv'],
+                        [])
+
+x = np.logspace(4,8)
+y1 = 10.E-5 * x
+y2 = 10.E-5 * x*x
+
+plt.legend(['qsort avg over 20','qsort avg over 5','qsort avg over 1'])
+figure.savefig('out/' + 'complexity.pdf', bbox_inches='tight')
+plt.yscale('log')
+plt.xscale('log')
+plt.plot(x, y1, '--', linewidth=1)
+plt.plot(x, y2, '--', linewidth=1)
+plt.legend(['qsort avg over 20','qsort avg over 5','qsort avg over 1', 'f(x) = 10^-5*x', 'f(x) = 10^-5*x^2'])
+figure.savefig('out/' + 'complexityLog.pdf', bbox_inches='tight')
