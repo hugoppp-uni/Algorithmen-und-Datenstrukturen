@@ -99,3 +99,14 @@ figure = generate_graph('', xl, yl, desc,
                         ['left', 'right', 'middle', 'median', 'random'])
 figure.savefig('out/' + 'pivotMethods.pdf', bbox_inches='tight')
 
+# ---
+
+desc = "Average over 20 runs, random numbers, 100k numbers"
+figure = generate_graph('', xl, yl, desc,
+                        ['data/qsort/switchPivot/left.csv',
+                         'data/qsort/switchPivot/right.csv',
+                         'data/qsort/switchPivot/middle.csv',
+                         'data/qsort/switchPivot/median.csv',
+                         'data/qsort/switchPivot/random.csv'],
+                        ['left', 'right', 'middle', 'median', 'random'])
+figure.savefig('out/' + 'switchPivot.pdf', bbox_inches='tight')
