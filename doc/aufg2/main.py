@@ -87,3 +87,15 @@ figure = generate_graph('', xl, yl, desc,
                         ],
                         ['right 3rd Impl.', 'right 1st Impl.', 'median 3rd Impl', 'median 1st Impl.' ,'middle 3rd Impl.', 'middle 1st Impl.'])
 figure.savefig('out/' + 'pivotMethods_Implementation3.pdf', bbox_inches='tight')
+
+# ---
+
+figure = generate_graph('', xl, yl, desc,
+                        ['data/qsort/pivotMethod/left.csv',
+                         'data/qsort/pivotMethod/right.csv',
+                         'data/qsort/pivotMethod/middle.csv',
+                         'data/qsort/pivotMethod/median.csv',
+                         'data/qsort/pivotMethod/random.csv'],
+                        ['left', 'right', 'middle', 'median', 'random'])
+figure.savefig('out/' + 'pivotMethods.pdf', bbox_inches='tight')
+
