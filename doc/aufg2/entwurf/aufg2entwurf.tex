@@ -138,15 +138,15 @@ Strukturell haben wir einen "Divide and Conquer"-Ansatz gewählt und den
 Algorithmus in mehrere Subroutinen unterteilt.
 
 \subparagraph{Bauen des Max-Heaps}
-Der Bau-Algorithmus des Max-Heaps beginnt mit dem Einsetzen des ersten
-Elements der Liste als Wurzel des Baumes.
-Jedes nachfolgende Element wird unten eingefügt. Der Baum wird von links
-nach rechts aufgebaut.
-Ist das nun eingefügte Element größer als sein Elternknoten, werden die
-Knoten vertauscht, wodurch das eingefügte Element nach oben wandert.
-Dieser Vergleich wird solange durchgeführt, bis das Element eine passende
-Position im Max-Heap gefunden hat.
-In Abbildung~\ref{fig:buildMaxHeap} spiegelt sich dieser Aufsteig-Vorgang
+Der Bau-Algorithmus des Max-Heaps beginnt mit dem Inkrementieren der Heap-Size, da ein neues Element eingesetzt wird.
+Jedes nachfolgende Element wird unten eingefügt.
+Der Baum wird von links nach rechts und top-down aufgebaut.
+Jeder Funktionsdurchlauf berechnet den Einsetz-Pfad im Heap.
+Wir vergleichen den derzeitigen Knoten mit unserem temporären Laufwert.
+Ist dieser Laufwert größer als der derzeitige Knoten, werden beide Werte vertauscht, sprich der Laufwert wird in den derzeitigen Knoten eingesetzt und der (nun ehemalige) derzeitige Knoten wird zum temporären Laufwert.
+So "sickert" jeder Wert aus der Liste and die richtige Position im Max-Heap, bis der korrekte Pfad abgelaufen worden ist.
+
+In Abbildung~\ref{fig:buildMaxHeap} spiegelt sich dieser Absteig-Vorgang
 in der unteren Schleife wieder.
 
 \subparagraph{Heapify}
