@@ -157,18 +157,15 @@ Stelle befindet.
 Dieses Element wird, falls nötig, zu einer passenden Position nach unten
 "durchsickern".
 
-Zunächst wird überprüft, ob das Wurzelelement größer als das linke Kind
-ist (Aufbau von links nach rechts).
-Ist dies der Fall müssen die Positionen getauscht werden und das Element
-wandert hinab.
-Gibt es kein linkes Kind geschieht der gleiche Prozess analog mit dem
-rechten Kind.
-Nach dem Tauschen fragt man erneut ab und tauscht wenn nötig, bis eine
-der folgenden Bedingungen erfüllt ist.
-Existiert auch kein rechtes Kind, hat das Element eine passende Position
-gefunden und der Heap ist wieder ein Max-Heap.
-Sind beide Kinder kleiner als das Elternelement, hat das Element eine
-passende Position gefunden und der Heap ist wieder ein Max-Heap.
+Zunächst wird überprüft, ob das beide Kinder der derzeitigen Postion im Baum (beim ersten Durchlauf root) leer sind, wir also einen Knoten ohne Kinder vorliegen haben.
+Ist dies der Fall sind wir am Ende des Baumes und geben den Heap zurueck.
+Ist dies nicht der Fall, kann es sein, dass nur das rechte Kind leer ist, was ebenfalls ueberprueft wird.
+Dies bedeutet, dass das linke Kind das letzte Element im Heap ist.
+Ein letzter Vergleich mit dem linken Kind (und ein letzter Tausche falls noetig) und der Baum wird zurueckgegeben.
+Das eigentliche "Durchsickern" des Lauf-Elements passiert nach diesen beiden Abfragen.
+Bei jeder Position wird zunaechst ueberprueft, ob das Lauf-Element groesser als beide Kinder ist.
+Ist dies der Fall ist das Element an die richtige Stelle durchgesickert.
+Ist dies jedoch nicht der Fall, tauscht das Element mit dem jeweils groesseren Kind die Position und wandert so nach unten.
 
 So wird der Heap für die weitere Sortierung "heapified".
 
@@ -224,5 +221,6 @@ Diese drei Fälle werden untersucht und verglichen:
         \item Invertiert sortierte Liste
         \item Zufällig generierte Liste
     \end{itemize}
+Wir erwarten, dass Heapsort nur dann schneller ist als Quicksort, wenn die fuer Quicksort unguenstigsten Bedingungen bestehen.
 \end{samepage}
 \FloatBarrier
