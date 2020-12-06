@@ -7,7 +7,7 @@
 -author("Hugo Protsch").
 
 %% API
--export([insertionS/1, qsort/3, hsort/1, insertToList/2, heap_sort/1, buildMaxHeap/1, heapify/2, calcPath/1]).
+-export([insertionS/1, qsort/3, hsort/1, insertToList/2, heap_sort/1, buildMaxHeap/1, heapify/1, calcPath/1]).
 
 % TODO: bisheriger Aufwand für Tests / Analyse aller Methoden: ~4h
 % TODO: bisheriger Aufwand für diese Methode (Entwurf): 2.5h (Code): 3h
@@ -127,24 +127,23 @@ listFindFirstLargerThanAndRest([H | T], _, Acc) -> {H, Acc ++ T}.
 %% Die Begründung ist im Entwurf aufzuführen. Da das Verfahren eine
 %% Vorabkodierung des Pfades zum einfügen von Elementen an der nächsten freien
 %% Position benötigt, wird eine Berechnung (mit konstantem Aufwand!!) dazu hier angeboten: sort.erl.
+
+%% returns {{}, InputList, OutputList}, sorts a list using the Heap-Sort-Algorithm
 hsort([]) -> [];
 hsort(List) ->
   Heap = buildMaxHeap(List),
   {_, _, OutputList} = hsort(Heap, List, []),
   OutputList.
 
-%% returns {{}, InputList, OutputList}
 hsort({}, InputList, OutputList) -> {{}, InputList, OutputList};
 hsort(Heap, InputList, OutputList) ->
   {MaxElement, _, _, _} = Heap,
   RootAndLastSwappedHeap = swapRootWithLast(Heap),
   NewHeap = removeSwappedRoot(RootAndLastSwappedHeap),
-  {_, _, _, ReducedSize} = NewHeap,
-  NewMaxHeap = heapify(NewHeap, ReducedSize),
+  NewMaxHeap = heapify(NewHeap),
   hsort(NewMaxHeap, InputList, [MaxElement | OutputList]).
 
-%% returns Max-Heap
-% TODO LEFT HAS TO BE SMALLER THAN RIGHT 
+%% builds a Max-Heap from a list
 buildMaxHeap(List) -> buildMaxHeap(List, {}, 0).
 
 buildMaxHeap([], AccHeap, _) -> AccHeap;
@@ -154,11 +153,13 @@ buildMaxHeap(InputList, AccHeap, Size) ->
   ElementInserted = insertIntoHeap(AccHeap, Head, NewSize),
   buildMaxHeap(Tail, ElementInserted, NewSize).
 
+%% inserts an element into a max heap
 insertIntoHeap({}, InsertElement, Size) -> {InsertElement, {}, {}, Size};
 insertIntoHeap(HostHeap, InsertElement, Size) ->
   Path = calcPath(Size),
   insertWithPath(HostHeap, InsertElement, Size, Path).
 
+%% inserts an element into a max heap using a given path
 insertWithPath({}, InsertElement, Size, _) -> {InsertElement, {}, {}, Size};
 insertWithPath({NodeElement, Left, Right, Index}, InsertElement, Size, [l|RemainingPath]) when NodeElement >= InsertElement ->
   {NodeElement, insertWithPath(Left, InsertElement, Size, RemainingPath), Right, Index};
@@ -169,34 +170,19 @@ insertWithPath({NodeElement, Left, Right, Index}, InsertElement, Size, [r|Remain
 insertWithPath({NodeElement, Left, Right, Index}, InsertElement, Size, [r|RemainingPath]) when NodeElement < InsertElement ->
   {InsertElement, Left, insertWithPath(Right, NodeElement, Size, RemainingPath), Index}.
 
-%% returns Max-Heap 
-heapify(Heap, Size) ->
-  Path = calcPath(Size),
-  sinkToBottom(Heap, Path).
-
-sinkToBottom(Heap, []) -> Heap;
-sinkToBottom({NodeElement, {LeftElement, LeftL, RightL, IndexL}, Right, Index}, [l|RemainingPath]) when NodeElement >= LeftElement -> 
-  {NodeElement, sinkToBottom({LeftElement, LeftL, RightL, IndexL}, RemainingPath), Right, Index};
-sinkToBottom({NodeElement, {LeftElement, LeftL, RightL, IndexL}, Right, Index}, [l|RemainingPath]) when NodeElement < LeftElement ->
-  {LeftElement, sinkToBottom({NodeElement, LeftL, RightL, IndexL}, RemainingPath), Right, Index};
-sinkToBottom({NodeElement, Left, {RightElement, LeftR, RightR, IndexR}, Index}, [r|RemainingPath]) when NodeElement >= RightElement ->
-  {NodeElement, Left, sinkToBottom({RightElement, LeftR, RightR, IndexR}, RemainingPath), Index};
-sinkToBottom({NodeElement, Left, {RightElement, LeftR, RightR, IndexR}, Index}, [r|RemainingPath]) when NodeElement < RightElement ->
-  {RightElement, Left, sinkToBottom({NodeElement, LeftR, RightR, IndexR}, RemainingPath), Index}.
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
+%% makes the top element of a max heap descend down to an appropriate position 
+heapify({NodeElement, {}, {}, Index}) -> {NodeElement, {}, {}, Index};
+heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {}, Index}) when NodeElement >= LeftElement -> 
+  {NodeElement, {LeftElement, LeftL, RightL, IndexL}, {}, Index};
+heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {}, Index}) when NodeElement < LeftElement -> 
+    {LeftElement, heapify({NodeElement, LeftL, RightL, IndexL}), {}, Index};
+heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {RightElement, LeftR, RightR, IndexR}, Index}) 
+  when (NodeElement >= LeftElement) and (NodeElement >= RightElement) ->
+    Heap = {NodeElement, {LeftElement, LeftL, RightL, IndexL}, {RightElement, LeftR, RightR, IndexR}, Index};
+heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {RightElement, LeftR, RightR, IndexR}, Index}) when LeftElement >= RightElement ->
+  {LeftElement, heapify({NodeElement, LeftL, RightL, IndexL}), {RightElement, LeftR, RightR, IndexR}, Index};
+heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {RightElement, LeftR, RightR, IndexR}, Index}) when LeftElement < RightElement ->
+  {RightElement, {LeftElement, LeftL, RightL, IndexL}, heapify({NodeElement, LeftR, RightR, IndexR}), Index}.
 
 
 swapRootWithLast(Heap) -> ok.
