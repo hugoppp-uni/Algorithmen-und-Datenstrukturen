@@ -7,7 +7,7 @@
 -author("Hugo Protsch").
 
 %% API
--export([insertionS/1, qsort/3, hsort/1, insertToList/2, heap_sort/1, buildMaxHeap/1, heapify/1, calcPath/1]).
+-export([insertionS/1, qsort/3, hsort/1, insertToList/2]).
 
 % TODO: bisheriger Aufwand für Tests / Analyse aller Methoden: ~4h
 % TODO: bisheriger Aufwand für diese Methode (Entwurf): 2.5h (Code): 3h
@@ -131,27 +131,28 @@ listFindFirstLargerThanAndRest([H | T], _, Acc) -> {H, Acc ++ T}.
 %% returns {{}, InputList, OutputList}, sorts a list using the Heap-Sort-Algorithm
 hsort([]) -> [];
 hsort(List) ->
-  Heap = buildMaxHeap(List),
-  {_, _, OutputList} = hsort(Heap, List, []),
+  {Heap, Size} = buildMaxHeap(List),
+  {_, _, OutputList} = hsort(Heap, List, [], Size),
   OutputList.
 
-hsort({}, InputList, OutputList) -> {{}, InputList, OutputList};
-hsort(Heap, InputList, OutputList) ->
+hsort({}, InputList, OutputList, _) -> {{}, InputList, OutputList};
+hsort(Heap, InputList, OutputList, Size) ->
   {MaxElement, _, _, _} = Heap,
-  RootReplacedWithLast = replaceRootWithLast(Heap),
+  RootReplacedWithLast = replaceRootWithLast(Heap, Size),
+  ReducedSize = Size-1,
   NewMaxHeap = heapify(RootReplacedWithLast),
-  hsort(NewMaxHeap, InputList, [MaxElement | OutputList]).
+  hsort(NewMaxHeap, InputList, [MaxElement | OutputList], ReducedSize).
 
 %% builds a Max-Heap from a list
 buildMaxHeap(List) -> buildMaxHeap(List, {}, 0).
 
-buildMaxHeap([], AccHeap, _) -> AccHeap;
+buildMaxHeap([], AccHeap, Size) -> {AccHeap, Size};
 buildMaxHeap(InputList, AccHeap, Size) -> 
   [Head|Tail] = InputList,
   NewSize = Size + 1,
   ElementInserted = insertIntoHeap(AccHeap, Head, NewSize),
   buildMaxHeap(Tail, ElementInserted, NewSize).
-
+  
 %% inserts an element into a max heap
 insertIntoHeap({}, InsertElement, Size) -> {InsertElement, {}, {}, Size};
 insertIntoHeap(HostHeap, InsertElement, Size) ->
@@ -170,27 +171,37 @@ insertWithPath({NodeElement, Left, Right, Index}, InsertElement, Size, [r|Remain
   {InsertElement, Left, insertWithPath(Right, NodeElement, Size, RemainingPath), Index}.
 
 %% puts last element at root position in a max heap
-replaceRootWithLast(Heap) ->
-  {ReducedHeap, LastElement} = replaceRootWithLast
+replaceRootWithLast({}, _) -> {};
+replaceRootWithLast({_, {}, {}, _}, _) -> {}; 
+replaceRootWithLast(Heap, Size) ->
+  Path = calcPath(Size),
+  LastElement = getLast(Heap, Path),
+  ReducedHeap = removeLast(Heap, Path),
+  {_, Left, Right, Index} = ReducedHeap, 
+  {LastElement, Left, Right, Index}.
 
+getLast({NodeElement, {}, {}, _}, []) -> NodeElement;
+getLast({_, Left, _, _}, [l|RemainingPath]) -> getLast(Left, RemainingPath);
+getLast({_, _, Right, _}, [r|RemainingPath]) -> getLast(Right, RemainingPath).
 
+removeLast({_, {}, {}, _}, []) -> {}; 
+removeLast({NodeElement, Left, Right, Index}, [l|RemainingPath]) -> {NodeElement, removeLast(Left, RemainingPath), Right, Index};
+removeLast({NodeElement, Left, Right, Index}, [r|RemainingPath]) -> {NodeElement, Left, removeLast(Right, RemainingPath), Index}.
 
 %% makes the top element of a max heap descend down to an appropriate position 
+heapify({}) -> {};
 heapify({NodeElement, {}, {}, Index}) -> {NodeElement, {}, {}, Index};
 heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {}, Index}) when NodeElement >= LeftElement -> 
   {NodeElement, {LeftElement, LeftL, RightL, IndexL}, {}, Index};
 heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {}, Index}) when NodeElement < LeftElement -> 
-    {LeftElement, heapify({NodeElement, LeftL, RightL, IndexL}), {}, Index};
+  {LeftElement, heapify({NodeElement, LeftL, RightL, IndexL}), {}, Index};
 heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {RightElement, LeftR, RightR, IndexR}, Index}) 
   when (NodeElement >= LeftElement) and (NodeElement >= RightElement) ->
-    Heap = {NodeElement, {LeftElement, LeftL, RightL, IndexL}, {RightElement, LeftR, RightR, IndexR}, Index};
+    {NodeElement, {LeftElement, LeftL, RightL, IndexL}, {RightElement, LeftR, RightR, IndexR}, Index};
 heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {RightElement, LeftR, RightR, IndexR}, Index}) when LeftElement >= RightElement ->
   {LeftElement, heapify({NodeElement, LeftL, RightL, IndexL}), {RightElement, LeftR, RightR, IndexR}, Index};
 heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {RightElement, LeftR, RightR, IndexR}, Index}) when LeftElement < RightElement ->
   {RightElement, {LeftElement, LeftL, RightL, IndexL}, heapify({NodeElement, LeftR, RightR, IndexR}), Index}.
-
-
-
 
 % Kodierung des Feldes: Nachfolger von Position i ist 2*i links und 2*i+1 rechts
 % berechnet den Pfad zur ersten leeren Position
@@ -209,40 +220,3 @@ calcPath(1,Accu) -> Accu;
 calcPath(Number,Accu) when Number rem 2 =:= 0 -> calcPath(Number div 2,[l|Accu]);
 % aktuelle Position ist ungerade
 calcPath(Number,Accu) when Number rem 2 =/= 0 -> calcPath((Number-1) div 2,[r|Accu]).
-
-
-
-
-heap_sort([]) -> [];
-heap_sort(L) ->
-  Size = length(L),
-  lists:foldl(fun(X, I) -> put(I, X), I + 1 end, 1, L),
-  lists:foreach(fun(I) -> make_heap(I, get(I)) end, lists:seq(2, Size)),
-  lists:foreach(fun(I) -> down_heap(I) end, lists:seq(Size, 2, -1)),
-  lists:foldl(fun(I, R) -> [get(I) | R] end, [], lists:seq(Size, 1, -1)).
-
-make_heap(I, A) ->
-  J = I div 2,
-  B = get(J),
-  if J < 1 orelse A =< B -> put(I, A);
-    true -> put(I, B),
-      make_heap(J, A)
-  end.
-
-down_heap(I) ->
-  Root = 1,
-  Val = put(I, put(Root, get(I))),     % exchange Root <-> I
-  down_heap(I - 1, Root, 2 * Root, Val).
-
-down_heap(Limit, Parent, Child, Val) when Limit < Child ->
-  put(Parent, Val);
-down_heap(Limit, Parent, Child, Val) ->
-  V0 = get(Child),
-  V1 = get(Child + 1),
-  {C, V} = if Child < Limit andalso V0 < V1 -> {Child + 1, V1};
-             true -> {Child, V0}
-           end,
-  if Val >= V -> put(Parent, Val);
-    true -> put(Parent, V),
-      down_heap(Limit, C, 2 * C, Val)
-  end.
