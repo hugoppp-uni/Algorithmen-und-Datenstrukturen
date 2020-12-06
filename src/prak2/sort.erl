@@ -138,9 +138,8 @@ hsort(List) ->
 hsort({}, InputList, OutputList) -> {{}, InputList, OutputList};
 hsort(Heap, InputList, OutputList) ->
   {MaxElement, _, _, _} = Heap,
-  RootAndLastSwappedHeap = swapRootWithLast(Heap),
-  NewHeap = removeSwappedRoot(RootAndLastSwappedHeap),
-  NewMaxHeap = heapify(NewHeap),
+  RootReplacedWithLast = replaceRootWithLast(Heap),
+  NewMaxHeap = heapify(RootReplacedWithLast),
   hsort(NewMaxHeap, InputList, [MaxElement | OutputList]).
 
 %% builds a Max-Heap from a list
@@ -170,6 +169,12 @@ insertWithPath({NodeElement, Left, Right, Index}, InsertElement, Size, [r|Remain
 insertWithPath({NodeElement, Left, Right, Index}, InsertElement, Size, [r|RemainingPath]) when NodeElement < InsertElement ->
   {InsertElement, Left, insertWithPath(Right, NodeElement, Size, RemainingPath), Index}.
 
+%% puts last element at root position in a max heap
+replaceRootWithLast(Heap) ->
+  {ReducedHeap, LastElement} = replaceRootWithLast
+
+
+
 %% makes the top element of a max heap descend down to an appropriate position 
 heapify({NodeElement, {}, {}, Index}) -> {NodeElement, {}, {}, Index};
 heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {}, Index}) when NodeElement >= LeftElement -> 
@@ -185,9 +190,7 @@ heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {RightElement, LeftR
   {RightElement, {LeftElement, LeftL, RightL, IndexL}, heapify({NodeElement, LeftR, RightR, IndexR}), Index}.
 
 
-swapRootWithLast(Heap) -> ok.
 
-removeSwappedRoot(Heap) -> ok.
 
 % Kodierung des Feldes: Nachfolger von Position i ist 2*i links und 2*i+1 rechts
 % berechnet den Pfad zur ersten leeren Position

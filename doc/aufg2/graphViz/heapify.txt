@@ -5,26 +5,37 @@ digraph G {
     
     begin [label = "heapify(Heap)" shape = ellipse]
     a1 [label = "tmp = root node" ]
-    cond1 [label = "tmp < left child node?" shape = diamond]
-    cond2 [label = "tmp < right child node?" shape = diamond]
-    cond1 -> a2 [label = true]
-    cond1 -> cond2 [label = false]
     begin -> a1
-    a1 -> abortcond
-    abortcond -> abortcond2 [label = "emtpy"]
-    abortcond -> cond1 [label = "not empty"]
-    a2 [label = "swap left child node and tmp"]
-    abortcond [label = "left child empty?" shape = diamond]
-    abortcond2 [label = "right child empty?" shape = diamond]
-    abortcond2 -> abort2 [label = "empty"]
-    abortcond2 -> cond2 [label = "not empty"]
-    abort [label = "return Heap with\ncurrent position of tmp"]
-    cond2 -> abort [label = false]
-    cond2 -> a3 [label = "true"]
-    a3 [label = "swap right child node and tmp"]
-    a3 -> abortcond [label = "continue\nwith\nnew\nposition\nof\ntmp"]
-    a2 -> abortcond [label = "continue\nwith\nnew\nposition\nof\ntmp"]
-    abort2 [label = "return Heap with\ncurrent position of tmp"]
+    
+    a2 [label = "both children of tmp empty?" shape = diamond]
+    a1 -> a2
+    a3 [label = "return max-heap with tmp at current position"]
+    a2 -> a3 [label = true]
+    a2 -> a4 [label = false]
+    a4 [label = "only right child empty?" shape = diamond]
+    a4 -> a5 [label = true]
+    a5 [label = "tmp >= left child element" shape = diamond]
+    a5 -> b1 [label = true]
+    a5 -> b2 [label = false]
+    b1 [label = "return max-heap with tmp at current position"]
+    b2 [label = "swap position of tmp and left child element"]
+    b2 -> a2 [label = "continue\nwith\nnew\nposition\nof\ntmp"]
+    
+    a4 -> c1 [label = false]
+    c1 [label = "tmp >= left child element\nAND\ntmp >= right child element?"
+        shape = diamond]
+    c1 -> c2 [label = true]
+    c2 [label = "return max-heap with tmp at current position"]
+    c1 -> c3 [label = false]
+    c3 [label = "left child element\n>=\nright child element?"
+        shape = diamond]
+    c3 -> c4 [label = true]
+    c4 [label = "swap position of tmp and left child element"]
+    c3 -> c5 [label = false]
+    c5 [label = "swap position of tmp and right child element"]
+    
+    c4 -> a2 [label = "continue\nwith\nnew\nposition\nof\ntmp"]
+    c5 -> a2 [label = "continue\nwith\nnew\nposition\nof\ntmp"]
     
 
 }
