@@ -1,5 +1,25 @@
 \subsection{Insertion Sort}\label{subsec:insertion-sort-laufzeit}
 
+In Abbildung~\ref{fig:isort} ist die Laufzeit mit zufälligen Zahlen und
+aufsteigenden Zahlen zu sehen.
+Der Plot ist eindeutig quadratisch.%TODO ausführen warum quadratisch
+Die quadratische Laufzeit des Average-Case ist auch in
+(Abbildung~\ref{fig:qsort-complexity-log}) als Log-Log Plot dargestellt.
+\begin{figure}[hbt]
+    \centering
+    \caption{Insertion Sort}
+    \subfloat[average case, worst case]{
+    \includegraphics[width = 0.47\textwidth]
+    {../out/isort.pdf}\label{fig:isort} }
+    \hfill
+    \subfloat[best case]{
+    \includegraphics[width = 0.47\textwidth]
+    {../out/isortBest.pdf}\label{fig:isort-best} }
+\end{figure}
+
+Der Best-Case ist in Abbildung~\ref{fig:isort-best} dargestellt.
+%TODO ausführen warum abbsteigend und nicht aufsteigenden worst case ist
+
 \subsection{Quick Sort}\label{subsec:quick-sort-laufzeit}
 
 \subsubsection{Pivot Methoden}
@@ -10,7 +30,7 @@ Verwendung der Pivot-Methoden \(right\) und \(median\)  eine deutlich längere
 Laufzeit aufgefallen (siehe Abbildung~\ref{fig:qsort-first-impl}).
 Gleichzeit ist die Laufzeit von der \(middle\) Pivot Methode besser, obwohl
 die Erwartung dieser schlechter ist:
-Diese muss eineinhalb mal -- einmal zum finden der Länge \(l\) komplett, danach
+Diese muss eineinhalb mal -- einmal zum Finden der Länge \(l\) komplett, danach
 bis zum \(l/2\) Element -- durchlaufen werden.
 Die Pivot Methode \(right\) muss nur einmal bis zum Ende der Liste laufen.
 
