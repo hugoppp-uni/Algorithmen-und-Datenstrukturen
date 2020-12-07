@@ -121,13 +121,21 @@ figure.savefig('out/' + 'switchWorstCase.pdf', bbox_inches='tight')
 
 # - - -
 
-desc = ""
+desc = "random numbers"
 figure = generate_graph('', xl, yl, desc,
                         ['data/isort/complexity.csv',
                          'data/isort/complexity2.csv'],
                         ['isort avg over 20', 'isort avg over 5'])
 figure.savefig('out/' + 'isort.pdf', bbox_inches='tight')
 
+# - - -
+
+desc = "avg over 20"
+figure = generate_graph('', xl, yl, desc,
+                        ['data/isort/best.csv',
+                         'data/qsort/complexityCut.csv'],
+                        ['isort descending numbers', 'qsort random numbers'])
+figure.savefig('out/' + 'isortBest.pdf', bbox_inches='tight')
 
 # - - -
 
