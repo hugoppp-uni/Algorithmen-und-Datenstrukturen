@@ -119,23 +119,39 @@ figure = generate_graph('', xl, yl, desc,
 figure.savefig('out/' + 'switchWorstCase.pdf', bbox_inches='tight')
 
 
+# - - -
 
-desc = "left pivot, random numbers, switch after 0"
+desc = ""
+figure = generate_graph('', xl, yl, desc,
+                        ['data/isort/complexity.csv',
+                         'data/isort/complexity2.csv'],
+                        ['isort avg over 20', 'isort avg over 5'])
+figure.savefig('out/' + 'isort.pdf', bbox_inches='tight')
+
+
+# - - -
+
+desc = "qsort: left pivot, random numbers, switch after 0"
 figure = generate_graph('', xl, yl, desc,
                         ['data/qsort/complexity.csv',
                          'data/qsort/complexity2.csv',
-                         'data/qsort/complexity3.csv'],
+                         'data/qsort/complexity3.csv',
+                         'data/isort/complexity.csv',
+                         'data/isort/complexity2.csv',
+                         ],
                         [])
 
-x = np.logspace(4,8)
+x = np.logspace(3,8)
 y1 = 10.E-5 * x
-y2 = 10.E-5 * x*x
+y2 = 10.E-7 * x*x
 
-plt.legend(['qsort avg over 20','qsort avg over 5','qsort avg over 1'])
+legend = ['qsort avg over 20', 'qsort avg over 5', 'qsort avg over 1', 'isort avg over 20', 'isort avg over 5']
+plt.legend(legend)
 figure.savefig('out/' + 'complexity.pdf', bbox_inches='tight')
 plt.yscale('log')
 plt.xscale('log')
 plt.plot(x, y1, '--', linewidth=1)
 plt.plot(x, y2, '--', linewidth=1)
-plt.legend(['qsort avg over 20','qsort avg over 5','qsort avg over 1', 'f(x) = 10^-5*x', 'f(x) = 10^-5*x^2'])
+legend.extend(['f(x) = 10^-5*x', 'f(x) = 10^-7*x^2'])
+plt.legend(legend)
 figure.savefig('out/' + 'complexityLog.pdf', bbox_inches='tight')
