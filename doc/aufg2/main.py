@@ -150,6 +150,8 @@ figure = generate_graph('', xl, yl, desc,
                          'data/qsort/complexity3.csv',
                          'data/isort/complexity.csv',
                          'data/isort/complexity2.csv',
+                         'data/hsort/complexity.csv',
+                         'data/hsort/complexity2.csv',
                          ],
                         [])
 
@@ -157,7 +159,9 @@ x = np.logspace(3,8)
 y1 = 10.E-5 * x
 y2 = 10.E-7 * x*x
 
-legend = ['qsort avg over 20', 'qsort avg over 5', 'qsort avg over 1', 'isort avg over 20', 'isort avg over 5']
+legend = ['qsort avg over 20', 'qsort avg over 5', 'qsort avg over 1',
+          'isort avg over 20', 'isort avg over 5',
+          'hsort avg over 20', 'hsort avg over 1']
 plt.legend(legend)
 figure.savefig('out/' + 'complexity.pdf', bbox_inches='tight')
 plt.yscale('log')
