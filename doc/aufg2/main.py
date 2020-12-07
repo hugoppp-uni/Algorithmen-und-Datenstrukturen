@@ -121,11 +121,15 @@ figure.savefig('out/' + 'switchWorstCase.pdf', bbox_inches='tight')
 
 # - - -
 
-desc = "random numbers"
+desc = ""
 figure = generate_graph('', xl, yl, desc,
                         ['data/isort/complexity.csv',
-                         'data/isort/complexity2.csv'],
-                        ['isort avg over 20', 'isort avg over 5'])
+                         'data/isort/complexity2.csv',
+                         'data/isort/worst.csv',
+                         'data/isort/worst2.csv'
+                         ],
+                        ['isort random, avg over 20', 'isort random, avg over 5',
+                         'isort desc., avg over 20', 'isort desc. avg over 5'])
 figure.savefig('out/' + 'isort.pdf', bbox_inches='tight')
 
 # - - -
