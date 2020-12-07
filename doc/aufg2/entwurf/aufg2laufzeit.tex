@@ -1,3 +1,5 @@
+%! suppress = LineBreak
+
 \subsection{Insertion Sort}\label{subsec:insertion-sort-laufzeit}
 
 In Abbildung~\ref{fig:isort} ist die Laufzeit mit zufälligen Zahlen und
@@ -128,11 +130,27 @@ dritten Implementation dargestellt.
 Bei der Implementation des Quicksort-Algorithmus wird ein Parameter
 \textit{switchnumber} übergeben, welches den Schwellenwert angibt, ab wann
 von Quicksort auf Insertion Sort umgeschaltet werden soll.
-Zum Finden des optimalen Wertes dieses Parameters verwenden wir die Pivot
-Methode \textit{left}, da %TODO
+In Abbildung~\ref{fig:qsort-switchPivot} sind
+jeweils Laufzeitmessungen mit variierender \textit{switchnumber} zu sehen.
+Es wird deutlich, dass im Average-Case die optimale \textit{switchnumber} bei
+ca. 20--50 Elementen liegt.
+
+In Abbildung~\ref{fig:qsort-switchWorst} ist die \textit{switchnumber} im
+Worst-Case von Quicksort untersucht worden.
+An den Daten zu absteigenden Zahlen befindet sich Insertion Sort im Best-Case
+und hat somit eine Laufzeit von \(\Omega(N)\), dies erklärt, warum der
+Verlauf mit zunehmender \textit{switchnumber} scheinbar gegen 0ms läuft.
+(Zu Details zum Best-Case von Insertion Sort, siehe
+Abbildung~\ref{fig:isort-best} in
+Abschnitt~\ref{subsec:insertion-sort-laufzeit})
+
+An den Daten zu aufsteigenden Zahlen befindet sich Insertion Sort im
+Average-Case und hat eine Komplexität von \(O(n^2)\).
+Da Quicksort im Worst-Case ebenfalls eine Komplexität von \(O(n^2)\)
+aufweist, wird hierdurch verdeutlicht, dass der Aufwand pro Iteration, also
+der Faktor vor dem \(n\), bei Insertion Sort geringer ist als bei Quicksort.
 
 %TODO
-Siehe Abbildung~\ref{fig:qsort-switchPivot} und~\ref{fig:qsort-switchWorst}
 
 \begin{figure}[hbt]
     \centering
@@ -170,7 +188,6 @@ unserer Erwartung, über-logarithmischen Messkurve unterscheiden.
     {../out/complexityLog.pdf}\label{fig:qsort-complexity-log} }
 \end{figure}
 
-
 \subsubsection{Worst Case}\label{subsubsec:worst-case}
 Die Laufzeit zum Worst Case wurde kurz im
 Abschnitt~\ref{subsubsec:switch-number} besprochen.
@@ -183,4 +200,5 @@ Aus zeitlichen Gründen werden wir nicht weiter darauf eingehen.
 % listen thetha(n) (?) ist
 
 \FloatBarrier
+
 \subsection{Heap Sort}\label{subsec:heap-sort-laufzeit}
