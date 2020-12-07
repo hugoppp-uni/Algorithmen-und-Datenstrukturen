@@ -143,15 +143,11 @@ figure.savefig('out/' + 'isortBest.pdf', bbox_inches='tight')
 
 # - - -
 
-desc = "qsort: left pivot, random numbers, switch after 0"
+desc = "avg over 20; qsort: left pivot, random numbers, switch after 0"
 figure = generate_graph('', xl, yl, desc,
-                        ['data/qsort/complexity.csv',
-                         'data/qsort/complexity2.csv',
-                         'data/qsort/complexity3.csv',
-                         'data/isort/complexity.csv',
-                         'data/isort/complexity2.csv',
-                         'data/hsort/complexity.csv',
-                         'data/hsort/complexity2.csv',
+                        ['data/qsort/merged.csv',
+                         'data/isort/merged.csv',
+                         'data/hsort/merged.csv',
                          ],
                         [])
 
@@ -159,9 +155,9 @@ x = np.logspace(3,8)
 y1 = 10.E-5 * x
 y2 = 10.E-7 * x*x
 
-legend = ['qsort avg over 20', 'qsort avg over 5', 'qsort avg over 1',
-          'isort avg over 20', 'isort avg over 5',
-          'hsort avg over 20', 'hsort avg over 1']
+legend = ['qsort; avg over 1 w/ 10E7 el.+',
+          'isort; avg over 5 w/ 10E4 el.+',
+          'hsort; avg over 1 w/ 10E6 el.+']
 plt.legend(legend)
 figure.savefig('out/' + 'complexity.pdf', bbox_inches='tight')
 plt.yscale('log')
