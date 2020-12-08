@@ -268,87 +268,62 @@ Aus zeitlichen Gründen werden wir nicht weiter darauf eingehen.
 
 \subsection{Heap Sort}\label{subsec:heap-sort-laufzeit}
 
-In Abbildung~\ref{fig:hsort2} ist die Laufzeit von Heapsort mit zufälligen
-Zahlen, absteigenden Zahlen und aufsteigenden Zahlen dargestellt.
-In diesem Test geht es zunächst darum, das Komplexitätsverhalten von Heapsort
-zu untersuchen und weitergehend den Vergleich zwischen Heap- und Quicksort
-abzubilden.
+In Abbildung~\ref{fig:hsort} ist die Laufzeit von Heapsort mit zufaelligen Zahlen, absteigenden Zahlen und aufsteigenden Zahlen dargestellt.
+In diesem Test geht es zunaechst darum, das Komplexitaetsverhalten von Heapsort zu untersuchen und weitergehend den Vergleich zwischen Heap- und Quicksort abzubilden. 
 
 \begin{figure}[hbt]
     \centering
     \caption{Heapsort}
     \subfloat[Heapsort]{
     \includegraphics[width = 0.47\textwidth]
-    {../out/hsort.pdf}\label{fig:hsort2} }
+    {../out/hsort.pdf}\label{fig:hsort} }
     \subfloat[Heapsort und Quicksort]{
     \includegraphics[width = 0.47\textwidth]
     {../out/hsortqsort.pdf}\label{fig:Vergleich} }
 \end{figure}
 
-\subsubsection{Komplexität im Avg Case}\label{subsec:Komplexitaet im
-Average-Case}
+\subsubsection{Komplexitaet im Avg Case}\label{subsec:Komplexitaet im Average-Case}
 
-Betrachten wir zunächst den Average-Case von Heapsort.
-Hier wurden zufällig generierte Listen verwendet, um eine durchschnittliche
-Laufzeit-Komplexität zu ermitteln.
-Anders als in Abbildung~\ref{fig:qsort-complexity}, in der es ohne Regression
-nicht möglich ist, Aussagen über das Komplexitätsverhalten zu treffen, lässt
-sich in Abbildung~\ref{fig:hsort} mit bloßem Auge eine Krümmung der Kurve
-erkennen.
+Betrachten wir zunaechst den Average-Case von Heapsort.
+Hier wurden zufaellig generierte Listen verwendet, um eine durchschnittliche Laufzeit-Komplexitaet zu ermitteln.
+Anders als in Abbildung~\ref{fig:qsort-complexity}, in der es ohne Regression nicht moeglich ist, Aussagen ueber das Komplexitaetsverhalten zu treffen, laesst sich in Abbildung~\ref{fig:hsort} mit blossem Auge eine Kruemmung der Kurve erkennen.
 Dies deutet auf die von uns erwartete Laufzeit von \(O(n\cdot log\ n)\) hin.
 
-\subsubsection{Komplexität im Best Case}\label{subsec:Komplexitaet im Best-Case}
+\subsubsection{Komplexitaet im Best Case}\label{subsec:Komplexitaet im Best-Case}
 
-Außerdem in Abbildung~\ref{fig:hsort} zu sehen ist der Best-Case.
+Ausserdem in Abbildung~\ref{fig:hsort} zu sehen ist der Best-Case.
 Hier sind die Ergebnisse ein wenig interessanter.
 
-Zunächst betrachten wir jene Ergebnisse die unseren Erwartungen entsprechen.
-Der bei einem Heapsort übliche Best-Case ist eine invertiert-sortierte Liste,
-also eine Liste von absteigenden Zahlen.
-Beim Heapsort spielt das Bauen von und Operieren auf einem Max-Heap eine
-zentrale Rolle.
-Das größte Element ist die Wurzel des Heaps und die Elemente werden abwärts
-immer kleiner.
-Da dieser Struktur eine absteigende Anordnung von Zahlen in einer Liste am
-nächsten kommt, sollte hier das Bauen des Max-Heaps die effizienteste
-Laufzeit besitzen.
+Zunaechst betrachten wir jene Ergebnisse die unseren Erwartungen entsprechen.
+Der bei einem Heapsort uebliche Best-Case ist eine invertiert-sortierte Liste, also eine Liste von absteigenden Zahlen.
+Beim Heapsort spielt das Bauen von und Operieren auf einem Max-Heap eine zentrale Rolle.
+Das groesste Element ist die Wurzel des Heaps und die Elemente werden abwaerts immer kleiner. 
+Da dieser Struktur eine absteigende Anordnung von Zahlen in einer Liste am naechsten kommt, sollte hier das Bauen des Max-Heaps die effizienteste Laufzeit besitzen.
 
-Unerwartete Ergebnisse erhalten wir jedoch beim Sortieren einer bereits
-sortierten bzw. aufsteigend-sortierten Liste.
-Da die Struktur des binären Max-Heaps eher einer absteigenden Liste ähnlich
-ist und dies einen kleineren Aufwand beim Erstellen des Heaps mit sich bringt,
-ließ sich
-ein gegenteilig grosser Aufwand bei einer aufsteigenden Liste vermuten.
+Unerwartete Ergebnisse erhalten wir jedoch beim Sortieren einer bereits sortierten bzw. aufsteigend-sortierten Liste.
+Da die Struktur des binaeren Max-Heaps eher einer absteigenden Liste aehnlich ist und dies einen kleineren Aufwand beim Erstellen des Heaps mitsichbringt, liess sich ein gegenteilig grosser Aufwand bei einer aufsteigenden Liste vermuten.
 Dies ist jedoch nicht der Fall gewesen.
-In Abbildung~\ref{fig:hsort} lässt sich aufsteigend klar eine bessere
-Laufzeit erkennen als absteigend, ob wohl absteigend intuitiv als effizienter
-hervortritt.
+In Abbildung~\ref{fig:hsort} laesst sich aufsteigend klar eine bessere Laufzeit erkennen als absteigend, ob wohl absteigend intuitiv als effizienter hervortritt.
 
-Ergründen lässt sich dies in der Natur unserer Implementierung und dem
-Verlauf unseres Projektes.
-Zunächst erstellten wir im Entwurf des Heapsort-Algorithmus eine
-Bottom-Up-Herangehensweise der Max-Heap-Konstruktion.
-In der Implementation haben wir uns jedoch für eine Top-Down-Herangehensweise
-entschieden.
-Wir nehmen stark an, dass sich die Ergebnisse bei einer Implementation des
-ursprünglichen Entwurfs mit unseren Erwartungen gedeckt hätten.
+Ergruenden laesst sich dies in der Natur unserer Implementierung und dem Verlauf unseres Projektes.
+Zunaechst erstellten wir im Entwurf des Heapsort-Algorithmus eine Bottom-Up-Herangehensweise der Max-Heap-Konstruktion.
+In der Implementation haben wir uns jedooch fuer eine Top-Down-Herangehensweise entschieden.
+Wir nehmen stark an, dass sich die Ergebnisse bei einer Implementation des urspruenglichen Entwurfs mit unseren Erwartungen gedeckt haetten.
+
 
 \subsubsection{Vergleich mit Quicksort}\label{subsec:Vergleich mit Quicksort}
 
-Die schlechtesten Rahmenbedingungen (Left-Pivot und aufsteigende Zahlen) und
-eine durchschnittliches Laufzeitverhalten (Left-Pivot und zufällig generierte
-Liste) wurden für den Vergleich von Quicksort mit Heapsort gewählt.
+Wir haben die Parameter für Quicksort und einen Vergleich von Quicksort und Heapsort wiefolgt gewählt:
+
+Einerseits die schlechtesten Rahmenbedingungen für Quicksort (Left-Pivot und aufsteigende Zahlen).
+Andererseits Rahmenbedingungen für eine durchschnittliche Laufzeit von Quicksort (Left-Pivot und zufaellig generierte Liste).
+Für Heapsort verwenden wir wieder die Laufzeiten aus Abbildung~\ref{fig:hsort}.
 
 Betrachte Abbildung~\ref{fig:Vergleich}.
-Bei zufällig generierten Listen ist Quicksort, wie erwartet, deutlich
-performanter.
-Bei 10 Mio. Elementen dauert eine Heap-Sortierung schon fast eine Minute,
-während Quicksort noch bei unter 10 Sekunden liegt.
+Bei zufaellig generierten Listen ist Quicksort, wie erwartet, deutlich performanter.
+Bei 10 Mio. Elementen dauert eine Heap-Sortierung schon fast eine Minute, waehrend Quicksort noch bei unter 10 Sekunden liegt.
 
-Stellt man jedoch den schlechten Bedingungen für Quicksort her, liegt
-(aufgrund von der bereits angesprochenen quadratischen Laufzeitkomplexität
-von Quicksort im Worst-Case) Heapsort mit der Performanz deutlich vorne. Die
-im Entwurf vermuteten Erwartungen sind demnach eingetroffen.
+Stellt man jedoch den schelchte Bedingungen fuer Quicksort her, liegt (aufgrund von der bereits angesprochenen quadratischen Laufzeitkomplexitaet von Quicksort im Worst-Case) Heapsort mit der Performanz deutlich vorne. Die im Entwurf vermuteten Erwartungen sind demnach eingetroffen. 
 
 
 
