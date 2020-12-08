@@ -20,8 +20,23 @@ Die quadratische Laufzeit des Average-Case ist auch in
 \end{figure}
 
 Der Best-Case ist in Abbildung~\ref{fig:isort-best} dargestellt.
-%TODO ausführen warum abbsteigend und nicht aufsteigenden worst case ist
+Dieser tritt auf, wenn die Liste absteigend sortiert ist.
+Dies lässt sich an der Erlang Implementation erklären, da bei absteigenden
+Zahlen mit der \textit{insertToList()} Methode jeweils kleinere Zahlen in den
+sortieren Abschnitt eingefügt werden.
+Diese Operation hat eine Komplexität von \(\Theta(1)\), da die kleinere Zahl
+der Liste vorangestellt wird.
+Somit ergibt sich bei absteigenden Zahlen eine Gesamtkomplexität von
+\(\Theta(n)\), da dieser diese Methode für alle Elemente der Liste ein Mal
+ausgeführt wird.
 
+Bei aufsteigenden Zahlen muss die \textit{insertToList()} Methode hingegen
+jeweils bis zum Ende des sortieren Abschnitts laufen, da die Elemente jeweils
+größer werden, wodurch eine Gesamtkomplexität von \(\Theta (n^2)\) entsteht.
+
+Zusammenfassen haben wir also festgestellt, dass sich die Laufzeit unserer
+Implementation von Insertion Sort durch \(O(n^2)\) und \(\Omega(n)\)
+beschreiben lässt, was unseren Erwartungen entspricht.
 \subsection{Quick Sort}\label{subsec:quick-sort-laufzeit}
 
 \subsubsection{Pivot Methoden}
