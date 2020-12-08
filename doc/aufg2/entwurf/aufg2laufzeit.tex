@@ -44,9 +44,13 @@ größer werden, wodurch eine Gesamtkomplexität von \(\Theta (n^2)\) entsteht.
 Zusammenfassen haben wir also festgestellt, dass sich die Laufzeit unserer
 Implementation von Insertion Sort durch \(O(n^2)\) und \(\Omega(n)\)
 beschreiben lässt, was unseren Erwartungen entspricht.
+
 \subsection{Quick Sort}\label{subsec:quick-sort-laufzeit}
 
-\subsubsection{Pivot Methoden}
+\subsubsection{Pivot Methoden - Anfängliche Probleme}
+
+Zur Analyse der finalen Implementation, siehe
+Absatz~\textit{\hyperref[par:pivots]{Vergleich der Pivot Methoden}}.
 
 \paragraph{Erste Implementation}
 Bei der ersten Implementation vom Quicksort Algorithmus ist bei der
@@ -134,10 +138,40 @@ Die Laufzeit der Pivot Methode \textit{middle} hat sich auch verbessert, was
 darauf zurückzuführen ist, dass diese ebenfalls die \textit{listGetNthAndRest
 ()} Methode verwendet.
 
-\paragraph{Vergleich der Pivot Methoden}
+\subsubsection{Vergleich der Pivot Methoden}\label{subsubsec:pivots}
 
 In Abbildung~\ref{fig:qsort-impl3-2} ist die Laufzeit der Pivot Methoden der
-dritten Implementation dargestellt.
+dritten Implementation mit zufälligen Zahlen dargestellt.
+Der Worst-Case ist des Weitern in Abschnitt~\ref{subsubsec:switch-number},
+insbesondere in Abbildung~\ref{fig:qsort-switchWorst} dargestellt.
+
+Die Pivot Methoden \textit{left} und \textit{random} weisen die beste
+Laufzeit auf, die Methoden \texit{median} und \texit{right} die schlechteste.
+Die Laufzeit von \textit{middle} liegt zwischen den anderen.
+
+\paragraph{Right und Median}
+Die schlechte Laufzeit von \textit{right} und \textit{median} lässt sich
+dadurch erklären, dass die Liste zum Finden des Pivots insgesamt zweimal
+komplett durchlaufen wird:
+Zunächst zum Finden der Länge, anschließend zum Finden des letzten Elementes.
+
+\paragraph{Middle}
+Bei \textit{middle} wird die Liste nur eineinhalb Mal durchlaufen, da beim
+zweiten Durchlauf nur bis zur Mitte gelaufen wird.
+Dies erklärt die bessere Laufzeit im Vergleich zu den obigen Methoden.
+
+\paragraph{Left und Random}
+Die gute Laufzeit von \textit{left} lässt sich dadurch erklären, dass diese bei
+zufälligen Zahlen den geringsten Aufwand benötigt, da die Liste zum Finden
+des Pivots nicht durchlaufen werden muss.
+
+Die fast identische Laufzeit von \textit{random} ist jedoch überraschend, da
+dabei schließlich im Mittel zusätzlich bis zum \(\dfrac{n}{2}\) Element gelaufen
+wird.
+Somit scheint \textit{random} eine gute Alternative zu \textit{left} zu sein,
+da dadurch der Worst-Case von \textit{left} (aufsteigend sortierten Listen)
+umgangen wird.
+
 
 \begin{figure}[hbt]
     \centering
@@ -152,6 +186,7 @@ dritten Implementation dargestellt.
 Bei der Implementation des Quicksort-Algorithmus wird ein Parameter
 \textit{switchnumber} übergeben, welches den Schwellenwert angibt, ab wann
 von Quicksort auf Insertion Sort umgeschaltet werden soll.
+
 \paragraph{Average Case}
 In Abbildung~\ref{fig:qsort-switchPivot} sind
 jeweils Laufzeitmessungen mit variierender \textit{switchnumber} zu sehen.
