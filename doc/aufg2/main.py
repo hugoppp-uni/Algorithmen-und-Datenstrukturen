@@ -129,7 +129,7 @@ figure = generate_graph('', xl, yl, desc,
                          'data/isort/worst2.csv'
                          ],
                         ['isort random, avg over 20', 'isort random, avg over 5',
-                         'isort desc., avg over 20', 'isort desc. avg over 5'])
+                         'isort asc., avg over 20', 'isort asc. avg over 5'])
 figure.savefig('out/' + 'isort.pdf', bbox_inches='tight')
 
 # - - -
