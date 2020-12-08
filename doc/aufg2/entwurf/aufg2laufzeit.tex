@@ -145,15 +145,24 @@ dritten Implementation dargestellt.
 Bei der Implementation des Quicksort-Algorithmus wird ein Parameter
 \textit{switchnumber} übergeben, welches den Schwellenwert angibt, ab wann
 von Quicksort auf Insertion Sort umgeschaltet werden soll.
+\paragraph{Average Case}
 In Abbildung~\ref{fig:qsort-switchPivot} sind
 jeweils Laufzeitmessungen mit variierender \textit{switchnumber} zu sehen.
 Es wird deutlich, dass im Average-Case die optimale \textit{switchnumber} bei
 ca. 20--50 Elementen liegt.
 
+Interessant ist dabei auch, dass die optimale \textit{switchnumber} mit den
+effizienteren Pivot Methoden niedriger ist, als mit den ineffizienteren.
+Das lässt sich damit erklären, dass bei letzteren der Overhead pro Iteration
+größer ist.
+Da Insertion Sort einen geringen Aufwand pro Iteration aufweist, ist dieser
+trotz schlechterer Komplexität länger im Vorteil.
+
+\paragraph{Worst Case}
 In Abbildung~\ref{fig:qsort-switchWorst} ist die \textit{switchnumber} im
 Worst-Case von Quicksort untersucht worden.
 An den Daten zu absteigenden Zahlen befindet sich Insertion Sort im Best-Case
-und hat somit eine Laufzeit von \(\Omega(N)\), dies erklärt, warum der
+und hat somit eine Laufzeit von \(\Omega(n)\), dies erklärt, warum der
 Verlauf mit zunehmender \textit{switchnumber} scheinbar gegen 0ms läuft.
 (Zu Details zum Best-Case von Insertion Sort, siehe
 Abbildung~\ref{fig:isort-best} in
