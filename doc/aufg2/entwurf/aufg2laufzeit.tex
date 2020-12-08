@@ -141,7 +141,7 @@ darauf zurückzuführen ist, dass diese ebenfalls die \textit{listGetNthAndRest
 
 In Abbildung~\ref{fig:qsort-impl3-2} ist die Laufzeit der Pivot Methoden der
 dritten Implementation mit zufälligen Zahlen dargestellt.
-Der Worst-Case ist des Weitern in Abschnitt~\ref{subsubsec:switch-number},
+Der Worst-Case ist des Weiteren in Abschnitt~\ref{subsubsec:switch-number},
 insbesondere in Abbildung~\ref{fig:qsort-switchWorst} dargestellt.
 
 Die Pivot Methoden \textit{left} und \textit{random} weisen die beste
@@ -285,8 +285,7 @@ abzubilden.
     {../out/hsortqsort.pdf}\label{fig:Vergleich} }
 \end{figure}
 
-\subsubsection{Komplexität im Avg Case}\label{subsec:Komplexitaet im
-Average-Case}
+\subsubsection{Komplexität im Avg Case}\label{subsubsec:komplexitaet-im average-case}
 
 Betrachten wir zunächst den Average-Case von Heapsort.
 Hier wurden zufällig generierte Listen verwendet, um eine durchschnittliche
@@ -295,9 +294,9 @@ Anders als in Abbildung~\ref{fig:qsort-complexity}, in der es ohne Regression
 nicht möglich ist, Aussagen über das Komplexitätsverhalten zu treffen, lässt
 sich in Abbildung~\ref{fig:hsort2} mit bloßem Auge eine Krümmung der Kurve
 erkennen.
-Dies deutet auf die von uns erwartete Laufzeit von \(O(n\cdot log\ n)\) hin.
+Dies deutet auf die von uns erwartete Laufzeit von \(O(n\cdot \log\ n)\) hin.
 
-\subsubsection{Komplexität im Best Case}\label{subsec:Komplexitaet im Best-Case}
+\subsubsection{Komplexität im Best Case}\label{subsubsec:komplexitaet-im-best -case}
 
 Außerdem in Abbildung~\ref{fig:hsort2} zu sehen ist der Best-Case.
 Hier sind die Ergebnisse ein wenig interessanter.
@@ -333,9 +332,11 @@ entschieden.
 Wir nehmen stark an, dass sich die Ergebnisse bei einer Implementation des
 ursprünglichen Entwurfs mit unseren Erwartungen gedeckt hätten.
 
-\subsubsection{Vergleich mit Quicksort}\label{subsec:Vergleich mit Quicksort}
+\subsubsection{Vergleich mit Quicksort}\label{subsubsec:vergleich-mit-quicksort}
 
-Für den Vergleich von Quicksort und Heapsort haben wir einerseits bei Quicksort den Worst- und Average-Case und andererseits bei Heapsort die Messungen aus Abbildung~\ref{fig:hsort2} benutzt.
+Für den Vergleich von Quicksort und Heapsort haben wir einerseits bei Quicksort
+den Worst- und Average-Case und andererseits bei Heapsort die Messungen aus
+Abbildung~\ref{fig:hsort2} benutzt.
 
 Betrachte Abbildung~\ref{fig:Vergleich}.
 Bei zufällig generierten Listen ist Quicksort, wie erwartet, deutlich
