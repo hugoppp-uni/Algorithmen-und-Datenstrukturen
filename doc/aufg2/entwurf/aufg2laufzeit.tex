@@ -2,11 +2,17 @@
 
 \subsection{Insertion Sort}\label{subsec:insertion-sort-laufzeit}
 
+\subsubsection{Komplexität im Average und Worst Case}
 In Abbildung~\ref{fig:isort} ist die Laufzeit mit zufälligen Zahlen und
 aufsteigenden Zahlen zu sehen.
-Der Plot ist eindeutig quadratisch.%TODO ausführen, warum quadratisch
-Die quadratische Laufzeit des Average-Case ist auch in
-(Abbildung~\ref{fig:qsort-complexity-log}) als Log-Log Plot dargestellt.
+Der Plot sieht auf den ersten Blick quadratisch aus.
+Diese Vermutungen bestätigt sich beim Betrachten von
+Abbildung~\ref{fig:qsort-complexity-log}, in der die Messung mit zufälligen
+Zahlen als Log-Log-Plot dargestellt ist. Da die Steigung der Kurve ähnlich
+der Steigung der quadratischen Funktion ist, lässt sich daraus schließen,
+dass eine quadratische Komplexität vorliegt.
+
+Dies bestätigt unsere Vermutungen aus dem Entwurf.
 \begin{figure}[hbt]
     \centering
     \caption{Insertion Sort}
@@ -19,6 +25,7 @@ Die quadratische Laufzeit des Average-Case ist auch in
     {../out/isortBest.pdf}\label{fig:isort-best} }
 \end{figure}
 
+\subsubsection{Komplexität im Best-Case}
 Der Best-Case ist in Abbildung~\ref{fig:isort-best} dargestellt.
 Dieser tritt auf, wenn die Liste absteigend sortiert ist.
 Dies lässt sich an der Erlang Implementation erklären, da bei absteigenden
