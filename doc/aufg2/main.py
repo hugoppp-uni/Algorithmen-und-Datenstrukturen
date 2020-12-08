@@ -22,6 +22,7 @@ def generate_graph(titl, xla, yla, d, pathArray, legend, clipBegin=0.0, clipEnd=
             xArr.append(x)
             yArr.append(y)
 
+    ax1.ticklabel_format(axis='both', style='sci')
     for i in range(0, len(xArr)):
         ax1.plot(np.array(xArr[i], int), np.array(yArr[i], int), '--.', linewidth=1)
     # ax1.axhline(0, color='lightgrey', lw=1)
@@ -37,6 +38,7 @@ def generate_graph(titl, xla, yla, d, pathArray, legend, clipBegin=0.0, clipEnd=
     font = {'family': 'normal',
             'weight': 'normal',
             'size': 11}
+
 
     plt.rc('font', **font)
     # fig.set_size_inches(7, 8, forward=True)
@@ -152,6 +154,25 @@ figure = generate_graph('', xl, yl, desc,
                          'ab'
                          ])
 figure.savefig('out/' + 'hsort.pdf', bbox_inches='tight')
+
+# - - - hsort 2
+
+desc = ""
+figure = generate_graph('', xl, yl, desc,
+                        ['data/qsort/merged.csv',
+                         'data/qsort/worst.csv',
+                         'data/hsort/merged.csv',
+                         'data/hsort/auf.csv',
+                         'data/hsort/ab.csv'
+                         ],
+                        [
+                            'qsort random numbers',
+                            'qsort worst case',
+                            'hsort random',
+                            'hsort auf',
+                            'hsort ab'
+                        ])
+figure.savefig('out/' + 'hsortqsort.pdf', bbox_inches='tight')
 
 # - - -
 
