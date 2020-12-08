@@ -293,13 +293,13 @@ Hier wurden zufällig generierte Listen verwendet, um eine durchschnittliche
 Laufzeit-Komplexität zu ermitteln.
 Anders als in Abbildung~\ref{fig:qsort-complexity}, in der es ohne Regression
 nicht möglich ist, Aussagen über das Komplexitätsverhalten zu treffen, lässt
-sich in Abbildung~\ref{fig:hsort} mit bloßem Auge eine Krümmung der Kurve
+sich in Abbildung~\ref{fig:hsort2} mit bloßem Auge eine Krümmung der Kurve
 erkennen.
 Dies deutet auf die von uns erwartete Laufzeit von \(O(n\cdot log\ n)\) hin.
 
 \subsubsection{Komplexität im Best Case}\label{subsec:Komplexitaet im Best-Case}
 
-Außerdem in Abbildung~\ref{fig:hsort} zu sehen ist der Best-Case.
+Außerdem in Abbildung~\ref{fig:hsort2} zu sehen ist der Best-Case.
 Hier sind die Ergebnisse ein wenig interessanter.
 
 Zunächst betrachten wir jene Ergebnisse die unseren Erwartungen entsprechen.
@@ -320,7 +320,7 @@ ist und dies einen kleineren Aufwand beim Erstellen des Heaps mit sich bringt,
 ließ sich
 ein gegenteilig grosser Aufwand bei einer aufsteigenden Liste vermuten.
 Dies ist jedoch nicht der Fall gewesen.
-In Abbildung~\ref{fig:hsort} lässt sich aufsteigend klar eine bessere
+In Abbildung~\ref{fig:hsort2} lässt sich aufsteigend klar eine bessere
 Laufzeit erkennen als absteigend, ob wohl absteigend intuitiv als effizienter
 hervortritt.
 
@@ -335,9 +335,7 @@ ursprünglichen Entwurfs mit unseren Erwartungen gedeckt hätten.
 
 \subsubsection{Vergleich mit Quicksort}\label{subsec:Vergleich mit Quicksort}
 
-Die schlechtesten Rahmenbedingungen (Left-Pivot und aufsteigende Zahlen) und
-eine durchschnittliches Laufzeitverhalten (Left-Pivot und zufällig generierte
-Liste) wurden für den Vergleich von Quicksort mit Heapsort gewählt.
+Für den Vergleich von Quicksort und Heapsort haben wir einerseits bei Quicksort den Worst- und Average-Case und andererseits bei Heapsort die Messungen aus Abbildung~\ref{fig:hsort2} benutzt.
 
 Betrachte Abbildung~\ref{fig:Vergleich}.
 Bei zufällig generierten Listen ist Quicksort, wie erwartet, deutlich
