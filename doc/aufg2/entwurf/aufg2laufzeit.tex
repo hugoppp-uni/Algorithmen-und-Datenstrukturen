@@ -4,7 +4,7 @@
 
 In Abbildung~\ref{fig:isort} ist die Laufzeit mit zufälligen Zahlen und
 aufsteigenden Zahlen zu sehen.
-Der Plot ist eindeutig quadratisch.%TODO ausführen warum quadratisch
+Der Plot ist eindeutig quadratisch.%TODO ausführen, warum quadratisch
 Die quadratische Laufzeit des Average-Case ist auch in
 (Abbildung~\ref{fig:qsort-complexity-log}) als Log-Log Plot dargestellt.
 \begin{figure}[hbt]
@@ -69,13 +69,13 @@ Performance erklären könnte.
 
 Somit die Vermutung, dass man die Performance verbessern kann, indem man
 zunächst die Länge der Liste ermittelt und anschließend diese zum Finden des
-n-ten Elements ein zweites mal durchläuft.
+n-ten Elements ein zweites Mal durchläuft.
 
 \paragraph{Zweite Implementation}
 
 In der zweiten Implementation wurden die Ermittlung des Pivots und das Finden
 der Länge der Liste getrennt.
-Das letzte Elements wurde nun ermittelt, indem zunächst
+Das letzte Element wurde nun ermittelt, indem zunächst
 die Länge \(l\) der Liste berechnet, anschließend mithilfe dieser zum
 \(l-1\) -ten Element gelaufen wird.
 \begin{figure}[hbt]
@@ -102,8 +102,8 @@ erkennen, was darauf schließen lässt, dass das in der ersten Implementation
 verwendete Pattern Matching nicht der Grund der schlechten Performance war.
 
 \paragraph{Weitere Mögliche Ursachen}
-Eine weitere Mögliche Ursache für die Ergebnisse ist der Fakt, das bei der
-Methode zum finden des n-ten Elementes und des Restes
+Eine weitere mögliche Ursache für die Ergebnisse ist der Fakt, das bei der
+Methode zum Finden des n-ten Elementes und des Restes
 \textit{listGetNthAndRest()} die Erlang List Concatenation (\(++\)) verwendet
 wird, und somit bei jedem Rekursionsschritt ein zusätzlicher Aufwand von
 \(n\), wobei \(n\) die Anzahl der Elemente in der Subliste darstellt,
@@ -187,18 +187,18 @@ der Faktor vor dem \(n\), bei Insertion Sort geringer ist als bei Quicksort.
     {../out/switchWorstCase.pdf}\label{fig:qsort-switchWorst} }
 \end{figure}
 
-\subsubsection{Best Case}\label{subsubsec:qsort-best-case}
+\subsubsection{Komplexität im Best Case}\label{subsubsec:qsort-best-case}
 
 An dem linearen Plot (Abbildung~\ref{fig:qsort-complexity})
 ist kaum zu erkennen, ob eine lineare oder
 über-logarithmische Komplexität vorliegt.
-Wir haben uns erhofft, dies mithilfe eines Log-Log Plots
+Wir haben uns erhofft, dies mithilfe eines Log-Log-Plots
 (Abbildung~\ref{fig:qsort-complexity-log}) genauer zu untersuchen.
-Auf solchem ist Anhand der Steigung des Graphen der Exponent zu erkennen.
+Auf solchem ist anhand der Steigung des Graphen der Exponent zu erkennen.
 Somit müsste die Steigung unserer Messkurve zwischen den beiden Funktionen
 \(f(x)=x\) und \(f(x)=x^2\) liegen, falls diese über-logarithmisch ist.
 
-Leider lässt sich auch auf diesem nicht zwischen dem linearem und, nach
+Leider lässt sich auch auf diesem nicht zwischen dem linearen und, nach
 unserer Erwartung, über-logarithmischen Messkurve unterscheiden.
 
 \begin{figure}[hbt]
@@ -212,12 +212,12 @@ unserer Erwartung, über-logarithmischen Messkurve unterscheiden.
     {../out/complexityLog.pdf}\label{fig:qsort-complexity-log} }
 \end{figure}
 
-\subsubsection{Worst Case}\label{subsubsec:worst-case}
+\subsubsection{Komplexität im Worst Case}\label{subsubsec:worst-case}
 Die Laufzeit zum Worst Case wurde kurz im
 Abschnitt~\ref{subsubsec:switch-number} besprochen.
 Aus zeitlichen Gründen werden wir nicht weiter darauf eingehen.
 
-% TODO avg kann so niedrig sein weil aufsteigend, heisst keine varianz der
+% TODO avg kann so niedrig sein, weil aufsteigend, heißt keine Varianz der
 %zahlen
 % hier eigentlich vergleich von isort und qsort
 % right, absteigend geht auf null, da die isort laufzeit von sortierten
