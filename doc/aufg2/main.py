@@ -33,6 +33,12 @@ def generate_graph(titl, xla, yla, d, pathArray, legend, clipBegin=0.0, clipEnd=
     plt.ylabel(yla)
     plt.figtext(0.5, 0.06, d, ha="center",  # fontsize=12,
                 bbox={"facecolor": "lightgrey", "alpha": 0.5, "pad": 5})
+
+    font = {'family': 'normal',
+            'weight': 'normal',
+            'size': 11}
+
+    plt.rc('font', **font)
     # fig.set_size_inches(7, 8, forward=True)
     # fig.show()
     # ax1.clf()
