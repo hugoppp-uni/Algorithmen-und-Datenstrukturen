@@ -132,6 +132,21 @@ figure = generate_graph('', xl, yl, desc,
                          'isort asc., avg over 20', 'isort asc. avg over 5'])
 figure.savefig('out/' + 'isort.pdf', bbox_inches='tight')
 
+# - - - hsort
+
+desc = ""
+figure = generate_graph('', xl, yl, desc,
+                        ['data/hsort/merged.csv',
+                         'data/hsort/auf.csv',
+                         'data/hsort/ab.csv'
+                         ],
+                        [
+                         'random',
+                         'auf',
+                         'ab'
+                         ])
+figure.savefig('out/' + 'hsort.pdf', bbox_inches='tight')
+
 # - - -
 
 desc = "avg over 20"
