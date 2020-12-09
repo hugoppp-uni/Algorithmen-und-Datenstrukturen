@@ -7,27 +7,27 @@ digraph G {
     a1 [label = "tmp = root node" ]
     begin -> a1
     
-    a2 [label = "both children of tmp empty?" shape = diamond]
+    a2 [label = "<N1> both children of tmp empty?" shape = diamond]
     a1 -> a2
     a3 [label = "return max-heap with tmp at current position"]
     a2 -> a3 [label = true]
     a2 -> a4 [label = false]
-    a4 [label = "only right child empty?" shape = diamond]
+    a4 [label = "<N2> only right child empty?" shape = diamond]
     a4 -> a5 [label = true]
-    a5 [label = "tmp >= left child element" shape = diamond]
+    a5 [label = "<N3> tmp >= left child element" shape = diamond]
     a5 -> b1 [label = true]
     a5 -> b2 [label = false]
-    b1 [label = "return max-heap with tmp at current position"]
-    b2 [label = "swap position of tmp and left child element"]
+    b1 [label = "<N6> return max-heap with tmp at current position"]
+    b2 [label = "<N4> swap position of tmp and left child element"]
     b2 -> a2 [label = "continue\nwith\nnew\nposition\nof\ntmp"]
     
     a4 -> c1 [label = false]
-    c1 [label = "tmp >= left child element\nAND\ntmp >= right child element?"
+    c1 [label = "<N5> tmp >= left child element\nAND\ntmp >= right child element?"
         shape = diamond]
-    c1 -> c2 [label = true]
-    c2 [label = "return max-heap with tmp at current position"]
+    c1 -> b1 [label = true]
+    
     c1 -> c3 [label = false]
-    c3 [label = "left child element\n>=\nright child element?"
+    c3 [label = "<N7> left child element\n>=\nright child element?"
         shape = diamond]
     c3 -> c4 [label = true]
     c4 [label = "swap position of tmp and left child element"]

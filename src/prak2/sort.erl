@@ -131,46 +131,70 @@ listFindFirstLargerThanAndRest([H | T], _, Acc) -> {H, Acc ++ T}.
 %% returns {{}, InputList, OutputList}, sorts a list using the Heap-Sort-Algorithm
 hsort([]) -> [];
 hsort(List) ->
+  % <N1> build max-heap from inputlist
   {Heap, Size} = buildMaxHeap(List),
+  % <N2> get sorted outputlist from hsort/4
   {_, _, OutputList} = hsort(Heap, List, [], Size),
   OutputList.
 
+% <N3> heap empty? -> true
 hsort({}, InputList, OutputList, _) -> {{}, InputList, OutputList};
+% <N3> heap empty? -> false
 hsort(Heap, InputList, OutputList, Size) ->
+  % <N4> take root element from max-heap
   {MaxElement, _, _, _} = Heap,
+  % <N5> <N6> swap root element with last element of heap,
+  %           also delete root element now last element of heap
   RootReplacedWithLast = replaceRootWithLast(Heap, Size),
   ReducedSize = Size-1,
+  % <N7> heapify and continue with reduced max-heap 
   NewMaxHeap = heapify(RootReplacedWithLast),
+  % <N8> prepend max-element to outputlist
   hsort(NewMaxHeap, InputList, [MaxElement | OutputList], ReducedSize).
 
 %% builds a Max-Heap from a list
 buildMaxHeap(List) -> buildMaxHeap(List, {}, 0).
 
+% <N1> list empty -> true
 buildMaxHeap([], AccHeap, Size) -> {AccHeap, Size};
+% <N1> list empty -> false
 buildMaxHeap(InputList, AccHeap, Size) -> 
+  % <N3> split List into Head and Tail
   [Head|Tail] = InputList,
+  % <N2> increment size of heap
   NewSize = Size + 1,
   ElementInserted = insertIntoHeap(AccHeap, Head, NewSize),
+  % continue with tail
   buildMaxHeap(Tail, ElementInserted, NewSize).
   
 %% inserts an element into a max heap
+% <N4> Heap Empty? -> true
 insertIntoHeap({}, InsertElement, Size) -> {InsertElement, {}, {}, Size};
+% <N4> Heap Empty? -> false
 insertIntoHeap(HostHeap, InsertElement, Size) ->
+  % <N5> calculate Path for current Position into path list
   Path = calcPath(Size),
   insertWithPath(HostHeap, InsertElement, Size, Path).
 
 %% inserts an element into a max heap using a given path
+% <N6> path list empty -> continue with tail
 insertWithPath({}, InsertElement, Size, _) -> {InsertElement, {}, {}, Size};
+% <N7> traverse according to path
+% <N5> Temp > current Node? -> false
 insertWithPath({NodeElement, Left, Right, Index}, InsertElement, Size, [l|RemainingPath]) when NodeElement >= InsertElement ->
   {NodeElement, insertWithPath(Left, InsertElement, Size, RemainingPath), Right, Index};
+% <N5> Temp > current Node? -> true  
 insertWithPath({NodeElement, Left, Right, Index}, InsertElement, Size, [l|RemainingPath]) when NodeElement < InsertElement ->
   {InsertElement, insertWithPath(Left, NodeElement, Size, RemainingPath), Right, Index};
+% <N5> Temp > current Node? -> false
 insertWithPath({NodeElement, Left, Right, Index}, InsertElement, Size, [r|RemainingPath]) when NodeElement >= InsertElement ->
   {NodeElement, Left, insertWithPath(Right, InsertElement, Size, RemainingPath), Index};
+% <N5> Temp > current Node? -> true
 insertWithPath({NodeElement, Left, Right, Index}, InsertElement, Size, [r|RemainingPath]) when NodeElement < InsertElement ->
   {InsertElement, Left, insertWithPath(Right, NodeElement, Size, RemainingPath), Index}.
 
 %% puts last element at root position in a max heap
+% <N5> <N6> swap root with last element and remove last
 replaceRootWithLast({}, _) -> {};
 replaceRootWithLast({_, {}, {}, _}, _) -> {}; 
 replaceRootWithLast(Heap, Size) ->
@@ -180,27 +204,45 @@ replaceRootWithLast(Heap, Size) ->
   {_, Left, Right, Index} = ReducedHeap, 
   {LastElement, Left, Right, Index}.
 
+%% returns last element from max-heap
 getLast({NodeElement, {}, {}, _}, []) -> NodeElement;
 getLast({_, Left, _, _}, [l|RemainingPath]) -> getLast(Left, RemainingPath);
 getLast({_, _, Right, _}, [r|RemainingPath]) -> getLast(Right, RemainingPath).
 
+%% removes the last element of a max-heap
+% <N6> remove former root (now last element) from max-heap
 removeLast({_, {}, {}, _}, []) -> {}; 
 removeLast({NodeElement, Left, Right, Index}, [l|RemainingPath]) -> {NodeElement, removeLast(Left, RemainingPath), Right, Index};
 removeLast({NodeElement, Left, Right, Index}, [r|RemainingPath]) -> {NodeElement, Left, removeLast(Right, RemainingPath), Index}.
 
 %% makes the top element of a max heap descend down to an appropriate position 
 heapify({}) -> {};
+% <N1> both children empty? -> true
 heapify({NodeElement, {}, {}, Index}) -> {NodeElement, {}, {}, Index};
+% <N1> both children empty? -> false
+% <N2> only right child empty? -> true
+% <N3> tmp (here NodeElement) >= left child -> true
 heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {}, Index}) when NodeElement >= LeftElement -> 
+  % <N6> return max-heap with tmp at current position
   {NodeElement, {LeftElement, LeftL, RightL, IndexL}, {}, Index};
-heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {}, Index}) when NodeElement < LeftElement -> 
+% <N3> tmp (here NodeElement) >= left child -> false
+heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {}, Index}) when NodeElement < LeftElement ->
+  % <N4> swap position of tmp and left child element and continue with new position of tmp (NodeElement)
   {LeftElement, heapify({NodeElement, LeftL, RightL, IndexL}), {}, Index};
+% <N2> only right child empty? -> false
+% <N5> tmp >= left child element AND tmp >= right child element -> true
 heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {RightElement, LeftR, RightR, IndexR}, Index}) 
   when (NodeElement >= LeftElement) and (NodeElement >= RightElement) ->
+    % <N6> return max-heap with tmp at current position
     {NodeElement, {LeftElement, LeftL, RightL, IndexL}, {RightElement, LeftR, RightR, IndexR}, Index};
+% <N5> tmp >= left child element AND tmp >= right child element -> false
+% <N7> left child element >= right child element? -> true
 heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {RightElement, LeftR, RightR, IndexR}, Index}) when LeftElement >= RightElement ->
+  % <N4> swap position with left child element and continue with new position of tmp (NodeElement)
   {LeftElement, heapify({NodeElement, LeftL, RightL, IndexL}), {RightElement, LeftR, RightR, IndexR}, Index};
+% <N7> left child element >= right child element? -> false
 heapify({NodeElement, {LeftElement, LeftL, RightL, IndexL}, {RightElement, LeftR, RightR, IndexR}, Index}) when LeftElement < RightElement ->
+  % <N8> swap position with right child element and continue with new position of tmp (NodeElement)
   {RightElement, {LeftElement, LeftL, RightL, IndexL}, heapify({NodeElement, LeftR, RightR, IndexR}), Index}.
 
 % Kodierung des Feldes: Nachfolger von Position i ist 2*i links und 2*i+1 rechts

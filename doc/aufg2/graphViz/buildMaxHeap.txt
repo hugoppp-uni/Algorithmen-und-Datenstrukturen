@@ -4,21 +4,21 @@
     compound = true;
     
     a1 [label = "buildMaxHeap(List)" shape = ellipse]
-    c1 [label = "list empty?" shape= diamond]
+    c1 [label = "<N1> list empty?" shape= diamond]
     c2 [label = "return heap"]
     a1 -> c1
     c1 -> c2 [label = true]
     c1 -> inc [label = false]
     inc -> a2
-    inc [label = "increment size of heap"]
-    a2 [label = "split List into Head and Tail"]
+    inc [label = "<N2> increment size of heap"]
+    a2 [label = "<N3> split List into Head and Tail"]
     a2 -> tmp
     tmp -> a3
     tmp [label = "Temp := Head"]
-    a3 [label = "Heap Empty?" shape = diamond]
+    a3 [label = "<N4> Heap Empty?" shape = diamond]
     a3 -> a4 [label = true]
     a4 [label = "put Temp as root of Heap and return"]
-    a5 [label = "Temp > current Node?" shape = diamond]
+    a5 [label = "<N5> Temp > current Node?" shape = diamond]
     a5 -> a6 [label = true]
     a6 [label = "put Temp into current node"]
     a8 [label = "Temp := old current node"]
@@ -28,12 +28,12 @@
     a3 -> b1 [label = false]
     b1 -> a5
     
-    b1 [label = "calculate Path for current Position into path list"]
+    b1 [label = "<N5> calculate Path for current Position into path list"]
  
     b2 -> a5 [label = " continue with new current node"]
     
-    b2 [label = "traverse according to path list"]
-    b3 [label = "path list empty?" shape = diamond]
+    b2 [label = "<N7> traverse according to path list"]
+    b3 [label = "<N6> path list empty?" shape = diamond]
     b3 -> b2 [label = false]
     b3 -> a1 [label = "true; continue with tail"]
 }
