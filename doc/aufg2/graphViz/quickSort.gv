@@ -7,20 +7,20 @@ digraph Q {
     d1 [label = "list length < 2" shape = diamond];
     d1 -> "return original list" [label = "YES"];
     d1 -> s1 [label = "NO"];
-    s1 [label = "choose pivot P"];
+    s1 [label = "<N1> choose pivot P"];
     s1 -> s2
     s2 [label =
-    "L = List with all elements smaller than P
+    "<N2> L = List with all elements smaller than P
     R = List with all elements larger or equal to P"]
     s2 -> s31
     s2 -> s32
-    s31 [label = "sortedL = qsort(L)"]
-    s32 [label = "sortedR = qsort(R)"]
+    s31 [label = "<N3a> sortedL = qsort(L)"]
+    s32 [label = "<N3b> sortedR = qsort(R)"]
     s31 -> begin [style = dashed penwidth = 0.4 arrowhead = onormal]
     s32 -> begin [style = dashed penwidth = 0.4 arrowhead = onormal]
     s31 -> cEnd
     s32 -> cEnd
-    cEnd [label = "return sortedL.Append(P).Append(R)"];
+    cEnd [label = "<N4> return sortedL.Append(P).Append(R)"];
     s2 -> cluster1Connector [arrowhead = none, lhead = cluster1]
 
 
@@ -34,15 +34,15 @@ digraph Q {
     c1d1 [label = "it < val" shape = diamond];
     c1d1 -> c1s1 [label = "YES"];
     c1d1 -> c1s2 [label = "NO"];
-    c1s1 [label = "L.AddAnywhere(it)"];
-    c1s2 [label = "R.AddAnywhere(it)"];
+    c1s1 [label = "<N6> L.AddAnywhere(it)"];
+    c1s2 [label = "<N5> R.AddAnywhere(it)"];
     c1s1 -> c1d2
     c1s2 -> c1d2
-    c1d2 [label = "it.hasNext?"];
+    c1d2 [label = "<N7> it.hasNext?"];
     c1d2 -> c1s4 [label = "YES"];
-    c1d2 -> "return L and R" [label = "NO"];
+    c1d2 -> "<N8> return L and R" [label = "NO"];
     c1s4 [label = "it = it.next"];
-    c1s4 -> cBegin
+    c1s4 -> cBegin [label = "<E1>"];
     }
 
 }
