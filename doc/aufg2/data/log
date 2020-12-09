@@ -1,0 +1,21 @@
+Insertion Sort Zufallszahlen 100 Zahlen Startzeit: 09.12 15:42:17,342|Endezeit: 09.12 15:42:17,342| Diff: 0 ms Sortiert: true
+Insertion Sort aufsteigend 100 Zahlen Startzeit: 09.12 15:42:17,358|Endezeit: 09.12 15:42:17,358| Diff: 0 ms Sortiert: true
+Insertion Sort absteigend 100 Zahlen Startzeit: 09.12 15:42:17,358|Endezeit: 09.12 15:42:17,358| Diff: 0 ms Sortiert: true
+Quick Sort middle Zufallszahlen Wechsel bei 75, 1000 Zahlen Startzeit: 09.12 15:42:17,342|Endezeit: 09.12 15:42:17,342| Diff: 0 ms Sortiert: true
+Quick Sort middle aufsteigend 1000 Zahlen Startzeit: 09.12 15:42:17,358|Endezeit: 09.12 15:42:17,358| Diff: 0 ms Sortiert: true
+Quick Sort middle absteigend 1000 Zahlen Startzeit: 09.12 15:42:17,358|Endezeit: 09.12 15:42:17,358| Diff: 0 ms Sortiert: true
+Heap Sort Zufallszahlen 1000 Zahlen Startzeit: 09.12 15:42:17,342|Endezeit: 09.12 15:42:17,358| Diff: 15 ms Sortiert: true
+Heap Sort aufsteigend 1000 Zahlen Startzeit: 09.12 15:42:17,358|Endezeit: 09.12 15:42:17,358| Diff: 0 ms Sortiert: true
+Heap Sort absteigend 1000 Zahlen Startzeit: 09.12 15:42:17,358|Endezeit: 09.12 15:42:17,358| Diff: 0 ms Sortiert: true
+Quick Sort left Zufallszahlen Wechsel bei 75, 1000 Zahlen Startzeit: 09.12 15:42:17,342|Endezeit: 09.12 15:42:17,342| Diff: 0 ms Sortiert: true
+Quick Sort left aufsteigend 1000 Zahlen Startzeit: 09.12 15:42:17,358|Endezeit: 09.12 15:42:17,374| Diff: 16 ms Sortiert: true
+Quick Sort left absteigend 1000 Zahlen Startzeit: 09.12 15:42:17,374|Endezeit: 09.12 15:42:17,374| Diff: 0 ms Sortiert: true
+Quick Sort random Zufallszahlen Wechsel bei 75, 1000 Zahlen Startzeit: 09.12 15:42:17,342|Endezeit: 09.12 15:42:17,342| Diff: 0 ms Sortiert: true
+Quick Sort random aufsteigend 1000 Zahlen Startzeit: 09.12 15:42:17,358|Endezeit: 09.12 15:42:17,358| Diff: 0 ms Sortiert: true
+Quick Sort random absteigend 1000 Zahlen Startzeit: 09.12 15:42:17,358|Endezeit: 09.12 15:42:17,374| Diff: 16 ms Sortiert: true
+Quick Sort right Zufallszahlen Wechsel bei 75, 1000 Zahlen Startzeit: 09.12 15:42:17,342|Endezeit: 09.12 15:42:17,342| Diff: 0 ms Sortiert: true
+Quick Sort right aufsteigend 1000 Zahlen Startzeit: 09.12 15:42:17,358|Endezeit: 09.12 15:42:17,374| Diff: 16 ms Sortiert: true
+Quick Sort right absteigend 1000 Zahlen Startzeit: 09.12 15:42:17,374|Endezeit: 09.12 15:42:17,389| Diff: 15 ms Sortiert: true
+Quick Sort median Zufallszahlen Wechsel bei 75, 1000 Zahlen Startzeit: 09.12 15:42:17,342|Endezeit: 09.12 15:42:17,342| Diff: 0 ms Sortiert: true
+Quick Sort median aufsteigend 1000 Zahlen Startzeit: 09.12 15:42:17,358|Endezeit: 09.12 15:42:17,405| Diff: 47 ms Sortiert: true
+Quick Sort median absteigend 1000 Zahlen Startzeit: 09.12 15:42:17,405|Endezeit: 09.12 15:42:17,451| Diff: 47 ms Sortiert: true
