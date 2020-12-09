@@ -9,10 +9,6 @@
 %% API
 -export([insertionS/1, qsort/3, hsort/1, insertToList/2]).
 
-% TODO: bisheriger Aufwand für Tests / Analyse aller Methoden: ~4h
-% TODO: bisheriger Aufwand für diese Methode (Entwurf): 2.5h (Code): 3h
-
-
 % NOTE: In the draft, all operations are made on a single list. In this
 % implementation, the list is split into two lists. This would corresponds to
 % splitting the list in the draft at <sortedSectionLength> and does not affect the
@@ -39,24 +35,23 @@ insertToList([H | T], E) when H > E -> [E | [H | T]];
 insertToList([H | T], E) -> [H | insertToList(T, E)].
 
 
-%% die Zahlen sind in der Erlang-Liste [ ] gehalten und zu sortieren.
-%% Der in der Vorlesung vorgestellte Algorithmus ist so auf die Verwendung
-%% von Listen (statt array) zu transformieren, dass das Kernkonzept erhalten bleibt!
-%% Die Begründung dazu ist im Entwurf aufzuführen.
-%% Als Schnittstelle ist sort:qsort(<pivot-methode>,<Liste>,<switch-number>) vorgegeben.
-%% Dabei kann <pivot-methode> die Werte left / middle / right / median / random annehmen.
-%% Die Zahl <switch-number> entscheidet, ab welcher Länge Insertion Sort eingesetzt wird,
-%% d.h. Teillisten, die kürzer als diese Zahl sind, werden dann mit
-%% Insertion Sort sortiert und nicht mehr mit Quicksort.
+%% <pivot-methode>: left / middle / right / median / random
+%% <switch-number>: unter dieser Länge wird Insertion Sort benutzt
 qsort(_, [], _) -> [];
 qsort(PivotMethod, List, SwitchNumber) ->
+  % <N1>
   {Pivot, ListWithoutPivot, Length} = getPivotAndLength(List, PivotMethod),
   if
+    % use insertionS when length < SwitchNumber
     Length =< SwitchNumber -> insertionS(List);
+    % <N4>
     true ->
+      % <N2>
       {Left, Right} = getLeftRightFromPivot(ListWithoutPivot, Pivot),
+      % <N3a>
       qsort(PivotMethod, Left, SwitchNumber) ++
         [Pivot] ++
+        % <N3b>
         qsort(PivotMethod, Right, SwitchNumber)
   end
 .
@@ -65,9 +60,12 @@ qsort(PivotMethod, List, SwitchNumber) ->
 getLeftRightFromPivot(List, Pivot) ->
   getLeftRightFromPivot(List, Pivot, [], []).
 
+% <N8> return L and R, when list is empty <N7>
 getLeftRightFromPivot([], _Pivot, L, R) -> {L, R};
+% <N6> Add to L and recall <E1>
 getLeftRightFromPivot([H | T], Pivot, L, R) when H < Pivot ->
   getLeftRightFromPivot(T, Pivot, [H | L], R);
+% <N5> Add to R and recall <E1>
 getLeftRightFromPivot([H | T], Pivot, L, R) ->
   getLeftRightFromPivot(T, Pivot, L, [H | R]).
 
